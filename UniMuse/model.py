@@ -52,13 +52,22 @@ class Song(db.Model):
     __tablename__ = "songs"
 
     song_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    title = db.Column(db.String(60), nullable=False)
+    # title = db.Column(db.String(60), nullable=False)
+    service_id = db.Column(db.String(300), nullable=False)  # Service key to request the song
+    service = db.Column(db.String(50), nullable=False)      # Source of service. E.g., 'Spotify'
 
 
 def connect_to_db(app):
-    """Connect the database to Flask app."""
+    """Connect UniMuse database to Flask app."""
 
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///unimuse'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)
+
+
+# TODO: Delete when finalized...?
+if __name__ == '__main__':
+    from server import app
+    connect_to_db(app)
+    print('Connected to database.')
