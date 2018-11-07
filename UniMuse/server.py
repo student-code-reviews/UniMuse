@@ -1,12 +1,15 @@
+"""Runs the application."""
+
 from flask_debugtoolbar import DebugToolbarExtension
 
 from views import app
+from model import connect_to_db
 
 
 if __name__ == "__main__":
     app.secret_key = "SECRETSAUCE"
     
-    # connect_to_db(app)  # Already connecting in model.py
+    connect_to_db(app)  # Already connecting in model.py
 
     app.debug = True
     app.jinja_env.auto_reload = app.debug
@@ -14,4 +17,4 @@ if __name__ == "__main__":
 
     DebugToolbarExtension(app)
 
-    app.run()
+    app.run(host="0.0.0.0")

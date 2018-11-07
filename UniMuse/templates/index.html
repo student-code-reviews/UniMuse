@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}UniMuse{% endblock %}
+
+{% block content %}
+
+  <h2>Welcome to UniMuse</h2>
+  
+  <form id="homepage-signup-login" action="/">  <!-- or /login-->
+
+    What would you like to do?
+      <select name="um-signup-login">
+
+        <option value="um-sign-up">New User</option>
+        <option value="um-login">Login</option>
+
+      </select>
+
+      <input type="submit" value="Submit">
+
+  </form>
+  
+  <!-- For later (second sprint)? Want to use buttons...
+  <button class="btn btn-primary" id="um-signup-button">New User</button>
+  <button class="btn btn-primary" id="um-login-button">Login</button>
+
+  
+  <script type="text/javascript">
+    $('#um-signup-button').on('click', () => {
+        window.location.href = '/sign-up-form';
+    });
+
+    $('#um-login-button').on('click', () => {
+        window.location.href = '/login';
+    });
+
+  </script> -->
+
+
+{% endblock %}

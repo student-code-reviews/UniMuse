@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Sign-Up!{% endblock %}
+
+{% block content %}
+
+  <h2>Sign-Up for UniMuse</h2>
+    
+  <form id="sign-up-form" action="/sign-up-verification" method="post">
+
+    <label>
+      Username: <input type="text" name="um-new-username" required>
+    </label><br>
+    <label>
+      Password: <input type="text" name="um-new-password" required>
+    </label><br>
+    <input type="submit" value="Sign-Up!">
+
+  </form>
+
+{% endblock %}
