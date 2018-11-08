@@ -1,11 +1,19 @@
-# Client IDs for services
-spotify_client_secret = os.environ["SPOTIFY_CLIENT_SECRET"]
-spotify_client_id = os.environ["SPOTIFY_CLIENT_ID"]
+##### Redirect URI #####
+CLIENT_SIDE_URL = "http://localhost"
+PORT = 5000
+REDIRECT_URI = f"{CLIENT_SIDE_URL}:{PORT}/callback"
 
-youtube_client_secret = os.environ["YOUTUBE_CLIENT_SECRET"]
-youtube_client_id = os.environ["YOUTUBE_CLIENT_ID"]
 
-mixcloud_client_secret = os.environ["MIXCLOUD_CLIENT_SECRET"]
-mixcloud_client_id = os.environ["MIXCLOUD_CLIENT_ID"]
+##### Spotify Client Info. and URLs #####
+SPOTIFY_CLIENT_SECRET = os.environ["SPOTIFY_CLIENT_SECRET"]
+SPOTIFY_CLIENT_ID = os.environ["SPOTIFY_CLIENT_ID"]
 
-redirect_uri = os.environ["REDIRECT_URI"]
+
+##### YouTube Client Info. and URLs #####
+YT_CLIENT_SECRET = os.environ["YOUTUBE_CLIENT_SECRET"]
+YT_CLIENT_ID = os.environ["YOUTUBE_CLIENT_ID"]
+
+
+##### MixCloud Client Info. and URLs #####
+MIXCLOUD_CLIENT_SECRET = os.environ["MIXCLOUD_CLIENT_SECRET"]
+MIXCLOUD_CLIENT_ID = os.environ["MIXCLOUD_CLIENT_ID"]

@@ -3,7 +3,7 @@
 from flask_debugtoolbar import DebugToolbarExtension
 
 from views import app
-from model import connect_to_db
+from models import connect_to_db
 
 
 if __name__ == "__main__":
