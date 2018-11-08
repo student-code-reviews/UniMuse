@@ -1,3 +1,5 @@
+import os
+
 ##### Redirect URI #####
 CLIENT_SIDE_URL = "http://localhost"
 PORT = 5000

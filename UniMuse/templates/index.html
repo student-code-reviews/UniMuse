@@ -6,9 +6,33 @@
 
   <h2>Welcome to UniMuse</h2>
   
-  <form id="homepage-signup-login" action="/">  <!-- or /login-->
+  <div id="main-login">
 
-    What would you like to do?
+    <button class="btn btn-primary" id="um-signup-button" onclick="location.href = '/sign-up-form'">
+      New User </button>
+
+    <button class="btn btn-primary" id="um-login-button" onclick="location.href = '/login-form'">
+      Login</button>
+
+  </div>
+
+  
+  <script type="text/javascript">
+
+    document.getElementById("um-signup-button").onclick = function () {
+      location.href = '/sign-up-form'
+    }
+
+    document.getElementById("um-login-button").onclick = function () {
+      location.href = '/login-form'
+    }
+
+  </script>
+
+<!-- OLD VERSION -->
+  <!-- <form id="homepage-signup-login" action="/">  or /login -->
+
+    <!-- What would you like to do?
       <select name="um-signup-login">
 
         <option value="um-sign-up">New User</option>
@@ -18,23 +42,6 @@
 
       <input type="submit" value="Submit">
 
-  </form>
+  </form> -->
   
-  <!-- For later (second sprint)? Want to use buttons...
-  <button class="btn btn-primary" id="um-signup-button">New User</button>
-  <button class="btn btn-primary" id="um-login-button">Login</button>
-
-  
-  <script type="text/javascript">
-    $('#um-signup-button').on('click', () => {
-        window.location.href = '/sign-up-form';
-    });
-
-    $('#um-login-button').on('click', () => {
-        window.location.href = '/login';
-    });
-
-  </script> -->
-
-
 {% endblock %}

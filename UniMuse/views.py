@@ -9,7 +9,7 @@ from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session
 
 # Import modules
-from model import db, User, Playlist, PlaylistSong, Song
+from models import db, User, Playlist, PlaylistSong, Song
 import spotify
 
 
@@ -22,12 +22,13 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """Homepage."""
 
-    option = request.args.get("um-signup-login")
+    # OLD VERSION
+    # option = request.args.get("um-signup-login")
 
-    if option == "um-sign-up":
-        return render_template("/sign-up-form.html")
-    elif option == "um-login":
-        return render_template("/login-form.html")
+    # if option == "um-sign-up":
+    #     return render_template("/sign-up-form.html")
+    # elif option == "um-login":
+    #     return render_template("/login-form.html")
 
     return render_template("/index.html")
 
@@ -84,7 +85,7 @@ def login():
             session['logged_user'] = username   # TODO: Need to check if a user is already logged in.
 
             flash("You've successfully logged in!")
-            return redirect("/")
+            return redirect("/subscriptions-login")
         else:
             flash("The password is incorrect.")
             return redirect("/login-form")
@@ -94,9 +95,14 @@ def login():
 
 
 # TODO: Route for list of subscription available to log into
+@app.route('/subscriptions-login')
+def subscriptions_login():
+    """Subscriptions login splash page."""
+
+    return render_template("/subscriptions-login.html")
 
 
-@app.route('/spotify_auth')
+@app.route('/spotify-auth')
 def spotify_auth():
     """Spotify user authentication page."""
 
@@ -104,7 +110,7 @@ def spotify_auth():
     return redirect(auth_url)
 
 
-@app.route("/spotify_callback")
+@app.route("/spotify-callback")
 def spotify_callback():
     """Spotify user authentication callback."""
 
