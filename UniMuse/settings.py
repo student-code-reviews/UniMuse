@@ -3,7 +3,7 @@ import os
 ##### Redirect URI #####
 CLIENT_SIDE_URL = "http://localhost"
 PORT = 5000
-REDIRECT_URI = f"{CLIENT_SIDE_URL}:{PORT}/callback"
+REDIRECT_URI = f"{CLIENT_SIDE_URL}:{PORT}/spotify-callback"
 
 
 ##### Spotify Client Info. and URLs #####

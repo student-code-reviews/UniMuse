@@ -110,20 +110,9 @@ def spotify_callback():
 
     response_data = spotify.spotify_get_access_tokens()
 
-    access_token = response_data["access_token"]
-    # refresh_token = response_data["refresh_token"]  # TODO: Need later for refreshing access tokens
-    # token_type = response_data["token_type"]
-    # expires_in = response_data["expires_in"]
-
-    authorization_header = spotify.spotify_auth_header(access_token)
-
-    # Get profile data
-    profile_data = spotify.spotify_user_profile(authorization_header)
-
-    # Get user playlist data
-    playlist_data = spotify.spotify_user_playlist(profile_data, authorization_header)
+    if 'spotify_token' in session:
+        flash("You're already logged into Spotify!")
+    else:
+        session['spotify_token'] = response_data["access_token"]
     
-    # Combine profile and playlist data to display
-    display_arr = [profile_data] + playlist_data["items"]
-
-    return render_template("index.html",sorted_array=display_arr)
+    return redirect("/subscriptions-login")
