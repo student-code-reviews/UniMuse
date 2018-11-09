@@ -4,19 +4,27 @@
 
 {% block content %}
 
-  <h2>Subscriptions Log-In</h2>    
+  <h2>Subscriptions Log-In</h2>
 
   <div id="spotify-login">
 
-    <button class="btn btn-primary" id="spotify-login-button" onclick="location.href = '/spotify-auth'">
+    <button class="btn btn-primary" id="spotify-login-button" onclick="location.href = '{{ spotify_auth_url }}'">
       Log-In to Spotify </button>
+
+  </div>
+
+  <div id="finished-logins">
+
+      <button class="btn btn-primary" id="finished-logins-button" onclick="location.href = '/search-playlists'">
+        Finish </button>
+        
   </div>
 
 
   <script type="text/javascript">
 
-    document.getElementById("spotify-login-button").onclick = function () {
-      location.href = "/spotify-auth";
+    document.getElementById("finished-logins").onclick = function () {
+      location.href = "/search-playlists"
     }
 
   </script>

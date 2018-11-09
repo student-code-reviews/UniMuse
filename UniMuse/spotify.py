@@ -52,19 +52,19 @@ def spotify_get_access_tokens():
     headers = {"Authorization": f"Basic {client_str.decode('ascii')}"}
     
     # TODO: Debug app.logger.error! The import isn't working.
-    # try:
-    #     response = requests.post(SPOTIFY_TOKEN_URL, data=code_payload, headers=headers)
-    # except:
-    #     app.logger.error("Spotify client failed.")
-    #     raise
-    # else:
-    #     results = json.loads(response.text)
-    #     return results
+    try:
+        response = requests.post(SPOTIFY_TOKEN_URL, data=code_payload, headers=headers)
+    except:
+        current_app.logger.error("Spotify client failed.")
+        raise
+    else:
+        results = json.loads(response.text)
+        return results
 
-    response = requests.post(SPOTIFY_TOKEN_URL, data=code_payload, headers=headers)
-    results = json.loads(response.text)
+    # response = requests.post(SPOTIFY_TOKEN_URL, data=code_payload, headers=headers)
+    # results = json.loads(response.text)
 
-    return results
+    # return results
 
 
 def spotify_auth_header(access_token):
@@ -78,6 +78,20 @@ def spotify_auth_header(access_token):
 
 
 # Temp queries
+def spotify_search(query):  # TODO: For now to test player API. Need to adjust later. 
+    """TESTING SEARCH"""
+
+    results = spotify_get_access_tokens()
+    headers = spotify_auth_header(results["access_token"])
+
+    url = f"{SPOTIFY_API_URL}/search?{query}"
+
+    response = requests.get(url, headers=headers)
+    #current_app.logger.info(response)
+
+    return response
+
+
 def spotify_user_profile(headers):
     user_profile_api_endpoint = "{}/me".format(SPOTIFY_API_URL)
     profile_response = requests.get(user_profile_api_endpoint, headers=headers)

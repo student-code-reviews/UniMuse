@@ -99,15 +99,9 @@ def login():
 def subscriptions_login():
     """Subscriptions login splash page."""
 
-    return render_template("/subscriptions-login.html")
+    spotify_auth_url = spotify.spotify_auth_page()
 
-
-@app.route('/spotify-auth')
-def spotify_auth():
-    """Spotify user authentication page."""
-
-    auth_url = spotify.spotify_auth_page()
-    return redirect(auth_url)
+    return render_template("/subscriptions-login.html", spotify_auth_url=spotify_auth_url)
 
 
 @app.route("/spotify-callback")
