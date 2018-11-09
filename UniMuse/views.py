@@ -22,14 +22,6 @@ app.jinja_env.undefined = StrictUndefined
 def index():
     """Homepage."""
 
-    # OLD VERSION
-    # option = request.args.get("um-signup-login")
-
-    # if option == "um-sign-up":
-    #     return render_template("/sign-up-form.html")
-    # elif option == "um-login":
-    #     return render_template("/login-form.html")
-
     return render_template("/index.html")
 
 
@@ -94,7 +86,6 @@ def login():
         return redirect("/login-form")
 
 
-# TODO: Route for list of subscription available to log into
 @app.route('/subscriptions-login')
 def subscriptions_login():
     """Subscriptions login splash page."""

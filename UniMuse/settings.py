@@ -3,12 +3,12 @@ import os
 ##### Redirect URI #####
 CLIENT_SIDE_URL = "http://localhost"
 PORT = 5000
-REDIRECT_URI = f"{CLIENT_SIDE_URL}:{PORT}/spotify-callback"
 
 
 ##### Spotify Client Info. and URLs #####
 SPOTIFY_CLIENT_SECRET = os.environ["SPOTIFY_CLIENT_SECRET"]
 SPOTIFY_CLIENT_ID = os.environ["SPOTIFY_CLIENT_ID"]
+SPOTIFY_REDIRECT_URI = f"{CLIENT_SIDE_URL}:{PORT}/spotify-callback"
 
 
 ##### YouTube Client Info. and URLs #####

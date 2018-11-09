@@ -8,7 +8,7 @@ import urllib
 from flask import request
 # from views import app  # TODO: DEBUG THIS
 
-from settings import REDIRECT_URI, SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
+from settings import SPOTIFY_REDIRECT_URI, SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
 
 
 # Spotify info. needed for authorization
@@ -21,7 +21,7 @@ SPOTIFY_SCOPE = "playlist-modify-public playlist-modify-private" # TODO: Scope s
 
 spotify_auth_query_param = {
     "response_type": "code",
-    "redirect_uri": REDIRECT_URI,
+    "redirect_uri": SPOTIFY_REDIRECT_URI,
     "scope": SPOTIFY_SCOPE,
     # "state": STATE,
     # "show_dialog": SHOW_DIALOG_str,
@@ -45,7 +45,7 @@ def spotify_get_access_tokens():
     code_payload = {
         "grant_type": "authorization_code",
         "code": str(auth_token),
-        "redirect_uri": REDIRECT_URI   # NOTE: The URI that the user is redirected to after the authorization from Spotify.
+        "redirect_uri": SPOTIFY_REDIRECT_URI   # NOTE: The URI that the user is redirected to after the authorization from Spotify.
                                        # TODO: Need to update URI.
     }
     client_str = base64.b64encode("{}:{}".format(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET).encode('ascii'))
