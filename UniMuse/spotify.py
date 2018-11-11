@@ -17,7 +17,8 @@ SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
 SPOTIFY_API_BASE_URL = "https://api.spotify.com"
 SPOTIFY_API_VERSION = "v1"
 SPOTIFY_API_URL = f"{SPOTIFY_API_BASE_URL}/{SPOTIFY_API_VERSION}"
-SPOTIFY_SCOPE = "playlist-modify-public playlist-modify-private" # TODO: Scope subject to change when working on actual player
+# SPOTIFY_SCOPE = "playlist-modify-public playlist-modify-private" # TODO: Scope subject to change when working on actual player
+SPOTIFY_SCOPE = "streaming user-read-birthdate user-read-email user-read-private user-modify-playback-state"  # NOTE: Scopes required for player
 
 spotify_auth_query_param = {
     "response_type": "code",

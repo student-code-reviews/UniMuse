@@ -2,7 +2,7 @@
 
 import os
 import json
-# import spotipy
+# import spotipy  # TODO: If enough time, try using Spotipy
 import requests
 
 from jinja2 import StrictUndefined
@@ -107,3 +107,12 @@ def spotify_callback():
         session['spotify_token'] = response_data["access_token"]
     
     return redirect("/subscriptions-login")
+
+
+@app.route("/search-playlists")
+def search_playlists():
+    """Search for songs and list of playlists."""
+    
+    access_token = session['spotify_token']
+
+    return render_template("/search-playlists.html", access_token=access_token)
