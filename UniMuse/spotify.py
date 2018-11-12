@@ -31,7 +31,7 @@ spotify_auth_query_param = {
 
 
 # Step 1: Spotify functions to get authorization tokens
-def spotify_auth_page():
+def get_auth_page():
     """Return Spotify's user authentication page."""
 
     url_args = "&".join(["{}={}".format(key,urllib.parse.quote(val)) for key,val in spotify_auth_query_param.items()])
@@ -39,7 +39,7 @@ def spotify_auth_page():
     return auth_url
 
 
-def spotify_get_access_tokens():
+def get_access_tokens():
     """Return authorization tokens from Spotify."""
 
     auth_token = request.args['code']  # NOTE: Value of the token. This is a get request from the callback URL after user authorizes.
@@ -55,12 +55,15 @@ def spotify_get_access_tokens():
     # TODO: Debug app.logger.error! The import isn't working.
     try:
         response = requests.post(SPOTIFY_TOKEN_URL, data=code_payload, headers=headers)
+    # Exception too broad. except only those that you expect to happen ...
     except:
+        # Here are some possible exceptions that *could* be raised here:
+        # http://docs.python-requests.org/en/latest/user/quickstart/#errors-and-exceptions
         current_app.logger.error("Spotify client failed.")
         raise
     else:
-        results = json.loads(response.text)
-        return results
+        # http://docs.python-requests.org/en/latest/user/quickstart/#json-response-content
+        return response.json()
 
     # response = requests.post(SPOTIFY_TOKEN_URL, data=code_payload, headers=headers)
     # results = json.loads(response.text)
@@ -68,7 +71,7 @@ def spotify_get_access_tokens():
     # return results
 
 
-def spotify_auth_header(access_token):
+def get_auth_header(access_token):
     """Return Spotify's authorization header.
     
     Args:
@@ -82,8 +85,8 @@ def spotify_auth_header(access_token):
 def spotify_search(query):  # TODO: For now to test player API. Need to adjust later. 
     """TESTING SEARCH"""
 
-    results = spotify_get_access_tokens()
-    headers = spotify_auth_header(results["access_token"])
+    results = get_access_tokens()
+    headers = get_auth_header(results["access_token"])
 
     url = f"{SPOTIFY_API_URL}/search?{query}"
 
