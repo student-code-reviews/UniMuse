@@ -7,5 +7,4 @@ env/
 
 # Others
 secrets.sh
-script_sources
 .DS_Store
