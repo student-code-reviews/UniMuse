@@ -6,7 +6,8 @@ PORT = 5000
 
 
 ##### Spotify Client Info. and URLs #####
-SPOTIFY_CLIENT_SECRET = os.environ["SPOTIFY_CLIENT_SECRET"]
+# Using `.get()` on dictionaries in general allows you to improve error handling by avoiding KeyErrors
+SPOTIFY_CLIENT_SECRET = os.getenv("SPOTIFY_CLIENT_SECRET")
 SPOTIFY_CLIENT_ID = os.environ["SPOTIFY_CLIENT_ID"]
 SPOTIFY_REDIRECT_URI = f"{CLIENT_SIDE_URL}:{PORT}/spotify-callback"
 
