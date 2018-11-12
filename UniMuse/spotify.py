@@ -20,7 +20,7 @@ SPOTIFY_API_URL = f"{SPOTIFY_API_BASE_URL}/{SPOTIFY_API_VERSION}"
 # SPOTIFY_SCOPE = "playlist-modify-public playlist-modify-private" # TODO: Scope subject to change when working on actual player
 SPOTIFY_SCOPE = "streaming user-read-birthdate user-read-email user-read-private user-modify-playback-state"  # NOTE: Scopes required for player
 
-spotify_auth_query_param = {
+auth_query_param = {
     "response_type": "code",
     "redirect_uri": SPOTIFY_REDIRECT_URI,
     "scope": SPOTIFY_SCOPE,
@@ -31,15 +31,15 @@ spotify_auth_query_param = {
 
 
 # Step 1: Spotify functions to get authorization tokens
-def spotify_auth_page():
+def auth_page():
     """Return Spotify's user authentication page."""
 
-    url_args = "&".join(["{}={}".format(key,urllib.parse.quote(val)) for key,val in spotify_auth_query_param.items()])
-    auth_url = "{}/?{}".format(SPOTIFY_AUTH_URL, url_args)
+    url_args = "&".join(["{}={}".format(key,urllib.parse.quote(val)) for key,val in auth_query_param.items()])
+    auth_url = f"{SPOTIFY_AUTH_URL}/?{url_args}"
     return auth_url
 
 
-def spotify_get_access_tokens():
+def get_access_tokens():
     """Return authorization tokens from Spotify."""
 
     auth_token = request.args['code']  # NOTE: Value of the token. This is a get request from the callback URL after user authorizes.
@@ -49,41 +49,38 @@ def spotify_get_access_tokens():
         "redirect_uri": SPOTIFY_REDIRECT_URI   # NOTE: The URI that the user is redirected to after the authorization from Spotify.
                                        # TODO: Need to update URI.
     }
-    client_str = base64.b64encode("{}:{}".format(SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET).encode('ascii'))
+    client_str = base64.b64encode(f"{SPOTIFY_CLIENT_ID}:{SPOTIFY_CLIENT_SECRET}".encode('ascii'))
     headers = {"Authorization": f"Basic {client_str.decode('ascii')}"}
     
     # TODO: Debug app.logger.error! The import isn't working.
     try:
         response = requests.post(SPOTIFY_TOKEN_URL, data=code_payload, headers=headers)
-    except:
-        current_app.logger.error("Spotify client failed.")
+    except ConnectionError:
+        current_app.logger.error("Spotify client connection failed.")
+        raise
+    except TimeoutError:
+        current_app.logger.error("Spotify client timed out.")
         raise
     else:
-        results = json.loads(response.text)
-        return results
-
-    # response = requests.post(SPOTIFY_TOKEN_URL, data=code_payload, headers=headers)
-    # results = json.loads(response.text)
-
-    # return results
+        return response.json()
 
 
-def spotify_auth_header(access_token):
+def auth_header(access_token):
     """Return Spotify's authorization header.
     
     Args:
         access_token (str): Access token returned from spotify_access_tokens().
     """
 
-    return {"Authorization" : "Bearer {}".format(access_token)}
+    return {"Authorization" : f"Bearer {access_token}"}
 
 
 # Temp queries
-def spotify_search(query):  # TODO: For now to test player API. Need to adjust later. 
+def search(query, access_token):  # TODO: For now to test player API. Need to adjust later. 
     """TESTING SEARCH"""
 
-    results = spotify_get_access_tokens()
-    headers = spotify_auth_header(results["access_token"])
+    # results = spotify_get_access_tokens()
+    headers = auth_header(access_token)
 
     url = f"{SPOTIFY_API_URL}/search?{query}"
 
@@ -93,16 +90,16 @@ def spotify_search(query):  # TODO: For now to test player API. Need to adjust l
     return response
 
 
-def spotify_user_profile(headers):
-    user_profile_api_endpoint = "{}/me".format(SPOTIFY_API_URL)
+def user_profile(headers):
+    user_profile_api_endpoint = f"{SPOTIFY_API_URL}/me"
     profile_response = requests.get(user_profile_api_endpoint, headers=headers)
     profile_data = json.loads(profile_response.text)
 
     return profile_data
 
 
-def spotify_user_playlist(profile_data, headers):
-    playlist_api_endpoint = "{}/playlists".format(profile_data["href"])
+def user_playlist(profile_data, headers):
+    playlist_api_endpoint = f'{profile_data["href"]}/playlists'
     playlists_response = requests.get(playlist_api_endpoint, headers=headers)
     playlist_data = json.loads(playlists_response.text)
 

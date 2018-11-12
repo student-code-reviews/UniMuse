@@ -6,18 +6,20 @@ import json
 import requests
 
 from jinja2 import StrictUndefined
-from flask import Flask, render_template, request, flash, redirect, session
+from flask import Flask, render_template, request, flash, redirect, session, jsonify
 
 # Import modules
 from models import db, User, Playlist, PlaylistSong, Song
 import spotify
 
+from pprint import pprint
 
 app = Flask(__name__)
 
 app.jinja_env.undefined = StrictUndefined
 
 
+# =========================================================================== #
 @app.route('/')
 def index():
     """Homepage."""
@@ -90,16 +92,18 @@ def login():
 def subscriptions_login():
     """Subscriptions login splash page."""
 
-    spotify_auth_url = spotify.spotify_auth_page()
+    spotify_auth_url = spotify.auth_page()
 
-    return render_template("/subscriptions-login.html", spotify_auth_url=spotify_auth_url)
+    return render_template("/subscriptions-login.html", 
+                            spotify_auth_url=spotify_auth_url)
 
 
+# =========================================================================== #
 @app.route("/spotify-callback")
 def spotify_callback():
     """Spotify user authentication callback."""
 
-    response_data = spotify.spotify_get_access_tokens()
+    response_data = spotify.get_access_tokens()
 
     if 'spotify_token' in session:
         flash("You're already logged into Spotify!")
@@ -109,10 +113,32 @@ def spotify_callback():
     return redirect("/subscriptions-login")
 
 
-@app.route("/search-playlists")
-def search_playlists():
-    """Search for songs and list of playlists."""
+@app.route("/search-page", methods=["GET", "POST"])
+def search_songs():
+    """Search songs on app."""
     
     access_token = session['spotify_token']
 
-    return render_template("/search-playlists.html", access_token=access_token)
+    if request.method == "GET":
+        return render_template("/search-page.html", access_token=access_token)
+
+    elif request.method == "POST":
+        query_input = request.form.get("user-song-query")
+        query_input = query_input.replace(" ", "%20").lower()
+
+        query = "q=" + query_input + "&type=track&limit=10"
+
+        results = spotify.search(query, access_token).json()
+        data = results["tracks"]["items"][0]["uri"]
+
+        return render_template("/player.html", access_token=access_token,
+                                               uri=data)
+
+
+@app.route("/player")
+def player():
+    """Play songs on app."""
+    
+    access_token = session['spotify_token']
+
+    return render_template("/player.html", access_token=access_token)

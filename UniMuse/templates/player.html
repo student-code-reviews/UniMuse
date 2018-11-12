@@ -4,11 +4,13 @@
 
 {% block content %}
 
-  <h1>Spotify Web Playback SDK Test</h1>
+  <h1>Song Player</h1>
 
+  <!-- Javascript for Spotify Web Player SDK -->
   <script src="https://sdk.scdn.co/spotify-player.js"></script>
   <script>
     const token = '{{ access_token }}';
+    let uri = '{"uris": ["' + '{{ uri }}' + '"]}'
 
     window.onSpotifyWebPlaybackSDKReady = () => {
       const player = new Spotify.Player({
@@ -16,39 +18,32 @@
         getOAuthToken: cb => { cb(token); }
       });
 
-      // Error handling
       player.addListener('initialization_error', ({ e_msg }) => { console.error(e_msg); });
       player.addListener('authentication_error', ({ e_msg }) => { console.error(e_msg); });
       player.addListener('account_error', ({ e_msg }) => { console.error(e_msg); });
       player.addListener('playback_error', ({ e_msg }) => { console.error(e_msg); });
 
-      // Playback status updates
       player.on('player_state_changed', state => {
         console.log(state)
         $('#current-track').attr('src', state.track_window.current_track.album.images[0].url);
         $('#current-track-name').text(state.track_window.current_track.name);
       });
 
-      // Ready
       player.on('ready', data => {
         console.log('Ready with Device ID', data.device_id);
 
-        // Play a track using our new device ID
         play(data.device_id);
-        
       });
 
-      // Connect to the player!
       player.connect();
-      
     };
-    
-    // Play a specified track on the Web Playback SDK's device ID
+
+
     function play(device_id) {
       $.ajax({
         url: "https://api.spotify.com/v1/me/player/play?device_id=" + device_id,
         type: "PUT",
-        data: '{"uris": ["spotify:track:3TGRqZ0a2l1LRblBkJoaDx"]}',
+        data: uri,
         beforeSend: function(xhr){xhr.setRequestHeader('Authorization', 'Bearer ' + token );},
         success: function(data) { 
           console.log(data)
@@ -57,10 +52,10 @@
     };
   </script>
 
-    <div class="container">
+  <div class="container">
       <h1>Play ze song</h1>
       <img id="current-track"/>
       <h3 id="current-track-name"></h3>
-    </div>
+  </div>
   
 {% endblock %}
