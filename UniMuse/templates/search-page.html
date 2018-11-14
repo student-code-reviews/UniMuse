@@ -6,29 +6,21 @@
 
   <h1>Search for Songs!</h1>
 
-  <div class="container" id="search-box">
-    
-    <form action="/search-page" method="post">
+  <script src="static/js/components/SearchResultsList.jsx" type="text/jsx"></script>
+  <script src="static/js/components/SearchForm.jsx" type="text/jsx"></script>
+  <script src="static/js/components/ResultsList.jsx" type="text/jsx"></script>
+  <script src="static/js/components/NoResults.jsx" type="text/jsx"></script>
+  <script src="static/js/components/Result.jsx" type="text/jsx"></script>
 
-      Search for the song title: <br>
-      <input type="text" id="search-song-title" name="user-song-query">
-      <input type="submit" id="search-song-title-submit" value="Search!">
+  <script type="text/jsx">
+    ReactDOM.render(<SearchResultsList />, document.querySelector('div#search-results'));
+  </script>
 
-    </form>
-
-  </div>
-
-  <div id="goto-player">
+  <!-- <div id="goto-player">
 
       <button class="btn btn-primary" id="goto-player-button" onclick="location.href = '/player'">
         Finish </button>
         
-  </div>
-
-  <script>
-    function get_first_song(evt) {
-
-    }
-  </script>
+  </div> -->
   
 {% endblock %}

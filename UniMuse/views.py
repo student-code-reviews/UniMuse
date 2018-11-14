@@ -113,27 +113,37 @@ def spotify_callback():
     return redirect("/subscriptions-login")
 
 
-@app.route("/search-page", methods=["GET", "POST"])
+@app.route("/search-page")
 def search_songs():
     """Search songs on app."""
-    
+
+    return render_template("/search-page.html")
+
+
+@app.route('/search-results.json', methods=["POST"])
+def search_results():
+    """Return result dictionary for search query."""
+
     access_token = session['spotify_token']
 
-    if request.method == "GET":
-        return render_template("/search-page.html", access_token=access_token)
+    query_input = request.form.get("user-song-query")
+    query_input = query_input.replace(" ", "%20").lower()
 
-    elif request.method == "POST":
-        query_input = request.form.get("user-song-query")
-        query_input = query_input.replace(" ", "%20").lower()
+    query = "q=" + query_input + "&type=track&limit=10"
 
-        query = "q=" + query_input + "&type=track&limit=10"
+    results = spotify.search(query, access_token).json()
+    data_lst = results["tracks"]["items"]   # List of dictionaries
+    print(data_lst)
 
-        results = spotify.search(query, access_token).json()
-        data = results["tracks"]["items"][0]["uri"]
+    # Create result "keys"
+    data_dict = {}
+    result_no = 1
+    while result_no < (len(data_lst)+1):
+        data_dict[result_no] = data_lst[result_no]
+        result_no += 1
 
-        return render_template("/player.html", access_token=access_token,
-                                               uri=data)
-
+    return jsonify(data_dict)
+    
 
 @app.route("/player")
 def player():
