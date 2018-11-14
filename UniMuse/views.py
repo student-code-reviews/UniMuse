@@ -127,6 +127,7 @@ def search_results():
     access_token = session['spotify_token']
 
     query_input = request.form.get("user-song-query")
+    print("-"*10, query_input)
     query_input = query_input.replace(" ", "%20").lower()
 
     query = "q=" + query_input + "&type=track&limit=10"
@@ -137,8 +138,8 @@ def search_results():
 
     # Create result "keys"
     data_dict = {}
-    result_no = 1
-    while result_no < (len(data_lst)+1):
+    result_no = 0
+    while result_no < (len(data_lst)):
         data_dict[result_no] = data_lst[result_no]
         result_no += 1
 

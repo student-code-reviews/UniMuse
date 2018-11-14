@@ -11,14 +11,15 @@ class SearchForm extends React.Component {
 
   render () {
     let route = this.props.route
+    console.log(route)
 
     return (
-      <form action={route} methods="post">
+      <form action={route} method="post">
         <h3 className="page-header">Search for a Song!</h3>
 
         <div className="form-group">
           <label htmlFor="resultName">Search <span style={styleRequired}>*</span></label>
-          <input type="text" className="form-control" id="resultName" placeholder="Enter song title" required ref="song-title" />
+          <input type="text" className="form-control" name="user-song-query" placeholder="Enter song title" required ref="song-title" />
         </div>
 
         <div className="form-group">

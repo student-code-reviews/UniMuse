@@ -9,7 +9,7 @@ class SearchResultsList extends React.Component {
     };
 
     this.updateResults = this.updateResults.bind(this);
-    this.addResult = this.addResult.bind(this);
+    this.addResults = this.addResults.bind(this);
   }
 
   updateResults (newResults) {
