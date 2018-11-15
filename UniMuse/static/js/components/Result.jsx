@@ -19,7 +19,7 @@ class Result extends React.Component {
           <p className="panel-body">
             {result.artistName}
             {result.albumName}
-            {result.albumImgURLsm}
+            <img href={result.albumImgURLsm}></img>
           </p>
   
           <div className="panel-footer">

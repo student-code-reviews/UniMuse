@@ -120,28 +120,29 @@ def search_songs():
     return render_template("/search-page.html")
 
 
-@app.route('/search-results.json', methods=["POST"])
+@app.route('/search-results.json')
 def search_results():
     """Return result dictionary for search query."""
 
     access_token = session['spotify_token']
 
-    query_input = request.form.get("user-song-query")
-    print("-"*10, query_input)
+    query_input = request.args.get("userquery")
     query_input = query_input.replace(" ", "%20").lower()
-
     query = "q=" + query_input + "&type=track&limit=10"
 
-    results = spotify.search(query, access_token).json()
-    data_lst = results["tracks"]["items"]   # List of dictionaries
-    print(data_lst)
+    results = spotify.search(query, access_token).json()  # Returns list
+    data_lst = results['tracks']['items']
 
     # Create result "keys"
     data_dict = {}
     result_no = 0
-    while result_no < (len(data_lst)):
+    while result_no < len(data_lst):
         data_dict[result_no] = data_lst[result_no]
         result_no += 1
+
+    print(data_dict.keys())
+    print(data_dict[0])
+    print(data_dict[1]['name'])
 
     return jsonify(data_dict)
     
