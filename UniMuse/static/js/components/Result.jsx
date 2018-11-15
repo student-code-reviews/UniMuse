@@ -5,7 +5,13 @@ class Result extends React.Component {
   
     }
   
-    //Need to add event handler for add to playlist button
+    // handleAddtoPlaylistSubmitEvent (evt) {
+    //   evt.preventDefault();
+    // }
+
+    // handlePlaySongSubmitEvent (evt) {
+    //   evt.preventDefault();
+    // }
   
     render () {
       let result = this.props.result;
@@ -17,14 +23,15 @@ class Result extends React.Component {
           </div>
   
           <p className="panel-body">
-            {result.artistName}
-            {result.albumName}
-            <img href={result.albumImgURLsm}></img>
+            <img src={result.albumImgURLsm}></img>
+            <strong>Artist:</strong> {result.artistName}
+            <strong> Album:</strong> {result.albumName}
           </p>
   
           <div className="panel-footer">
             <form className="form-inline">
               <button type="add-to-playlist" className="btn btn-default btn-xs">Add to playlist</button>
+              <button type="search-player" className="btn btn-default btn-xs">Play Song</button>
             </form>
           </div>
         </div>
