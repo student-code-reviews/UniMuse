@@ -17,7 +17,7 @@ class SearchForm extends React.Component {
     evt.preventDefault();  // Need this?
 
     let userQuery = this.refs.userquery.value;
-
+    console.log(userQuery)
     this.props.getAPIrequestData(userQuery);
   }
 
