@@ -17,13 +17,19 @@ class PlaylistForm extends React.Component {
 
         <button type="button" className="btn btn-primary" data-toggle="collapse" 
                 data-target="#createplaylistform">Create New Playlist</button>
+        <p />
 
         <div id="createplaylistform" className="collapse">
 
-          <label htmlFor="createPlaylistBoxLabel">New Playlist Name 
-                <span style={styleRequired}>*</span></label>
-          <input type="text" className="form-control" placeholder="Enter new playlist name" 
-                required ref="new-playlist" />
+          <form>
+            <label htmlFor="createPlaylistBoxLabel">New Playlist Name</label>
+            <input type="text" className="form-control" placeholder="Enter new playlist name" 
+                  required ref="new-playlist" />
+            <p />
+            <button type="submit" className="btn btn-default btn-xs">Create</button>
+            <button type="reset" className="btn btn-link btn-xs" data-toggle="collapse" 
+                data-target="#createplaylistform">Cancel</button>
+          </form>
 
         </div>
 
