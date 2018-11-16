@@ -22,8 +22,8 @@ class SearchListElement extends React.Component {
 
         <div className="panel-footer">
           <form className="form-inline">
-            <button type="submit" className="btn btn-default btn-xs">Add to playlist</button>
-            <button type="submit" className="btn btn-default btn-xs">Play Song</button>
+            <button type="button" className="btn btn-default btn-xs">Add to playlist</button>
+            <button type="button" className="btn btn-default btn-xs">Play Song</button>
           </form>
         </div>
       </div>

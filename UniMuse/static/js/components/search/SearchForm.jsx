@@ -30,6 +30,9 @@ class SearchForm extends React.Component {
           <input type="text" className="form-control" placeholder="Enter song title" required ref="userquery" />
         </div>
 
+        <button type="submit" className="btn btn-primary">Submit</button>
+        <button type="reset" className="btn btn-link">Cancel</button>
+
         <div className="form-group">
           <div className="row">
             <div className="col-xs-5 col-sm-6 col-md-4">
@@ -38,9 +41,6 @@ class SearchForm extends React.Component {
         </div>
 
         <hr />
-
-        <button type="submit" className="btn btn-primary">Submit</button>
-        <button type="reset" className="btn btn-link">Cancel</button>
       </form>
     );
   }
