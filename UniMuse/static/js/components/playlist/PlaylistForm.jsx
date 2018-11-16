@@ -4,9 +4,15 @@ class PlaylistForm extends React.Component {
     this.state = {};
     
     // Bindings
+    this.handleCreatePlaylistSubmitEvent = this.handleCreatePlaylistSubmitEvent.bind(this);
   }
   
-  // PLACEHOLDER FOR CREATE HANDLER
+  handleCreatePlaylistSubmitEvent (evt) {
+    evt.preventDefault();
+
+    let userNewPlaylist = this.refs.newPlaylistName.value
+    console.log(userNewPlaylist)
+  }
 
   render () {
 
@@ -21,10 +27,10 @@ class PlaylistForm extends React.Component {
 
         <div id="createplaylistform" className="collapse">
 
-          <form>
+          <form onSubmit={this.handleCreatePlaylistSubmitEvent}>
             <label htmlFor="createPlaylistBoxLabel">New Playlist Name</label>
             <input type="text" className="form-control" placeholder="Enter new playlist name" 
-                  required ref="new-playlist" />
+                  required ref="newPlaylistName" />
             <p />
             <button type="submit" className="btn btn-default btn-xs">Create</button>
             <button type="reset" className="btn btn-link btn-xs" data-toggle="collapse" 
