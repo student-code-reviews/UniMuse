@@ -87,6 +87,11 @@ class SearchListPlaylist extends React.Component {
             <SearchList searchListDataAll={searchListDataAll} />
 
           </div>
+          <div className="col-sm-6">
+
+            <PlaylistsSongList />
+
+          </div>
         </div>
       </div>
     );
