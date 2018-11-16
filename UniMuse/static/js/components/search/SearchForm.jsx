@@ -2,8 +2,6 @@ let styleRequired = {
   color: "#ffaaaa"
 };
 
-// This class should call the super(props) from APIrequest.jsx
-// Props needed = getData
 
 class SearchForm extends React.Component {
   constructor(props) {
@@ -14,7 +12,7 @@ class SearchForm extends React.Component {
   }
 
   handleSearchSubmitEvent (evt) {
-    evt.preventDefault();  // Need this?
+    evt.preventDefault();
 
     let userQuery = this.refs.userquery.value;
     console.log(userQuery)
@@ -28,7 +26,7 @@ class SearchForm extends React.Component {
         <h3 className="page-header">Search for a Song!</h3>
 
         <div className="form-group">
-          <label htmlFor="resultName">Search <span style={styleRequired}>*</span></label>
+          <label htmlFor="searchBoxLabel">Search <span style={styleRequired}>*</span></label>
           <input type="text" className="form-control" placeholder="Enter song title" required ref="userquery" />
         </div>
 

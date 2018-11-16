@@ -9,7 +9,7 @@ from models import connect_to_db
 if __name__ == "__main__":
     app.secret_key = "SECRETSAUCE"
     
-    connect_to_db(app)  # Already connecting in model.py
+    connect_to_db(app)
 
     app.debug = True
     app.jinja_env.auto_reload = app.debug

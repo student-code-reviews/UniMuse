@@ -2,7 +2,6 @@
 
 import os
 import json
-# import spotipy  # TODO: If enough time, try using Spotipy
 import requests
 
 from jinja2 import StrictUndefined
@@ -20,6 +19,7 @@ app.jinja_env.undefined = StrictUndefined
 
 
 # =========================================================================== #
+
 @app.route('/')
 def index():
     """Homepage."""
@@ -41,7 +41,6 @@ def sign_up_success():
     username = request.form.get("um-new-username")
     password = request.form.get("um-new-password")
 
-    # Query database for the username. Will return None if username doesn't exist
     user = db.session.query(User).filter(User.username==username).first()
 
     if user:
@@ -71,12 +70,11 @@ def login():
     username = request.form.get("um-username")
     password = request.form.get("um-password")
 
-    # Query database for the username. Will return None if username doesn't exist
     user = db.session.query(User).filter(User.username==username).first()
     
     if user:
         if user.password == password:
-            session['logged_user'] = username   # TODO: Need to check if a user is already logged in.
+            session['logged_user'] = username
 
             flash("You've successfully logged in!")
             return redirect("/subscriptions-login")
@@ -99,6 +97,7 @@ def subscriptions_login():
 
 
 # =========================================================================== #
+
 @app.route("/spotify-callback")
 def spotify_callback():
     """Spotify user authentication callback."""
@@ -113,15 +112,15 @@ def spotify_callback():
     return redirect("/subscriptions-login")
 
 
-@app.route("/search-page")
+@app.route("/searchlist-playlist")
 def search_songs():
     """Search songs on app."""
 
-    return render_template("/search-page.html")
+    return render_template("/searchlist-playlist.html")
 
 
-@app.route('/search-results.json')
-def search_results():
+@app.route('/search-api-request.json')
+def search_api_request():
     """Return result dictionary for search query."""
 
     access_token = session['spotify_token']
@@ -130,15 +129,15 @@ def search_results():
     query_input = query_input.replace(" ", "%20").lower()
     query = "q=" + query_input + "&type=track&limit=10"
 
-    results = spotify.search(query, access_token).json()  # Returns list
+    results = spotify.search(query, access_token).json()
     data_lst = results['tracks']['items']
 
-    # Create result "keys"
+    # Create result "keys" used in React
     data_dict = {}
-    result_no = 0
-    while result_no < len(data_lst):
-        data_dict[result_no] = data_lst[result_no]
-        result_no += 1
+    search_result_no = 0
+    while search_result_no < len(data_lst):
+        data_dict[search_result_no] = data_lst[search_result_no]
+        search_result_no += 1
 
     print(data_dict.keys())
     print(data_dict[0])
@@ -152,5 +151,4 @@ def player():
     """Play songs on app."""
     
     access_token = session['spotify_token']
-
     return render_template("/player.html", access_token=access_token)

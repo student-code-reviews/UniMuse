@@ -81,11 +81,9 @@ def connect_to_db(app):
     db.app = app
     db.init_app(app)
 
-
-# TODO: Delete when finalized...?
 if __name__ == '__main__':
     from server import app
     
     connect_to_db(app)
     db.create_all()
-    print('Connected to database.')  # TODO: Delete when finished
+    print('Connected to database.')

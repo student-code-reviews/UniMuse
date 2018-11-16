@@ -1,40 +1,39 @@
-class SearchResultsList extends React.Component {
+class SearchListPlaylist extends React.Component {
   constructor() {
     super();
 
-    // Initial state (attributes of SearchResultsList class)
     this.state = {
-      allResults: {}
+      searchListDataAll: {}
     };
 
-    this.updateResults = this.updateResults.bind(this);  // What does binding do?
-    this.addResults = this.addResults.bind(this);
+    // Bindings
+    this.updateSearchListDataAll = this.updateSearchListDataAll.bind(this);
+    this.addSearchListDataAll = this.addSearchListDataAll.bind(this);
     this.getAPIrequestData = this.getAPIrequestData.bind(this);
   }
 
-  updateResults (newResults) {
+  updateSearchListDataAll (newSearchListDataAll) {
     this.setState({
-      allResults: newResults
+      searchListDataAll: newSearchListDataAll
     });
   }
   
-  addResults (result) {
-    let allResults = this.state.allResults;
+  addSearchListDataAll (searchListData) {
+    let searchListDataAll = this.state.searchListDataAll;
 
-    allResults[result.result_no] = result;
+    searchListDataAll[searchListData.search_result_no] = searchListData;
 
-    this.updateResults(allResults)
+    this.updateSearchListDataAll(searchListDataAll)
   }
 
-  // Put it in here for now (one top of tree instead of two) - refactor later
   getAPIrequestData (userQuery) {
-    fetch(`/search-results.json?userquery=${userQuery}`)
+    fetch(`/search-api-request.json?userquery=${userQuery}`)
       .then(res => res.json())
       .then(data => {
         for (let key of Object.keys(data)) {
           console.log(key, data[key])
-          let result = {
-            result_no: key,
+          let searchListData = {
+            search_result_no: key,
             songTitle: data[key]['name'],
             artistName: data[key]['album']['artists'][0]['name'],
             albumName: data[key]['album']['name'],
@@ -42,15 +41,15 @@ class SearchResultsList extends React.Component {
             albumImgURLlg: data[key]['album']['images'][0]['url'],
             songURI: data[key]['uri']
           };
-          console.log(result)
-          this.addResults(result);
+          console.log(searchListData)
+          this.addSearchListDataAll(searchListData);
         }
       })
-      .catch(err => this.setState({ allResults: "Something went wrong."}));
+      .catch(err => this.setState({ searchListDataAll: "Something went wrong."}));
   }
 
   render() {
-    let results = this.state.allResults;
+    let searchListDataAll = this.state.searchListDataAll;
 
     return (
       <div className="container">
@@ -62,7 +61,7 @@ class SearchResultsList extends React.Component {
           </div>
           <div className="col-sm-6">
 
-            <ResultsList results={results} />
+            <SearchList searchListDataAll={searchListDataAll} />
 
           </div>
         </div>

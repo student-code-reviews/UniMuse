@@ -1,0 +1,27 @@
+
+{% extends 'base.html' %}
+
+{% block title %}Search Songs{% endblock %}
+
+{% block content %}
+
+  <div id="root"></div>
+
+  <script src="static/js/components/SearchListPlaylist.jsx" type="text/jsx"></script>
+  <script src="static/js/components/search/SearchForm.jsx" type="text/jsx"></script>
+  <script src="static/js/components/search/SearchList.jsx" type="text/jsx"></script>
+  <script src="static/js/components/search/SearchListElement.jsx" type="text/jsx"></script>
+  <script src="static/js/components/search/NoSearchListElement.jsx" type="text/jsx"></script>
+
+  <script type="text/jsx">
+    ReactDOM.render(<SearchListPlaylist />, document.querySelector('div#root'));
+  </script>
+
+  <!-- <div id="goto-player">
+
+      <button class="btn btn-primary" id="goto-player-button" onclick="location.href = '/player'">
+        Finish </button>
+        
+  </div> -->
+  
+{% endblock %}
