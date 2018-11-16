@@ -2,7 +2,6 @@ let styleRequired = {
   color: "#ffaaaa"
 };
 
-
 class SearchForm extends React.Component {
   constructor(props) {
     super(props);
@@ -23,7 +22,7 @@ class SearchForm extends React.Component {
 
     return (
       <form onSubmit={this.handleSearchSubmitEvent}>
-        <h3 className="page-header">Search for a Song!</h3>
+        <h3 className="page-header"><strong>Search for a Song!</strong></h3>
 
         <div className="form-group">
           <label htmlFor="searchBoxLabel">Search <span style={styleRequired}>*</span></label>
