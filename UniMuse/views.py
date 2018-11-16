@@ -74,7 +74,9 @@ def login():
     
     if user:
         if user.password == password:
-            session['logged_user'] = username
+            user_id = user.user_id
+            session['logged_user'] = { 'user_id': user_id,
+                                       'username': username}
 
             flash("You've successfully logged in!")
             return redirect("/subscriptions-login")
@@ -98,6 +100,7 @@ def subscriptions_login():
 
 # =========================================================================== #
 
+
 @app.route("/spotify-callback")
 def spotify_callback():
     """Spotify user authentication callback."""
@@ -110,6 +113,9 @@ def spotify_callback():
         session['spotify_token'] = response_data["access_token"]
     
     return redirect("/subscriptions-login")
+
+
+# =========================================================================== #
 
 
 @app.route("/searchlist-playlist")
@@ -144,7 +150,30 @@ def search_api_request():
     print(data_dict[1]['name'])
 
     return jsonify(data_dict)
-    
+
+
+@app.route("/save-new-playlist")
+def save_new_playlist():
+    """Save new playlist created by user into database."""
+
+    new_playlist = request.args.get("newPlaylistName")
+    print(new_playlist)
+    user_id = session['logged_user']['user_id']
+
+    playlist = db.session.query(Playlist).filter(User.user_id==user_id,
+                                                 Playlist.playlist_name==new_playlist
+                                                ).first()
+
+    if playlist:
+        return jsonify("User already has a playlist with that name.")
+    else:
+        playlist = Playlist(user_id=user_id, playlist_name=new_playlist)
+        
+        db.session.add(playlist)
+        db.session.commit()
+
+        return jsonify("Sucessfully added the playlist.")
+
 
 @app.route("/player")
 def player():

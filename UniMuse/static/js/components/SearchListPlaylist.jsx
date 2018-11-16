@@ -3,13 +3,15 @@ class SearchListPlaylist extends React.Component {
     super();
 
     this.state = {
-      searchListDataAll: {}
+      searchListDataAll: {},
+      playlistsAll: {}
     };
 
     // Bindings
     this.updateSearchListDataAll = this.updateSearchListDataAll.bind(this);
     this.addSearchListDataAll = this.addSearchListDataAll.bind(this);
     this.getAPIrequestData = this.getAPIrequestData.bind(this);
+    this.saveUserNewPlaylist = this.saveUserNewPlaylist.bind(this);
   }
 
   updateSearchListDataAll (newSearchListDataAll) {
@@ -48,8 +50,24 @@ class SearchListPlaylist extends React.Component {
       .catch(err => this.setState({ searchListDataAll: "Something went wrong."}));
   }
 
+  saveUserNewPlaylist (userNewPlaylist) {
+    fetch(`/save-new-playlist?newPlaylistName=${userNewPlaylist}`)
+      .then(res => res.json())
+      .then(response => {
+        console.log(response)
+        if (response === 'Sucessfully added the playlist.') {
+          alert(`Successfully created playlist '${userNewPlaylist}'!`);
+        } else {
+          alert(`'${userNewPlaylist}' already exists!`)
+        }
+
+      })
+      .catch(err => this.setState({ playlistsAll: "Something went wrong."}));
+  }
+
   render() {
     let searchListDataAll = this.state.searchListDataAll;
+    let saveUserNewPlaylist = this.state.saveUserNewPlaylist;
 
     return (
       <div className="container">
@@ -61,7 +79,7 @@ class SearchListPlaylist extends React.Component {
           </div>
           <div className="col-sm-6">
 
-            <PlaylistForm />
+            <PlaylistForm saveUserNewPlaylist={this.saveUserNewPlaylist} />
 
           </div>
           <div className="col-sm-6">
