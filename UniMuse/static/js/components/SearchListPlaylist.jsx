@@ -61,6 +61,11 @@ class SearchListPlaylist extends React.Component {
           </div>
           <div className="col-sm-6">
 
+            <PlaylistForm />
+
+          </div>
+          <div className="col-sm-6">
+
             <SearchList searchListDataAll={searchListDataAll} />
 
           </div>
