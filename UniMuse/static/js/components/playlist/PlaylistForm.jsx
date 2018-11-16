@@ -15,7 +15,17 @@ class PlaylistForm extends React.Component {
 
         <h3 className="page-header"><strong>Playlists</strong></h3>
 
-        <button type="button" className="btn btn-primary">Create New Playlist</button>
+        <button type="button" className="btn btn-primary" data-toggle="collapse" 
+                data-target="#createplaylistform">Create New Playlist</button>
+
+        <div id="createplaylistform" className="collapse">
+
+          <label htmlFor="createPlaylistBoxLabel">New Playlist Name 
+                <span style={styleRequired}>*</span></label>
+          <input type="text" className="form-control" placeholder="Enter new playlist name" 
+                required ref="new-playlist" />
+
+        </div>
 
         <hr />
 
