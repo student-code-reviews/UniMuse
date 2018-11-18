@@ -20,8 +20,10 @@ class PlaylistsSongList extends React.Component {
       .getPlaylistsDataAllKeys(playlistsDataAll)
       .map(function createPlaylistDataElements(playlist_no) {
         playlistData = playlistsDataAll[playlist_no];
-        return (<PlaylistElement playlistData={playlistData} />);
+        console.log(playlistData)
+        return (<PlaylistElement key={playlist_no} playlistData={playlistData} />);
       }.bind(this))
+      .reverse()
     );
   }
 
