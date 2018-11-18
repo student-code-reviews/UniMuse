@@ -4,7 +4,7 @@ class SearchListPlaylist extends React.Component {
 
     this.state = {
       searchListDataAll: {},
-      playlistsAll: {}
+      playlistsDataAll: {}
     };
 
     // Bindings
@@ -12,11 +12,21 @@ class SearchListPlaylist extends React.Component {
     this.addSearchListDataAll = this.addSearchListDataAll.bind(this);
     this.getAPIrequestData = this.getAPIrequestData.bind(this);
     this.saveUserNewPlaylist = this.saveUserNewPlaylist.bind(this);
+
+    this.updatePlaylistsDataAll = this.updatePlaylistsDataAll.bind(this);
+    this.addPlaylistsDataAll = this.addPlaylistsDataAll.bind(this);
+    this.getUserPlaylistsData = this.getUserPlaylistsData.bind(this);
   }
 
   updateSearchListDataAll (newSearchListDataAll) {
     this.setState({
       searchListDataAll: newSearchListDataAll
+    });
+  }
+
+  updatePlaylistsDataAll (newPlaylistsDataAll) {
+    this.setState({
+      playlistsDataAll: newPlaylistsDataAll
     });
   }
   
@@ -26,6 +36,14 @@ class SearchListPlaylist extends React.Component {
     searchListDataAll[searchListData.search_result_no] = searchListData;
 
     this.updateSearchListDataAll(searchListDataAll)
+  }
+
+  addPlaylistsDataAll (playlistData) {
+    let playlistsDataAll = this.state.playlistsDataAll;
+
+    playlistsDataAll[playlistData.playlist_no] = playlistData;
+
+    this.updatePlaylistsDataAll(playlistsDataAll)
   }
 
   getAPIrequestData (userQuery) {
@@ -50,6 +68,22 @@ class SearchListPlaylist extends React.Component {
       .catch(err => this.setState({ searchListDataAll: "Something went wrong."}));
   }
 
+  getUserPlaylistsData () {
+    fetch('/user-playlists.json')
+      .then(res => res.json())
+      .then(data => {
+        for (let key of Object.keys(data)) {
+          let playlistData = {
+            playlist_no: key,
+            playlist_name: data[key]
+          };
+          console.log(playlistData);
+          this.addPlaylistsDataAll(playlistData);
+        }
+      })
+    .catch(err => this.setState({ playlistsDataAll: "Something went wrong with user's playlists."}));
+  }
+
   saveUserNewPlaylist (userNewPlaylist) {
     fetch(`/save-new-playlist?newPlaylistName=${userNewPlaylist}`)
       .then(res => res.json())
@@ -68,6 +102,9 @@ class SearchListPlaylist extends React.Component {
   render() {
     let searchListDataAll = this.state.searchListDataAll;
     let saveUserNewPlaylist = this.state.saveUserNewPlaylist;
+
+    this.getUserPlaylistsData();
+    let playlistsDataAll = this.state.playlistsDataAll;
 
     return (
       <div className="container">
@@ -88,8 +125,10 @@ class SearchListPlaylist extends React.Component {
 
           </div>
           <div className="col-sm-6">
-
-            <PlaylistsSongList />
+            
+            <PlaylistsSongList 
+              playlistsDataAll={playlistsDataAll}
+              getUserPlaylistsData={this.getUserPlaylistsData} />
 
           </div>
         </div>

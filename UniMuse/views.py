@@ -154,8 +154,10 @@ def search_api_request():
 
 @app.route("/user-playlists.json")
 def get_user_playlists():
+    """Retrieve user's previously-created playlists."""
 
     user_id = session['logged_user']['user_id']
+    print(user_id)
     playlist_check = db.session.query(Playlist).filter(User.user_id==user_id).first()
 
     user_playlists = {}
@@ -166,6 +168,7 @@ def get_user_playlists():
         for playlist in playlists:
             user_playlists[playlist.playlist_id] = playlist.playlist_name
         
+        print(user_playlists)
         return jsonify(user_playlists)
     else:
         return jsonify("User does not have any playlists.")
