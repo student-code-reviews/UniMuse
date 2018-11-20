@@ -37,6 +37,12 @@ class SearchListPlaylist extends React.Component {
       searchListDataAll: newSearchListDataAll
     });
   }
+
+  // updatePlaylistsDataAll (newPlaylistsDataAll) {
+  //   this.setState({
+  //     playlistsDataAll: newPlaylistsDataAll
+  //   });
+  // }
   
   addSearchListDataAll (searchListData) {
     let searchListDataAll = this.state.searchListDataAll;
@@ -45,6 +51,14 @@ class SearchListPlaylist extends React.Component {
 
     this.updateSearchListDataAll(searchListDataAll)
   }
+
+  // addPlaylistsDataAll (playlistData) {
+  //   let playlistsDataAll = this.state.PlaylistsDataAll;
+
+  //   playlistsDataAll[playlistData.playlist_no] = playlistData;
+
+  //   this.updatePlaylistsDataAll(searchListDataAll)
+  // }
 
   getAPIrequestData (userQuery) {
     fetch(`/search-api-request.json?userquery=${userQuery}`)
@@ -73,12 +87,21 @@ class SearchListPlaylist extends React.Component {
       .then(res => res.json())
       .then(response => {
         console.log(response)
-        if (response === 'Sucessfully added the playlist.') {
-          alert(`Successfully created playlist '${userNewPlaylist}'!`);
-        } else {
+        if (response === 'User already has a playlist with that name.') {
           alert(`'${userNewPlaylist}' already exists!`)
+        } else {
+          alert(`Successfully created playlist '${userNewPlaylist}'!`);
+          let playlistsDataAll = {};
+          for (let key of Object.keys(response)) {
+            let playlistData = {
+              playlist_no: key,
+              playlist_name: response[key]
+            };
+            playlistsDataAll[key] = playlistData;
+          };
+          this.setState( {playlistsDataAll: playlistsDataAll} );
+          console.log(this.state.playlistsDataAll);
         }
-
       })
       .catch(err => this.setState({ playlistsAll: "Something went wrong."}));
   }

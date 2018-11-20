@@ -186,6 +186,8 @@ def save_new_playlist():
                                                  Playlist.playlist_name==new_playlist
                                                 ).first()
 
+    user_playlists = {}
+
     if playlist:
         return jsonify("User already has a playlist with that name.")
     else:
@@ -194,7 +196,13 @@ def save_new_playlist():
         db.session.add(playlist)
         db.session.commit()
 
-        return jsonify("Sucessfully added the playlist.")
+        playlists = db.session.query(Playlist).filter(User.user_id==user_id).all()
+        
+        for playlist in playlists:
+            user_playlists[playlist.playlist_id] = playlist.playlist_name
+        
+        print(user_playlists)
+        return jsonify(user_playlists)
 
 
 @app.route("/player")
