@@ -57,22 +57,6 @@ class PlaylistSong(db.Model):
                                                       order_by=song_id))
 
 
-# def test_data():
-#     """Example data for testing application."""
-
-#     User.query.delete()
-#     Playlist.query.delete()
-#     Song.query.delete()
-#     PlaylistSong.query.delete()
-
-#     frank = User.(username="frank", password="iamfrank")
-#     minerva = User.(username="mrsminervatoyou", password="ilovecats123")
-#     dee = User.(username="princessDee", password="iamnotabird@dee")
-
-#     db.session.add_all([frank, minerva, dee])
-#     db.session.commit()
-
-
 def connect_to_db(app):
     """Connect UniMuse database to Flask app."""
 

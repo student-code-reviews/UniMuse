@@ -11,8 +11,6 @@ from flask import Flask, render_template, request, flash, redirect, session, jso
 from models import db, User, Playlist, PlaylistSong, Song
 import spotify
 
-from pprint import pprint
-
 app = Flask(__name__)
 
 app.jinja_env.undefined = StrictUndefined
@@ -145,10 +143,6 @@ def search_api_request():
         data_dict[search_result_no] = data_lst[search_result_no]
         search_result_no += 1
 
-    print(data_dict.keys())
-    print(data_dict[0])
-    print(data_dict[1]['name'])
-
     return jsonify(data_dict)
 
 
@@ -167,9 +161,9 @@ def get_user_playlists():
         
         for playlist in playlists:
             user_playlists[playlist.playlist_id] = playlist.playlist_name
-        
-        print(user_playlists)
+
         return jsonify(user_playlists)
+
     else:
         return jsonify("User does not have any playlists.")
 
@@ -186,10 +180,9 @@ def save_new_playlist():
                                                  Playlist.playlist_name==new_playlist
                                                 ).first()
 
-    user_playlists = {}
-
     if playlist:
         return jsonify("User already has a playlist with that name.")
+        
     else:
         playlist = Playlist(user_id=user_id, playlist_name=new_playlist)
         

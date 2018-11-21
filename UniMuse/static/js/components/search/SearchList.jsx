@@ -26,7 +26,7 @@ class SearchList extends React.Component {
   }
 
   render () {
-    let searchListDataAll = this.props.searchListDataAll
+    let searchListDataAll = this.props.searchListDataAll;
     let searchListDataElements = this.createSearchListDataElements(searchListDataAll);
 
     return (
