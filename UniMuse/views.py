@@ -196,13 +196,12 @@ def save_new_playlist():
         db.session.add(playlist)
         db.session.commit()
 
-        playlists = db.session.query(Playlist).filter(User.user_id==user_id).all()
-        
-        for playlist in playlists:
-            user_playlists[playlist.playlist_id] = playlist.playlist_name
-        
-        print(user_playlists)
-        return jsonify(user_playlists)
+        playlistData = {
+            'playlist_no': playlist.playlist_id,
+            'playlist_name': playlist.playlist_name
+        }
+        print(playlistData)
+        return jsonify(playlistData)
 
 
 @app.route("/player")
