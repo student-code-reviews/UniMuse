@@ -152,6 +152,28 @@ def search_api_request():
     return jsonify(data_dict)
 
 
+@app.route("/user-playlists.json")
+def get_user_playlists():
+    """Retrieve user's previously-created playlists."""
+
+    user_id = session['logged_user']['user_id']
+    print(user_id)
+    playlist_check = db.session.query(Playlist).filter(User.user_id==user_id).first()
+
+    user_playlists = {}
+
+    if playlist_check:
+        playlists = db.session.query(Playlist).filter(User.user_id==user_id).all()
+        
+        for playlist in playlists:
+            user_playlists[playlist.playlist_id] = playlist.playlist_name
+        
+        print(user_playlists)
+        return jsonify(user_playlists)
+    else:
+        return jsonify("User does not have any playlists.")
+
+
 @app.route("/save-new-playlist")
 def save_new_playlist():
     """Save new playlist created by user into database."""
@@ -164,6 +186,8 @@ def save_new_playlist():
                                                  Playlist.playlist_name==new_playlist
                                                 ).first()
 
+    user_playlists = {}
+
     if playlist:
         return jsonify("User already has a playlist with that name.")
     else:
@@ -172,7 +196,12 @@ def save_new_playlist():
         db.session.add(playlist)
         db.session.commit()
 
-        return jsonify("Sucessfully added the playlist.")
+        playlistData = {
+            'playlist_no': playlist.playlist_id,
+            'playlist_name': playlist.playlist_name
+        }
+        print(playlistData)
+        return jsonify(playlistData)
 
 
 @app.route("/player")

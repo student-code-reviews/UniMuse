@@ -11,7 +11,7 @@ class PlaylistForm extends React.Component {
     evt.preventDefault();
 
     let userNewPlaylist = this.refs.newPlaylistName.value
-    console.log(userNewPlaylist)
+    // console.log(userNewPlaylist)
 
     this.props.saveUserNewPlaylist(userNewPlaylist);
   }
