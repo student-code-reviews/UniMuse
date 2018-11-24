@@ -50,7 +50,7 @@ class SearchListPlaylist extends React.Component {
 
     searchListDataAll[searchListData.search_result_no] = searchListData;
 
-    this.updateSearchListDataAll(searchListDataAll)
+    this.updateSearchListDataAll(searchListDataAll);
   }
 
   addPlaylistsDataAll (playlistData) {
@@ -58,7 +58,7 @@ class SearchListPlaylist extends React.Component {
 
     playlistsDataAll[playlistData.playlist_no] = playlistData;
 
-    this.updatePlaylistsDataAll(playlistsDataAll)
+    this.updatePlaylistsDataAll(playlistsDataAll);
   }
 
   getAPIrequestData (userQuery) {
