@@ -4,7 +4,8 @@ class SearchListPlaylist extends React.Component {
 
     this.state = {
       searchListDataAll: {},
-      playlistsDataAll: {}
+      playlistsDataAll: {},
+      selectedPlaylist: {}
     };
 
     // Bindings
@@ -15,6 +16,8 @@ class SearchListPlaylist extends React.Component {
 
     this.addPlaylistsDataAll = this.addPlaylistsDataAll.bind(this);
     this.updatePlaylistsDataAll = this.updatePlaylistsDataAll.bind(this);
+
+    this.setSelectedPlaylist = this.setSelectedPlaylist.bind(this);
   }
 
   componentDidMount () {
@@ -97,6 +100,12 @@ class SearchListPlaylist extends React.Component {
       .catch(err => this.setState({ playlistsAll: "Something went wrong."}));
   }
 
+  setSelectedPlaylist (currentSelectedPlaylist) {
+    this.setState({ selectedPlaylist: currentSelectedPlaylist }, () => {
+      console.log(this.state.selectedPlaylist);
+    });
+  }
+
   render() {
     let searchListDataAll = this.state.searchListDataAll;
     let saveUserNewPlaylist = this.state.saveUserNewPlaylist;
@@ -122,7 +131,8 @@ class SearchListPlaylist extends React.Component {
           </div>
           <div className="col-sm-6">
             
-            <PlaylistsSongList playlistsDataAll={playlistsDataAll} />
+            <PlaylistsSongList playlistsDataAll={playlistsDataAll} 
+                               setSelectedPlaylist={this.setSelectedPlaylist} />
 
           </div>
         </div>
