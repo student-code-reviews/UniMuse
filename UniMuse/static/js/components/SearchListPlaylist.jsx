@@ -1,3 +1,8 @@
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
+
+
 class SearchListPlaylist extends React.Component {
   constructor() {
     super();
@@ -16,9 +21,12 @@ class SearchListPlaylist extends React.Component {
 
     this.addPlaylistsDataAll = this.addPlaylistsDataAll.bind(this);
     this.updatePlaylistsDataAll = this.updatePlaylistsDataAll.bind(this);
+    this.removePlaylistData = this.removePlaylistData.bind(this);
 
     this.setSelectedPlaylist = this.setSelectedPlaylist.bind(this);
     this.saveSongToPlaylist = this.saveSongToPlaylist.bind(this);
+
+    this.deleteSelectedPlaylist = this.deleteSelectedPlaylist.bind(this);
   }
 
   componentDidMount () {
@@ -63,6 +71,14 @@ class SearchListPlaylist extends React.Component {
     playlistsDataAll[playlistData.playlist_no] = playlistData;
 
     this.updatePlaylistsDataAll(playlistsDataAll);
+  }
+
+  removePlaylistData (playlistData) {
+    let playlistDataAll = this.state.playlistsDataAll;
+    
+    delete playlistDataAll[playlistData.playlist_no];
+
+    this.updatePlaylistsDataAll(playlistDataAll);
   }
 
   getAPIrequestData (userQuery) {
@@ -132,6 +148,28 @@ class SearchListPlaylist extends React.Component {
     }
   }
 
+  deleteSelectedPlaylist () {
+    let currentSelectedPlaylist = this.state.selectedPlaylist;
+
+    if (isEmpty(currentSelectedPlaylist)) {
+      alert("Please select a playlist to delete!");
+    } else {
+      let playlistToDelete = currentSelectedPlaylist.playlist_no
+      // console.log(playlistToDelete)
+      fetch(`/delete-playlist?playlist=${playlistToDelete}`)
+      .then(res => res.json())
+      .then(response => {
+        this.removePlaylistData(currentSelectedPlaylist);
+        this.setState({ selectedPlaylist: {} }, () => {
+          console.log(this.state.selectedPlaylist);
+        });
+        // The if statement above should only require playlists that exist in the DB.
+      })
+      .catch(err => console.log("Something went wrong with deleting playlist."));
+    }
+  }
+
+
   render() {
     let searchListDataAll = this.state.searchListDataAll;
     let saveUserNewPlaylist = this.state.saveUserNewPlaylist;
@@ -147,7 +185,8 @@ class SearchListPlaylist extends React.Component {
           </div>
           <div className="col-sm-6">
 
-            <PlaylistForm saveUserNewPlaylist={this.saveUserNewPlaylist} />
+            <PlaylistForm saveUserNewPlaylist={this.saveUserNewPlaylist} 
+                          deleteSelectedPlaylist={this.deleteSelectedPlaylist} />
 
           </div>
           <div className="col-sm-6">

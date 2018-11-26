@@ -235,6 +235,24 @@ def save_song():
     return jsonify('Success.')
 
 
+@app.route('/delete-playlist')
+def delete_playlist():
+    """Delete playlist from the database."""
+
+    playlist_id = int(request.args.get('playlist'))
+
+    songs = db.session.query(PlaylistSong.song_id).filter(PlaylistSong.playlist_id == playlist_id).all()
+
+    db.session.query(PlaylistSong).filter(PlaylistSong.playlist_id == playlist_id).delete()
+    db.session.query(Playlist).filter(Playlist.playlist_id == playlist_id).delete()
+    for song in songs:
+        db.session.query(Song).filter(Song.song_id == song[0]).delete()
+
+    db.session.commit()
+
+    return jsonify('Successfully deleted playlist.')
+
+
 @app.route("/player")
 def player():
     """Play songs on app."""

@@ -5,6 +5,7 @@ class PlaylistForm extends React.Component {
     
     // Bindings
     this.handleCreatePlaylistSubmitEvent = this.handleCreatePlaylistSubmitEvent.bind(this);
+    this.handleDeletePlaylistSubmitEvent = this.handleDeletePlaylistSubmitEvent.bind(this);
   }
   
   handleCreatePlaylistSubmitEvent (evt) {
@@ -14,6 +15,12 @@ class PlaylistForm extends React.Component {
     // console.log(userNewPlaylist)
 
     this.props.saveUserNewPlaylist(userNewPlaylist);
+  }
+
+  handleDeletePlaylistSubmitEvent (evt) {
+    evt.preventDefault();
+
+    this.props.deleteSelectedPlaylist();
   }
 
   render () {
@@ -43,13 +50,13 @@ class PlaylistForm extends React.Component {
 
         {/* Delete Selected Playlist */}
         <form onSubmit={this.handleDeletePlaylistSubmitEvent}>
-          <button id="deletePlaylistBtn" type="submit" className="btn btn-primary"><i class="fa fa-minus"></i></button>
+          <button id="deletePlaylistBtn" type="submit" className="btn btn-primary"><i className="fa fa-minus"></i></button>
         </form>
         
 
         {/* Go to Selected Playlist */}
         <form onSubmit={this.handleGotoPlaylistSubmitEvent}>
-          <button id="gotoPlaylistBtn" type="submit" className="btn btn-primary"><i class="fa fa-play"></i></button>
+          <button id="gotoPlaylistBtn" type="submit" className="btn btn-primary"><i className="fa fa-play"></i></button>
         </form>
         
         <p />
