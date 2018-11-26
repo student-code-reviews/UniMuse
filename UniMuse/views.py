@@ -197,6 +197,62 @@ def save_new_playlist():
         return jsonify(playlistData)
 
 
+@app.route("/save-song")
+def save_song():
+    """Save song to database."""
+
+    song_uri = request.args.get("songData")
+    playlist_no = int(request.args.get("playlist"))
+
+    service = ''
+    if 'spotify' in song_uri:
+        service = 'spotify'
+    else:
+        service = 'youtube'
+    
+    # Duplicates of the song are okay
+    song = Song(service_id=song_uri, service=service)
+
+    db.session.add(song)
+    db.session.commit()
+
+    order_ids = db.session.query(PlaylistSong.order_id).filter(PlaylistSong.playlist_id==playlist_no).all()
+    if order_ids:
+        order_nums = []
+        for num in order_ids:
+            order_nums.append(num[0])
+        new_order_id = max(order_nums) + 1
+    else:
+        new_order_id = 1
+    
+    playlist_song = PlaylistSong(playlist_id=playlist_no,
+                                 song_id=song.song_id,
+                                 order_id=new_order_id)
+
+    db.session.add(playlist_song)
+    db.session.commit()
+
+    return jsonify('Success.')
+
+
+@app.route('/delete-playlist')
+def delete_playlist():
+    """Delete playlist from the database."""
+
+    playlist_id = int(request.args.get('playlist'))
+
+    songs = db.session.query(PlaylistSong.song_id).filter(PlaylistSong.playlist_id == playlist_id).all()
+
+    db.session.query(PlaylistSong).filter(PlaylistSong.playlist_id == playlist_id).delete()
+    db.session.query(Playlist).filter(Playlist.playlist_id == playlist_id).delete()
+    for song in songs:
+        db.session.query(Song).filter(Song.song_id == song[0]).delete()
+
+    db.session.commit()
+
+    return jsonify('Successfully deleted playlist.')
+
+
 @app.route("/player")
 def player():
     """Play songs on app."""

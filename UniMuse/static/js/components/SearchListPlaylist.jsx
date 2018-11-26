@@ -1,10 +1,16 @@
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
+
+
 class SearchListPlaylist extends React.Component {
   constructor() {
     super();
 
     this.state = {
       searchListDataAll: {},
-      playlistsDataAll: {}
+      playlistsDataAll: {},
+      selectedPlaylist: {}
     };
 
     // Bindings
@@ -15,6 +21,12 @@ class SearchListPlaylist extends React.Component {
 
     this.addPlaylistsDataAll = this.addPlaylistsDataAll.bind(this);
     this.updatePlaylistsDataAll = this.updatePlaylistsDataAll.bind(this);
+    this.removePlaylistData = this.removePlaylistData.bind(this);
+
+    this.setSelectedPlaylist = this.setSelectedPlaylist.bind(this);
+    this.saveSongToPlaylist = this.saveSongToPlaylist.bind(this);
+
+    this.deleteSelectedPlaylist = this.deleteSelectedPlaylist.bind(this);
   }
 
   componentDidMount () {
@@ -61,6 +73,14 @@ class SearchListPlaylist extends React.Component {
     this.updatePlaylistsDataAll(playlistsDataAll);
   }
 
+  removePlaylistData (playlistData) {
+    let playlistDataAll = this.state.playlistsDataAll;
+    
+    delete playlistDataAll[playlistData.playlist_no];
+
+    this.updatePlaylistsDataAll(playlistDataAll);
+  }
+
   getAPIrequestData (userQuery) {
     fetch(`/search-api-request.json?userquery=${userQuery}`)
       .then(res => res.json())
@@ -97,6 +117,59 @@ class SearchListPlaylist extends React.Component {
       .catch(err => this.setState({ playlistsAll: "Something went wrong."}));
   }
 
+  setSelectedPlaylist (currentSelectedPlaylist) {
+    this.setState({ selectedPlaylist: currentSelectedPlaylist }, () => {
+      console.log(this.state.selectedPlaylist);
+    });
+  }
+
+  saveSongToPlaylist (songData) {
+    let checkPlaylistExists = this.state.selectedPlaylist;
+    let songURI = songData.songURI;
+    
+    console.log(checkPlaylistExists);
+    console.log(songURI);
+    
+    if (Object.keys(checkPlaylistExists).length !== 0) {
+      let playlistNo = checkPlaylistExists.playlist_no
+
+      fetch(`/save-song?songData=${songURI}&playlist=${playlistNo}`)
+      .then(res => res.json())
+      .then(response => {
+        if (response === 'Success.') {
+          alert('Success.')
+        } else {
+          alert('Something went wrong.');
+        }
+      })
+      .catch(err => console.log("Something went wrong with saving song."));
+    } else {
+      alert('Please select a playlist!')
+    }
+  }
+
+  deleteSelectedPlaylist () {
+    let currentSelectedPlaylist = this.state.selectedPlaylist;
+
+    if (isEmpty(currentSelectedPlaylist)) {
+      alert("Please select a playlist to delete!");
+    } else {
+      let playlistToDelete = currentSelectedPlaylist.playlist_no
+      // console.log(playlistToDelete)
+      fetch(`/delete-playlist?playlist=${playlistToDelete}`)
+      .then(res => res.json())
+      .then(response => {
+        this.removePlaylistData(currentSelectedPlaylist);
+        this.setState({ selectedPlaylist: {} }, () => {
+          console.log(this.state.selectedPlaylist);
+        });
+        // The if statement above should only require playlists that exist in the DB.
+      })
+      .catch(err => console.log("Something went wrong with deleting playlist."));
+    }
+  }
+
+
   render() {
     let searchListDataAll = this.state.searchListDataAll;
     let saveUserNewPlaylist = this.state.saveUserNewPlaylist;
@@ -112,17 +185,20 @@ class SearchListPlaylist extends React.Component {
           </div>
           <div className="col-sm-6">
 
-            <PlaylistForm saveUserNewPlaylist={this.saveUserNewPlaylist} />
+            <PlaylistForm saveUserNewPlaylist={this.saveUserNewPlaylist} 
+                          deleteSelectedPlaylist={this.deleteSelectedPlaylist} />
 
           </div>
           <div className="col-sm-6">
 
-            <SearchList searchListDataAll={searchListDataAll} />
+            <SearchList searchListDataAll={searchListDataAll} 
+                        saveSongToPlaylist={this.saveSongToPlaylist} />
 
           </div>
           <div className="col-sm-6">
             
-            <PlaylistsSongList playlistsDataAll={playlistsDataAll} />
+            <PlaylistsSongList playlistsDataAll={playlistsDataAll} 
+                               setSelectedPlaylist={this.setSelectedPlaylist} />
 
           </div>
         </div>

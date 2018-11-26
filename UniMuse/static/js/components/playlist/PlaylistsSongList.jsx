@@ -21,7 +21,9 @@ class PlaylistsSongList extends React.Component {
       .map(function createPlaylistDataElements(playlist_no) {
         playlistData = playlistsDataAll[playlist_no];
         // console.log(playlistData)
-        return (<PlaylistElement key={playlist_no} playlistData={playlistData} />);
+        return (<PlaylistElement key={playlist_no} 
+                                 playlistData={playlistData} 
+                                 setSelectedPlaylist={this.props.setSelectedPlaylist} />);
       }.bind(this))
       .reverse()
     );
