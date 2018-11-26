@@ -11,7 +11,7 @@ class PlaylistElement extends React.Component {
       evt.preventDefault();
 
       let currentSelectedPlaylist = this.props.playlistData;
-      console.log(currentSelectedPlaylist)
+      // console.log(currentSelectedPlaylist)
       
       this.props.setSelectedPlaylist(currentSelectedPlaylist);
     }

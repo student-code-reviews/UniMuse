@@ -18,6 +18,7 @@ class SearchListPlaylist extends React.Component {
     this.updatePlaylistsDataAll = this.updatePlaylistsDataAll.bind(this);
 
     this.setSelectedPlaylist = this.setSelectedPlaylist.bind(this);
+    this.saveSongToPlaylist = this.saveSongToPlaylist.bind(this);
   }
 
   componentDidMount () {
@@ -106,6 +107,31 @@ class SearchListPlaylist extends React.Component {
     });
   }
 
+  saveSongToPlaylist (songData) {
+    let checkPlaylistExists = this.state.selectedPlaylist;
+    let songURI = songData.songURI;
+    
+    console.log(checkPlaylistExists);
+    console.log(songURI);
+    
+    if (Object.keys(checkPlaylistExists).length !== 0) {
+      let playlistNo = checkPlaylistExists.playlist_no
+
+      fetch(`/save-song?songData=${songURI}&playlist=${playlistNo}`)
+      .then(res => res.json())
+      .then(response => {
+        if (response === 'Success.') {
+          alert('Success.')
+        } else {
+          alert('Something went wrong.');
+        }
+      })
+      .catch(err => console.log("Something went wrong with saving song."));
+    } else {
+      alert('Please select a playlist!')
+    }
+  }
+
   render() {
     let searchListDataAll = this.state.searchListDataAll;
     let saveUserNewPlaylist = this.state.saveUserNewPlaylist;
@@ -126,7 +152,8 @@ class SearchListPlaylist extends React.Component {
           </div>
           <div className="col-sm-6">
 
-            <SearchList searchListDataAll={searchListDataAll} />
+            <SearchList searchListDataAll={searchListDataAll} 
+                        saveSongToPlaylist={this.saveSongToPlaylist} />
 
           </div>
           <div className="col-sm-6">
