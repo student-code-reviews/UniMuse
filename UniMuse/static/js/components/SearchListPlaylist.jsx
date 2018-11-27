@@ -19,14 +19,13 @@ class SearchListPlaylist extends React.Component {
     this.getAPIrequestData = this.getAPIrequestData.bind(this);
     this.saveUserNewPlaylist = this.saveUserNewPlaylist.bind(this);
 
-    this.addPlaylistsDataAll = this.addPlaylistsDataAll.bind(this);
     this.updatePlaylistsDataAll = this.updatePlaylistsDataAll.bind(this);
+    this.addPlaylistsDataAll = this.addPlaylistsDataAll.bind(this);
     this.removePlaylistData = this.removePlaylistData.bind(this);
-
     this.setSelectedPlaylist = this.setSelectedPlaylist.bind(this);
-    this.saveSongToPlaylist = this.saveSongToPlaylist.bind(this);
-
     this.deleteSelectedPlaylist = this.deleteSelectedPlaylist.bind(this);
+
+    this.saveSongToPlaylist = this.saveSongToPlaylist.bind(this);
   }
 
   componentDidMount () {
@@ -100,7 +99,7 @@ class SearchListPlaylist extends React.Component {
           this.addSearchListDataAll(searchListData);
         }
       })
-      .catch(err => this.setState({ searchListDataAll: "Something went wrong."}));
+      .catch(err => this.setState({ searchListDataAll: "Something went wrong with API request."}));
   }
 
   saveUserNewPlaylist (userNewPlaylist) {
@@ -114,7 +113,7 @@ class SearchListPlaylist extends React.Component {
           this.addPlaylistsDataAll(response);
         }
       })
-      .catch(err => this.setState({ playlistsAll: "Something went wrong."}));
+      .catch(err => this.setState({ playlistsAll: "Something went wrong with saving new playlist."}));
   }
 
   setSelectedPlaylist (currentSelectedPlaylist) {
@@ -123,34 +122,10 @@ class SearchListPlaylist extends React.Component {
     });
   }
 
-  saveSongToPlaylist (songData) {
-    let checkPlaylistExists = this.state.selectedPlaylist;
-    let songURI = songData.songURI;
-    
-    console.log(checkPlaylistExists);
-    console.log(songURI);
-    
-    if (Object.keys(checkPlaylistExists).length !== 0) {
-      let playlistNo = checkPlaylistExists.playlist_no
-
-      fetch(`/save-song?songData=${songURI}&playlist=${playlistNo}`)
-      .then(res => res.json())
-      .then(response => {
-        if (response === 'Success.') {
-          alert('Success.')
-        } else {
-          alert('Something went wrong.');
-        }
-      })
-      .catch(err => console.log("Something went wrong with saving song."));
-    } else {
-      alert('Please select a playlist!')
-    }
-  }
-
   deleteSelectedPlaylist () {
     let currentSelectedPlaylist = this.state.selectedPlaylist;
 
+    // By nature, the if statement should only require playlists that exist in the DB.
     if (isEmpty(currentSelectedPlaylist)) {
       alert("Please select a playlist to delete!");
     } else {
@@ -163,9 +138,35 @@ class SearchListPlaylist extends React.Component {
         this.setState({ selectedPlaylist: {} }, () => {
           console.log(this.state.selectedPlaylist);
         });
-        // The if statement above should only require playlists that exist in the DB.
       })
       .catch(err => console.log("Something went wrong with deleting playlist."));
+    }
+  }
+
+  saveSongToPlaylist (songData) {
+    let checkPlaylistExists = this.state.selectedPlaylist;
+    let songURI = songData.songURI;
+    let songTitle = songData.songTitle;
+    
+    console.log(checkPlaylistExists);
+    console.log(songURI);
+    
+    if (isEmpty(checkPlaylistExists)) {
+      alert('Please select a playlist!')
+    } else {
+      let playlistNo = checkPlaylistExists.playlist_no
+      let playlistName = checkPlaylistExists.playlist_name
+
+      fetch(`/save-song?songData=${songURI}&playlist=${playlistNo}`)
+      .then(res => res.json())
+      .then(response => {
+        if (response === 'Success.') {
+          alert(`Added ${songTitle} to playlist: ${playlistName}.`)
+        } else {
+          alert('Could not add song to playlist.');
+        }
+      })
+      .catch(err => console.log("Something went wrong with saving song to playlist."));
     }
   }
 

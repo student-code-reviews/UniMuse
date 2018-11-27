@@ -9,10 +9,7 @@ class PlaylistElement extends React.Component {
 
     handlePlaylistSelectEvent (evt) {
       evt.preventDefault();
-
       let currentSelectedPlaylist = this.props.playlistData;
-      // console.log(currentSelectedPlaylist)
-      
       this.props.setSelectedPlaylist(currentSelectedPlaylist);
     }
   

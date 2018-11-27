@@ -10,16 +10,12 @@ class PlaylistForm extends React.Component {
   
   handleCreatePlaylistSubmitEvent (evt) {
     evt.preventDefault();
-
     let userNewPlaylist = this.refs.newPlaylistName.value;
-    // console.log(userNewPlaylist)
-
     this.props.saveUserNewPlaylist(userNewPlaylist);
   }
 
   handleDeletePlaylistSubmitEvent (evt) {
     evt.preventDefault();
-
     this.props.deleteSelectedPlaylist();
   }
 
@@ -53,7 +49,6 @@ class PlaylistForm extends React.Component {
           <button id="deletePlaylistBtn" type="submit" className="btn btn-primary"><i className="fa fa-minus"></i></button>
         </form>
         
-
         {/* Go to Selected Playlist */}
         <form onSubmit={this.handleGotoPlaylistSubmitEvent}>
           <button id="gotoPlaylistBtn" type="submit" className="btn btn-primary"><i className="fa fa-play"></i></button>
