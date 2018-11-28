@@ -1,3 +1,8 @@
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
+
+
 class PlaylistForm extends React.Component {
 	constructor(props) {
 		super(props);
@@ -6,6 +11,7 @@ class PlaylistForm extends React.Component {
     // Bindings
     this.handleCreatePlaylistSubmitEvent = this.handleCreatePlaylistSubmitEvent.bind(this);
     this.handleDeletePlaylistSubmitEvent = this.handleDeletePlaylistSubmitEvent.bind(this);
+    this.gotoPlaylistButtonClick = this.gotoPlaylistButtonClick.bind(this);
   }
   
   handleCreatePlaylistSubmitEvent (evt) {
@@ -17,6 +23,10 @@ class PlaylistForm extends React.Component {
   handleDeletePlaylistSubmitEvent (evt) {
     evt.preventDefault();
     this.props.deleteSelectedPlaylist();
+  }
+
+  gotoPlaylistButtonClick () {
+    this.props.playlistPlaylistRender();
   }
 
   render () {
@@ -50,10 +60,8 @@ class PlaylistForm extends React.Component {
         </form>
         
         {/* Go to Selected Playlist */}
-        <form onSubmit={this.handleGotoPlaylistSubmitEvent}>
-          <button id="gotoPlaylistBtn" type="submit" className="btn btn-primary"><i className="fa fa-play"></i></button>
-        </form>
-        
+        <button id="gotoPlaylistBtn" type="button" className="btn btn-primary" onClick={this.gotoPlaylistButtonClick}><i className="fa fa-play"></i></button>
+
         <p />
         <hr />
 

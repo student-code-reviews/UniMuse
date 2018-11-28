@@ -10,7 +10,8 @@ class SearchListPlaylist extends React.Component {
     this.state = {
       searchListDataAll: {},
       playlistsDataAll: {},
-      selectedPlaylist: {}
+      selectedPlaylist: {},
+      playlistPlayerClick: false
     };
 
     // Bindings
@@ -26,6 +27,7 @@ class SearchListPlaylist extends React.Component {
     this.deleteSelectedPlaylist = this.deleteSelectedPlaylist.bind(this);
 
     this.saveSongToPlaylist = this.saveSongToPlaylist.bind(this);
+    this.playlistPlaylistRender = this.playlistPlaylistRender.bind(this);
   }
 
   componentDidMount () {
@@ -170,39 +172,56 @@ class SearchListPlaylist extends React.Component {
     }
   }
 
+  playlistPlaylistRender () {
+    let checkPlaylistExists = this.state.selectedPlaylist;
+    
+    if (isEmpty(checkPlaylistExists)) {
+      alert("Please select a playlist!");
+    } else {
+      // let playlistNo = checkPlaylistExists.playlist_no;
+      // return <PlaylistPlayer playlist_no={playlistNo} />
+      this.setState({ playlistPlayerClick: true });
+    }
+  }
 
   render() {
     let searchListDataAll = this.state.searchListDataAll;
     let saveUserNewPlaylist = this.state.saveUserNewPlaylist;
     let playlistsDataAll = this.state.playlistsDataAll;
+    let selectedPlaylist = this.state.selectedPlaylist
 
     return (
       <div className="container">
-        <div className="row">
-          <div className="col-sm-6">
+        { this.state.playlistPlayerClick ? 
+          <PlaylistPlayer playlistNo={selectedPlaylist.playlist_no} /> :
 
-            <SearchForm getAPIrequestData={this.getAPIrequestData} />
+          <div className="row">
+            <div className="col-sm-6">
 
+              <SearchForm getAPIrequestData={this.getAPIrequestData} />
+
+            </div>
+            <div className="col-sm-6">
+
+              <PlaylistForm saveUserNewPlaylist={this.saveUserNewPlaylist} 
+                            deleteSelectedPlaylist={this.deleteSelectedPlaylist} 
+                            playlistPlaylistRender={this.playlistPlaylistRender} />
+
+            </div>
+            <div className="col-sm-6">
+
+              <SearchList searchListDataAll={searchListDataAll} 
+                          saveSongToPlaylist={this.saveSongToPlaylist} />
+
+            </div>
+            <div className="col-sm-6">
+              
+              <PlaylistsSongList playlistsDataAll={playlistsDataAll} 
+                                setSelectedPlaylist={this.setSelectedPlaylist} />
+
+            </div>
           </div>
-          <div className="col-sm-6">
-
-            <PlaylistForm saveUserNewPlaylist={this.saveUserNewPlaylist} 
-                          deleteSelectedPlaylist={this.deleteSelectedPlaylist} />
-
-          </div>
-          <div className="col-sm-6">
-
-            <SearchList searchListDataAll={searchListDataAll} 
-                        saveSongToPlaylist={this.saveSongToPlaylist} />
-
-          </div>
-          <div className="col-sm-6">
-            
-            <PlaylistsSongList playlistsDataAll={playlistsDataAll} 
-                               setSelectedPlaylist={this.setSelectedPlaylist} />
-
-          </div>
-        </div>
+        }
       </div>
     );
   }
