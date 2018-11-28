@@ -170,11 +170,11 @@ class SearchListPlaylist extends React.Component {
     }
   }
 
-
   render() {
     let searchListDataAll = this.state.searchListDataAll;
     let saveUserNewPlaylist = this.state.saveUserNewPlaylist;
     let playlistsDataAll = this.state.playlistsDataAll;
+    let selectedPlaylist = this.state.selectedPlaylist;
 
     return (
       <div className="container">
@@ -187,7 +187,8 @@ class SearchListPlaylist extends React.Component {
           <div className="col-sm-6">
 
             <PlaylistForm saveUserNewPlaylist={this.saveUserNewPlaylist} 
-                          deleteSelectedPlaylist={this.deleteSelectedPlaylist} />
+                          deleteSelectedPlaylist={this.deleteSelectedPlaylist} 
+                          selectedPlaylist={selectedPlaylist} />
 
           </div>
           <div className="col-sm-6">

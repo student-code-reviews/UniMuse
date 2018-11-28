@@ -1,11 +1,19 @@
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
+
+
 class PlaylistForm extends React.Component {
 	constructor(props) {
 		super(props);
-    this.state = {};
+    this.state = {
+      playlistPlayerClick: false
+    };
     
     // Bindings
     this.handleCreatePlaylistSubmitEvent = this.handleCreatePlaylistSubmitEvent.bind(this);
     this.handleDeletePlaylistSubmitEvent = this.handleDeletePlaylistSubmitEvent.bind(this);
+    this.gotoPlaylistButtonClick = this.gotoPlaylistButtonClick.bind(this);
   }
   
   handleCreatePlaylistSubmitEvent (evt) {
@@ -19,7 +27,20 @@ class PlaylistForm extends React.Component {
     this.props.deleteSelectedPlaylist();
   }
 
+  gotoPlaylistButtonClick () {
+    let checkPlaylistExists = this.props.selectedPlaylist;
+    
+    if (isEmpty(checkPlaylistExists)) {
+      alert("Please select a playlist!");
+    } else {
+      // let playlistNo = checkPlaylistExists.playlist_no;
+      // return <PlaylistPlayer playlist_no={playlistNo} />
+      this.setState({ playlistPlayerClick: true });
+    }
+  }
+
   render () {
+    let playlist_no = this.props.selectedPlaylist.playlist_no
 
     return (
       <div>
@@ -50,10 +71,13 @@ class PlaylistForm extends React.Component {
         </form>
         
         {/* Go to Selected Playlist */}
-        <form onSubmit={this.handleGotoPlaylistSubmitEvent}>
-          <button id="gotoPlaylistBtn" type="submit" className="btn btn-primary"><i className="fa fa-play"></i></button>
-        </form>
+        <button id="gotoPlaylistBtn" type="button" className="btn btn-primary" onClick={this.gotoPlaylistButtonClick}><i className="fa fa-play"></i></button>
         
+        {this.state.playlistPlayerClick ?
+           <PlaylistPlayer playlist_no={playlist_no}/> :
+           null
+        }
+
         <p />
         <hr />
 

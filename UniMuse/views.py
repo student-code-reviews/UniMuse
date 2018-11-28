@@ -253,9 +253,23 @@ def delete_playlist():
     return jsonify('Successfully deleted playlist.')
 
 
-@app.route("/player")
+@app.route("/playlist-player")
 def player():
-    """Play songs on app."""
-    
-    access_token = session['spotify_token']
-    return render_template("/player.html", access_token=access_token)
+    """Play songs from playlist."""
+
+    return render_template("/playlist-player.html")
+
+
+@app.route("/playlist-songs.json")
+def playlist_songs():
+    selected_playlist = int(request.args.get('playlist'))
+
+    song_ids = db.session.query(PlaylistSong.song_id).filter(PlaylistSong.playlist_id==selected_playlist).all()
+    song_uris = {}
+    for song_id in song_ids:
+        service_id = db.session.query(Song.service_id).filter(Song.song_id==song_id[0]).one()[0]
+        service = db.session.query(Song.service).filter(Song.song_id==song_id[0]).one()[0]
+
+        song_uris[song_id[0]] = {'service_id': service_id, 'service': service}
+
+    return jsonify(song_uris)
