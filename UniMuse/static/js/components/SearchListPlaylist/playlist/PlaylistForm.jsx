@@ -6,9 +6,7 @@ function isEmpty(obj) {
 class PlaylistForm extends React.Component {
 	constructor(props) {
 		super(props);
-    this.state = {
-      playlistPlayerClick: false
-    };
+    this.state = {};
     
     // Bindings
     this.handleCreatePlaylistSubmitEvent = this.handleCreatePlaylistSubmitEvent.bind(this);
@@ -28,19 +26,10 @@ class PlaylistForm extends React.Component {
   }
 
   gotoPlaylistButtonClick () {
-    let checkPlaylistExists = this.props.selectedPlaylist;
-    
-    if (isEmpty(checkPlaylistExists)) {
-      alert("Please select a playlist!");
-    } else {
-      // let playlistNo = checkPlaylistExists.playlist_no;
-      // return <PlaylistPlayer playlist_no={playlistNo} />
-      this.setState({ playlistPlayerClick: true });
-    }
+    this.props.playlistPlaylistRender();
   }
 
   render () {
-    let playlist_no = this.props.selectedPlaylist.playlist_no
 
     return (
       <div>
@@ -72,11 +61,6 @@ class PlaylistForm extends React.Component {
         
         {/* Go to Selected Playlist */}
         <button id="gotoPlaylistBtn" type="button" className="btn btn-primary" onClick={this.gotoPlaylistButtonClick}><i className="fa fa-play"></i></button>
-        
-        {this.state.playlistPlayerClick ?
-           <PlaylistPlayer playlist_no={playlist_no}/> :
-           null
-        }
 
         <p />
         <hr />
