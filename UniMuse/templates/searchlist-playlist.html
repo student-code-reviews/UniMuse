@@ -7,26 +7,19 @@
 
   <div id="root"></div>
 
-  <script src="static/js/components/SearchListPlaylist/SearchListPlaylist.jsx" type="text/jsx"></script>
-  <script src="static/js/components/SearchListPlaylist/search/SearchForm.jsx" type="text/jsx"></script>
-  <script src="static/js/components/SearchListPlaylist/playlist/PlaylistForm.jsx" type="text/jsx"></script>
-  <script src="static/js/components/SearchListPlaylist/search/SearchList.jsx" type="text/jsx"></script>
-  <script src="static/js/components/SearchListPlaylist/playlist/PlaylistsSongList.jsx" type="text/jsx"></script>
-  <script src="static/js/components/SearchListPlaylist/search/SearchListElement.jsx" type="text/jsx"></script>
-  <script src="static/js/components/SearchListPlaylist/playlist/PlaylistElement.jsx" type="text/jsx"></script>
-  <script src="static/js/components/SearchListPlaylist/search/NoSearchListElement.jsx" type="text/jsx"></script>
-  <script src="static/js/components/SearchListPlaylist/playlist/NoPlaylistElement.jsx" type="text/jsx"></script>
-  <script src="static/js/components/PlaylistPlayer/PlaylistPlayer.jsx" type="text/jsx"></script>
+  <script src="static/js/components/SearchListPlaylist.jsx" type="text/jsx"></script>
+  <script src="static/js/components/search/SearchForm.jsx" type="text/jsx"></script>
+  <script src="static/js/components/playlist/PlaylistForm.jsx" type="text/jsx"></script>
+  <script src="static/js/components/search/SearchList.jsx" type="text/jsx"></script>
+  <script src="static/js/components/playlist/PlaylistsSongList.jsx" type="text/jsx"></script>
+  <script src="static/js/components/search/SearchListElement.jsx" type="text/jsx"></script>
+  <script src="static/js/components/playlist/PlaylistElement.jsx" type="text/jsx"></script>
+  <script src="static/js/components/search/NoSearchListElement.jsx" type="text/jsx"></script>
+  <script src="static/js/components/playlist/NoPlaylistElement.jsx" type="text/jsx"></script>
+  <script src="static/js/components/PlaylistPlayer.jsx" type="text/jsx"></script>
 
   <script type="text/jsx">
     ReactDOM.render(<SearchListPlaylist />, document.querySelector('div#root'));
   </script>
-
-  <!-- <div id="goto-player">
-
-      <button class="btn btn-primary" id="goto-player-button" onclick="location.href = '/player'">
-        Finish </button>
-        
-  </div> -->
   
 {% endblock %}
