@@ -35,9 +35,11 @@ class Song(db.Model):
     __tablename__ = "songs"
 
     song_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    # title = db.Column(db.String(60), nullable=False)
-    service_id = db.Column(db.String(300), nullable=False)  # Service key to request the song
-    service = db.Column(db.String(50), nullable=False)      # Source of service. E.g., 'Spotify'
+    service_id = db.Column(db.String(300), nullable=False)
+    song_name = db.Column(db.String(100), nullable=False)
+    artist = db.Column(db.String(100), nullable=False)
+    song_img = db.Column(db.String(300), nullable=True)
+    service = db.Column(db.String(50), nullable=False)
 
 
 class PlaylistSong(db.Model):

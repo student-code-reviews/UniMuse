@@ -20,7 +20,8 @@ class Songs extends React.Component {
           songData = songsDataAll[song_no];
           console.log(songData)
           return (<SongElement key={song_no}
-                               songData={songData} />);
+                               songData={songData} 
+                               setSelectedSong={this.props.setSelectedSong} />);
         }.bind(this))
         .reverse()
       );

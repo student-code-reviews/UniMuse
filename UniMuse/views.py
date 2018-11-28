@@ -202,6 +202,9 @@ def save_song():
     """Save song to database."""
 
     song_uri = request.args.get("songData")
+    song_name = request.args.get("songTitle")
+    artist = request.args.get("artistName")
+    song_img = request.args.get("songImg")
     playlist_no = int(request.args.get("playlist"))
 
     service = ''
@@ -211,7 +214,7 @@ def save_song():
         service = 'youtube'
     
     # Duplicates of the song are okay
-    song = Song(service_id=song_uri, service=service)
+    song = Song(service_id=song_uri, song_name=song_name, artist=artist, song_img=song_img, service=service)
 
     db.session.add(song)
     db.session.commit()
@@ -269,8 +272,18 @@ def playlist_songs():
     song_uris = {}
     for song_id in song_ids:
         service_id = db.session.query(Song.service_id).filter(Song.song_id==song_id[0]).one()[0]
+        service_id = service_id.split(":")[-1]
+        
         service = db.session.query(Song.service).filter(Song.song_id==song_id[0]).one()[0]
+        song_name = db.session.query(Song.song_name).filter(Song.song_id==song_id[0]).one()[0]
+        artist = db.session.query(Song.artist).filter(Song.song_id==song_id[0]).one()[0]
+        song_img = db.session.query(Song.song_img).filter(Song.song_id==song_id[0]).one()[0]
 
-        song_uris[song_id[0]] = {'service_id': service_id, 'service': service}
-
+        song_uris[song_id[0]] = {'service_id': service_id,
+                                 'song_name': song_name,
+                                 'artist': artist,
+                                 'song_img': song_img,
+                                 'service': service
+                                }
+    print(song_uris)
     return jsonify(song_uris)

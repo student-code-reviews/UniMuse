@@ -35,16 +35,19 @@ class SearchListPlaylist extends React.Component {
     fetch('/user-playlists.json')
       .then(res => res.json())
       .then(data => {
-        let playlistsDataAll = {};
-        for (let key of Object.keys(data)) {
-          let playlistData = {
-            playlist_no: key,
-            playlist_name: data[key]
+        if (data === 'User does not have any playlists.') {
+        } else {
+          let playlistsDataAll = {};
+          for (let key of Object.keys(data)) {
+            let playlistData = {
+              playlist_no: key,
+              playlist_name: data[key]
+            };
+            playlistsDataAll[key] = playlistData;
           };
-          playlistsDataAll[key] = playlistData;
-        };
-        this.setState( {playlistsDataAll: playlistsDataAll} );
-        // console.log(this.state.playlistsDataAll);
+          this.setState( {playlistsDataAll: playlistsDataAll} );
+          // console.log(this.state.playlistsDataAll);
+        }
       })
     .catch(err => this.setState({ playlistsDataAll: "Something went wrong with user's playlists."}));
   }
@@ -150,6 +153,8 @@ class SearchListPlaylist extends React.Component {
     let checkPlaylistExists = this.state.selectedPlaylist;
     let songURI = songData.songURI;
     let songTitle = songData.songTitle;
+    let artistName = songData.artistName;
+    let albumImgURLsm = songData.albumImgURLsm;
     
     console.log(checkPlaylistExists);
     console.log(songURI);
@@ -160,7 +165,7 @@ class SearchListPlaylist extends React.Component {
       let playlistNo = checkPlaylistExists.playlist_no
       let playlistName = checkPlaylistExists.playlist_name
 
-      fetch(`/save-song?songData=${songURI}&playlist=${playlistNo}`)
+      fetch(`/save-song?songData=${songURI}&songTitle=${songTitle}&artistName=${artistName}&songImg=${albumImgURLsm}&playlist=${playlistNo}`)
       .then(res => res.json())
       .then(response => {
         if (response === 'Success.') {

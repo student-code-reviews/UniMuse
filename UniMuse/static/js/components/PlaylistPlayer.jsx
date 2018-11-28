@@ -4,11 +4,13 @@ class PlaylistPlayer extends React.Component {
 
     this.state = {
       selectedPlaylist: this.props.selectedPlaylist,
-      songsDataAll: {}
+      songsDataAll: {},
+      currentSongData: {}
     };
 
     // Bindings
     this.goBackFromPlayer = this.goBackFromPlayer.bind(this);
+    this.setSelectedSong = this.setSelectedSong.bind(this);
   }
 
   componentDidMount () {
@@ -21,8 +23,11 @@ class PlaylistPlayer extends React.Component {
         for (let key of Object.keys(data)) {
           let playlistSongData = {
             song_no: key,
-            song_uri: data[key]['service_id'],
-            song_source: data[key]['service']
+            service_id: data[key]['service_id'],
+            song_name: data[key]['song_name'],
+            artist: data[key]['artist'],
+            song_img: data[key]['song_img'],
+            service: data[key]['service']
           };
           songsDataAll[key] = playlistSongData;
         };
@@ -37,9 +42,16 @@ class PlaylistPlayer extends React.Component {
     this.props.revertPlaylistPlayerRender();
   }
 
+  setSelectedSong (songData) {
+    this.setState({ currentSongData: songData }, () => {
+      console.log(this.state.currentSongData)
+    })
+  }
+
   render() {
     let songsDataAll = this.state.songsDataAll;
     let playlistName = this.state.selectedPlaylist.playlist_name;
+    let currentSongData = this.state.currentSongData;
 
     return (
       <div className="container">
@@ -60,12 +72,13 @@ class PlaylistPlayer extends React.Component {
           </div>
           <div className="col-sm-6">
 
-            <h3>Player section</h3>
+            <Player currentSongData={currentSongData} />
 
           </div>
           <div className="col-sm-6">
             
-            <Songs songsDataAll={songsDataAll} />
+            <Songs songsDataAll={songsDataAll} 
+                   setSelectedSong={this.setSelectedSong} />
 
           </div>
         </div>

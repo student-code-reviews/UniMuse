@@ -4,6 +4,12 @@ class SongElement extends React.Component {
       this.state = {};
       
       // Bindings
+      this.handlePlaySongClick = this.handlePlaySongClick.bind(this);
+    }
+
+    handlePlaySongClick () {
+      let songData = this.props.songData;
+      this.props.setSelectedSong(songData);
     }
   
     render () {
@@ -12,9 +18,11 @@ class SongElement extends React.Component {
       return (
         <div className="panel panel-primary">
           <div className="panel-footer">
-            <form className="form-inline" onSubmit={this.handlePlaylistSelectEvent}>
-              <button type="submit" className="btn btn-default btn-xs">{songData.song_uri}</button>
-            </form>
+
+              <button type="button" className="btn btn-default btn-xs" onClick={this.handlePlaySongClick}>
+                {songData.song_name} - {songData.artist}
+              </button>
+
             <p />
           </div>
         </div>
