@@ -178,8 +178,6 @@ class SearchListPlaylist extends React.Component {
     if (isEmpty(checkPlaylistExists)) {
       alert("Please select a playlist!");
     } else {
-      // let playlistNo = checkPlaylistExists.playlist_no;
-      // return <PlaylistPlayer playlist_no={playlistNo} />
       this.setState({ playlistPlayerClick: true });
     }
   }
