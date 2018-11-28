@@ -27,23 +27,27 @@ class SearchListPlaylist extends React.Component {
     this.deleteSelectedPlaylist = this.deleteSelectedPlaylist.bind(this);
 
     this.saveSongToPlaylist = this.saveSongToPlaylist.bind(this);
-    this.playlistPlaylistRender = this.playlistPlaylistRender.bind(this);
+    this.playlistPlayerRender = this.playlistPlayerRender.bind(this);
+    this.revertPlaylistPlayerRender = this.revertPlaylistPlayerRender.bind(this);
   }
 
   componentDidMount () {
     fetch('/user-playlists.json')
       .then(res => res.json())
       .then(data => {
-        let playlistsDataAll = {};
-        for (let key of Object.keys(data)) {
-          let playlistData = {
-            playlist_no: key,
-            playlist_name: data[key]
+        if (data === 'User does not have any playlists.') {
+        } else {
+          let playlistsDataAll = {};
+          for (let key of Object.keys(data)) {
+            let playlistData = {
+              playlist_no: key,
+              playlist_name: data[key]
+            };
+            playlistsDataAll[key] = playlistData;
           };
-          playlistsDataAll[key] = playlistData;
-        };
-        this.setState( {playlistsDataAll: playlistsDataAll} );
-        // console.log(this.state.playlistsDataAll);
+          this.setState( {playlistsDataAll: playlistsDataAll} );
+          // console.log(this.state.playlistsDataAll);
+        }
       })
     .catch(err => this.setState({ playlistsDataAll: "Something went wrong with user's playlists."}));
   }
@@ -149,6 +153,8 @@ class SearchListPlaylist extends React.Component {
     let checkPlaylistExists = this.state.selectedPlaylist;
     let songURI = songData.songURI;
     let songTitle = songData.songTitle;
+    let artistName = songData.artistName;
+    let albumImgURLsm = songData.albumImgURLsm;
     
     console.log(checkPlaylistExists);
     console.log(songURI);
@@ -159,7 +165,7 @@ class SearchListPlaylist extends React.Component {
       let playlistNo = checkPlaylistExists.playlist_no
       let playlistName = checkPlaylistExists.playlist_name
 
-      fetch(`/save-song?songData=${songURI}&playlist=${playlistNo}`)
+      fetch(`/save-song?songData=${songURI}&songTitle=${songTitle}&artistName=${artistName}&songImg=${albumImgURLsm}&playlist=${playlistNo}`)
       .then(res => res.json())
       .then(response => {
         if (response === 'Success.') {
@@ -172,7 +178,7 @@ class SearchListPlaylist extends React.Component {
     }
   }
 
-  playlistPlaylistRender () {
+  playlistPlayerRender () {
     let checkPlaylistExists = this.state.selectedPlaylist;
     
     if (isEmpty(checkPlaylistExists)) {
@@ -182,16 +188,21 @@ class SearchListPlaylist extends React.Component {
     }
   }
 
+  revertPlaylistPlayerRender () {
+    this.setState({ playlistPlayerClick: false });
+  }
+
   render() {
     let searchListDataAll = this.state.searchListDataAll;
     let saveUserNewPlaylist = this.state.saveUserNewPlaylist;
     let playlistsDataAll = this.state.playlistsDataAll;
-    let selectedPlaylist = this.state.selectedPlaylist
+    let selectedPlaylist = this.state.selectedPlaylist;
 
     return (
       <div className="container">
         { this.state.playlistPlayerClick ? 
-          <PlaylistPlayer playlistNo={selectedPlaylist.playlist_no} /> :
+          <PlaylistPlayer selectedPlaylist={selectedPlaylist}
+                          revertPlaylistPlayerRender={this.revertPlaylistPlayerRender} /> :
 
           <div className="row">
             <div className="col-sm-6">
@@ -203,7 +214,7 @@ class SearchListPlaylist extends React.Component {
 
               <PlaylistForm saveUserNewPlaylist={this.saveUserNewPlaylist} 
                             deleteSelectedPlaylist={this.deleteSelectedPlaylist} 
-                            playlistPlaylistRender={this.playlistPlaylistRender} />
+                            playlistPlayerRender={this.playlistPlayerRender} />
 
             </div>
             <div className="col-sm-6">

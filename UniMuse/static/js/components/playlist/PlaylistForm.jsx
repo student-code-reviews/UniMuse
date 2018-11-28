@@ -26,7 +26,7 @@ class PlaylistForm extends React.Component {
   }
 
   gotoPlaylistButtonClick () {
-    this.props.playlistPlaylistRender();
+    this.props.playlistPlayerRender();
   }
 
   render () {
