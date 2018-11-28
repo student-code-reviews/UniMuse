@@ -27,7 +27,8 @@ class SearchListPlaylist extends React.Component {
     this.deleteSelectedPlaylist = this.deleteSelectedPlaylist.bind(this);
 
     this.saveSongToPlaylist = this.saveSongToPlaylist.bind(this);
-    this.playlistPlaylistRender = this.playlistPlaylistRender.bind(this);
+    this.playlistPlayerRender = this.playlistPlayerRender.bind(this);
+    this.revertPlaylistPlayerRender = this.revertPlaylistPlayerRender.bind(this);
   }
 
   componentDidMount () {
@@ -172,7 +173,7 @@ class SearchListPlaylist extends React.Component {
     }
   }
 
-  playlistPlaylistRender () {
+  playlistPlayerRender () {
     let checkPlaylistExists = this.state.selectedPlaylist;
     
     if (isEmpty(checkPlaylistExists)) {
@@ -182,16 +183,21 @@ class SearchListPlaylist extends React.Component {
     }
   }
 
+  revertPlaylistPlayerRender () {
+    this.setState({ playlistPlayerClick: false });
+  }
+
   render() {
     let searchListDataAll = this.state.searchListDataAll;
     let saveUserNewPlaylist = this.state.saveUserNewPlaylist;
     let playlistsDataAll = this.state.playlistsDataAll;
-    let selectedPlaylist = this.state.selectedPlaylist
+    let selectedPlaylist = this.state.selectedPlaylist;
 
     return (
       <div className="container">
         { this.state.playlistPlayerClick ? 
-          <PlaylistPlayer playlistNo={selectedPlaylist.playlist_no} /> :
+          <PlaylistPlayer selectedPlaylist={selectedPlaylist}
+                          revertPlaylistPlayerRender={this.revertPlaylistPlayerRender} /> :
 
           <div className="row">
             <div className="col-sm-6">
@@ -203,7 +209,7 @@ class SearchListPlaylist extends React.Component {
 
               <PlaylistForm saveUserNewPlaylist={this.saveUserNewPlaylist} 
                             deleteSelectedPlaylist={this.deleteSelectedPlaylist} 
-                            playlistPlaylistRender={this.playlistPlaylistRender} />
+                            playlistPlayerRender={this.playlistPlayerRender} />
 
             </div>
             <div className="col-sm-6">
