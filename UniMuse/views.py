@@ -263,7 +263,8 @@ def player():
 @app.route("/playlist-songs.json")
 def playlist_songs():
     selected_playlist = int(request.args.get('playlist'))
-
+    print(selected_playlist)
+    
     song_ids = db.session.query(PlaylistSong.song_id).filter(PlaylistSong.playlist_id==selected_playlist).all()
     song_uris = {}
     for song_id in song_ids:

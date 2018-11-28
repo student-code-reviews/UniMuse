@@ -4,11 +4,33 @@ class PlaylistPlayer extends React.Component {
 
     this.state = {
       selectedPlaylist: this.props.selectedPlaylist,
-      playlistSongsDataAll: {}
+      songsDataAll: {}
     };
 
     // Bindings
     this.goBackFromPlayer = this.goBackFromPlayer.bind(this);
+  }
+
+  componentDidMount () {
+    let playlistNo = this.state.selectedPlaylist.playlist_no;
+
+    fetch(`/playlist-songs.json?playlist=${playlistNo}`)
+      .then(res => res.json())
+      .then(data => {
+        let songsDataAll = {};
+        for (let key of Object.keys(data)) {
+          let playlistSongData = {
+            song_no: key,
+            song_uri: data[key]['service_id'],
+            song_source: data[key]['service']
+          };
+          songsDataAll[key] = playlistSongData;
+        };
+        
+        this.setState( {songsDataAll: songsDataAll} );
+        console.log(this.state.songsDataAll);
+      })
+    .catch(err => this.setState({ songsDataAll: "Something went wrong with user's playlists songs."}));
   }
 
   goBackFromPlayer () {
@@ -16,6 +38,7 @@ class PlaylistPlayer extends React.Component {
   }
 
   render() {
+    let songsDataAll = this.state.songsDataAll;
     let playlistName = this.state.selectedPlaylist.playlist_name;
 
     return (
@@ -38,11 +61,11 @@ class PlaylistPlayer extends React.Component {
           <div className="col-sm-6">
 
             <h3>Player section</h3>
-            
+
           </div>
           <div className="col-sm-6">
             
-            <h3>Song list section</h3>
+            <Songs songsDataAll={songsDataAll} />
 
           </div>
         </div>
