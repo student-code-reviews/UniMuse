@@ -4,23 +4,16 @@ class SearchList extends React.Component {
       this.state = {};
 
       // Bindings
-      this.getSearchListDataAllKeys = this.getSearchListDataAllKeys.bind(this);
       this.createSearchListDataElements = this.createSearchListDataElements.bind(this);
   }
 
-  getSearchListDataAllKeys (searchListDataAll) {
-    return Object.keys(searchListDataAll)
-  }
-
   createSearchListDataElements (searchListDataAll) {
-    let searchListData;
+   console.log(searchListDataAll)
 
     return (
-      this
-      .getSearchListDataAllKeys(searchListDataAll)
-      .map(function createSearchListDataElements(search_result_no) {
-        searchListData = searchListDataAll[search_result_no];
-        return (<SearchListElement key={search_result_no}
+      searchListDataAll
+      .map(function createSearchListDataElements(searchListData) {
+        return (<SearchListElement key={searchListData.toString()}
                                    searchListData={searchListData} 
                                    saveSongToPlaylist={this.props.saveSongToPlaylist} />);
       }.bind(this))

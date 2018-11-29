@@ -8,15 +8,13 @@ class SearchListPlaylist extends React.Component {
     super();
 
     this.state = {
-      searchListDataAll: {},
+      searchListDataAll: [],
       playlistsDataAll: {},
       selectedPlaylist: {},
       playlistPlayerClick: false
     };
 
     // Bindings
-    this.updateSearchListDataAll = this.updateSearchListDataAll.bind(this);
-    this.addSearchListDataAll = this.addSearchListDataAll.bind(this);
     this.getSpotifyAPIrequestData = this.getSpotifyAPIrequestData.bind(this);
     this.saveUserNewPlaylist = this.saveUserNewPlaylist.bind(this);
 
@@ -52,24 +50,10 @@ class SearchListPlaylist extends React.Component {
     .catch(err => this.setState({ playlistsDataAll: "Something went wrong with user's playlists."}));
   }
 
-  updateSearchListDataAll (newSearchListDataAll) {
-    this.setState({
-      searchListDataAll: newSearchListDataAll
-    });
-  }
-
   updatePlaylistsDataAll (newPlaylistsDataAll) {
     this.setState( {playlistsDataAll: newPlaylistsDataAll} );
   }
   
-  addSearchListDataAll (searchListData) {
-    let searchListDataAll = this.state.searchListDataAll;
-
-    searchListDataAll[searchListData.search_result_no] = searchListData;
-
-    this.updateSearchListDataAll(searchListDataAll);
-  }
-
   addPlaylistsDataAll (playlistData) {
     let playlistsDataAll = this.state.playlistsDataAll;
 
@@ -90,21 +74,10 @@ class SearchListPlaylist extends React.Component {
     fetch(`/spotify-search-api-request.json?userquery=${userQuery}`)
       .then(res => res.json())
       .then(data => {
-        for (let key of Object.keys(data)) {
-          // console.log(key, data[key])
-          let searchListData = {
-            search_result_no: key,
-            songTitle: data[key]['name'],
-            artistName: data[key]['album']['artists'][0]['name'],
-            albumName: data[key]['album']['name'],
-            albumImgURLsm: data[key]['album']['images'][2]['url'],
-            albumImgURLlg: data[key]['album']['images'][0]['url'],
-            songURI: data[key]['uri']
-          };
-          // console.log(searchListData)
-          this.addSearchListDataAll(searchListData);
-        }
-      })
+          this.setState({
+            searchListDataAll: data
+          });
+        })
       .catch(err => this.setState({ searchListDataAll: "Something went wrong with API request."}));
   }
 

@@ -69,12 +69,28 @@ def auth_header(access_token):
 
     return {"Authorization" : f"Bearer {access_token}"}
 
+def search_data_map(response):
+    search_data = {
+        'songTitle': response['name'],
+        'artistName': response['album']['artists'][0]['name'],
+        'albumName': response['album']['name'],
+        'albumImgURLsm': response['album']['images'][2]['url'],
+        'albumImgURLlg': response['album']['images'][0]['url'],
+        'songURI': response['uri']
+    }
+
+    return search_data
 
 def search(query, access_token):
     """Spotify search request and response."""
 
     headers = auth_header(access_token)
     url = f"{SPOTIFY_API_URL}/search?{query}"
-    response = requests.get(url, headers=headers)
+    response = requests.get(url, headers=headers).json()
 
-    return response
+    response_lst = response['tracks']['items']
+
+    search_list_data = list(map(search_data_map, response_lst))
+    print(search_list_data)
+
+    return search_list_data

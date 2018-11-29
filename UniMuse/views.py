@@ -134,16 +134,9 @@ def spotify_search_api_request():
     query_input = query_input.replace(" ", "%20").lower()
     query = "q=" + query_input + "&type=track&limit=10"
 
-    results = spotify.search(query, access_token).json()
-    data_lst = results['tracks']['items']
+    results = spotify.search(query, access_token)
 
-    data_dict = {}
-    search_result_no = 0
-    while search_result_no < len(data_lst):
-        data_dict[search_result_no] = data_lst[search_result_no]
-        search_result_no += 1
-
-    return jsonify(data_dict)
+    return jsonify(results)
 
 
 @app.route('/youtube-search-api-request.json')
