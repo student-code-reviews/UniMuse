@@ -157,15 +157,12 @@ def get_user_playlists():
     print(user_id)
     playlist_check = db.session.query(Playlist).filter(User.user_id==user_id).first()
 
-    user_playlists = {}
-
     if playlist_check:
         playlists = db.session.query(Playlist).filter(User.user_id==user_id).all()
         
-        for playlist in playlists:
-            user_playlists[playlist.playlist_id] = playlist.playlist_name
+        user_playlists = list(map(lambda x: {'playlist_no': x.playlist_id, 'playlist_name': x.playlist_name}, playlists))
 
-        return jsonify(user_playlists)
+        return jsonify({'playlists': user_playlists})
 
     else:
         return jsonify("User does not have any playlists.")
@@ -246,6 +243,7 @@ def delete_playlist():
     """Delete playlist from the database."""
 
     playlist_id = int(request.args.get('playlist'))
+    print(playlist_id)
 
     songs = db.session.query(PlaylistSong.song_id).filter(PlaylistSong.playlist_id == playlist_id).all()
 

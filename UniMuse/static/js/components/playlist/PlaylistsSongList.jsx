@@ -4,25 +4,15 @@ class PlaylistsSongList extends React.Component {
     this.state = {};
 
     // Bindings
-    this.getPlaylistsDataAllKeys = this.getPlaylistsDataAllKeys.bind(this);
     this.createPlaylistDataElements = this.createPlaylistDataElements.bind(this);
   }
 
-  getPlaylistsDataAllKeys (playlistsDataAll) {
-    return Object.keys(playlistsDataAll)
-  }
-
   createPlaylistDataElements (playlistsDataAll) {
-    let playlistData;
-
     return (
-      this
-      .getPlaylistsDataAllKeys(playlistsDataAll)
-      .map(function createPlaylistDataElements(playlist_no) {
-        playlistData = playlistsDataAll[playlist_no];
-        // console.log(playlistData)
-        return (<PlaylistElement key={playlist_no} 
-                                 playlistData={playlistData} 
+      playlistsDataAll
+      .map(function createPlaylistDataElements(playlist) {
+        return (<PlaylistElement key={playlist.playlist_no} 
+                                 playlistData={playlist} 
                                  setSelectedPlaylist={this.props.setSelectedPlaylist} />);
       }.bind(this))
       .reverse()

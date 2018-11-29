@@ -9,7 +9,7 @@ class SearchListPlaylist extends React.Component {
 
     this.state = {
       searchListDataAll: [],
-      playlistsDataAll: {},
+      playlistsDataAll: [],
       selectedPlaylist: {},
       playlistPlayerClick: false
     };
@@ -18,7 +18,6 @@ class SearchListPlaylist extends React.Component {
     this.getSpotifyAPIrequestData = this.getSpotifyAPIrequestData.bind(this);
     this.saveUserNewPlaylist = this.saveUserNewPlaylist.bind(this);
 
-    this.updatePlaylistsDataAll = this.updatePlaylistsDataAll.bind(this);
     this.addPlaylistsDataAll = this.addPlaylistsDataAll.bind(this);
     this.removePlaylistData = this.removePlaylistData.bind(this);
     this.setSelectedPlaylist = this.setSelectedPlaylist.bind(this);
@@ -35,39 +34,23 @@ class SearchListPlaylist extends React.Component {
       .then(data => {
         if (data === 'User does not have any playlists.') {
         } else {
-          let playlistsDataAll = {};
-          for (let key of Object.keys(data)) {
-            let playlistData = {
-              playlist_no: key,
-              playlist_name: data[key]
-            };
-            playlistsDataAll[key] = playlistData;
-          };
-          this.setState( {playlistsDataAll: playlistsDataAll} );
-          // console.log(this.state.playlistsDataAll);
+          console.log(data.playlists)
+          this.setState( {playlistsDataAll: data.playlists} );
         }
       })
     .catch(err => this.setState({ playlistsDataAll: "Something went wrong with user's playlists."}));
   }
-
-  updatePlaylistsDataAll (newPlaylistsDataAll) {
-    this.setState( {playlistsDataAll: newPlaylistsDataAll} );
-  }
   
   addPlaylistsDataAll (playlistData) {
-    let playlistsDataAll = this.state.playlistsDataAll;
-
-    playlistsDataAll[playlistData.playlist_no] = playlistData;
-
-    this.updatePlaylistsDataAll(playlistsDataAll);
+    let newPlaylistsDataAll = this.state.playlistsDataAll;
+    newPlaylistsDataAll.push(playlistData);
+    this.setState( {playlistsDataAll: newPlaylistsDataAll} );
   }
 
-  removePlaylistData (playlistData) {
+  removePlaylistData (playlistToDelete) {
     let playlistDataAll = this.state.playlistsDataAll;
-    
-    delete playlistDataAll[playlistData.playlist_no];
-
-    this.updatePlaylistsDataAll(playlistDataAll);
+    let newPlaylistsDataAll =  playlistDataAll.filter(playlist => playlist.playlist_no !== playlistToDelete);
+    this.setState( {playlistsDataAll: newPlaylistsDataAll} );
   }
 
   getSpotifyAPIrequestData (userQuery) {
@@ -109,11 +92,10 @@ class SearchListPlaylist extends React.Component {
       alert("Please select a playlist to delete!");
     } else {
       let playlistToDelete = currentSelectedPlaylist.playlist_no
-      // console.log(playlistToDelete)
       fetch(`/delete-playlist?playlist=${playlistToDelete}`)
       .then(res => res.json())
       .then(response => {
-        this.removePlaylistData(currentSelectedPlaylist);
+        this.removePlaylistData(playlistToDelete);
         this.setState({ selectedPlaylist: {} }, () => {
           console.log(this.state.selectedPlaylist);
         });
