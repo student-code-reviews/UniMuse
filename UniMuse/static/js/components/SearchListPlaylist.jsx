@@ -17,7 +17,7 @@ class SearchListPlaylist extends React.Component {
     // Bindings
     this.updateSearchListDataAll = this.updateSearchListDataAll.bind(this);
     this.addSearchListDataAll = this.addSearchListDataAll.bind(this);
-    this.getAPIrequestData = this.getAPIrequestData.bind(this);
+    this.getSpotifyAPIrequestData = this.getSpotifyAPIrequestData.bind(this);
     this.saveUserNewPlaylist = this.saveUserNewPlaylist.bind(this);
 
     this.updatePlaylistsDataAll = this.updatePlaylistsDataAll.bind(this);
@@ -86,8 +86,8 @@ class SearchListPlaylist extends React.Component {
     this.updatePlaylistsDataAll(playlistDataAll);
   }
 
-  getAPIrequestData (userQuery) {
-    fetch(`/search-api-request.json?userquery=${userQuery}`)
+  getSpotifyAPIrequestData (userQuery) {
+    fetch(`/spotify-search-api-request.json?userquery=${userQuery}`)
       .then(res => res.json())
       .then(data => {
         for (let key of Object.keys(data)) {
@@ -207,7 +207,7 @@ class SearchListPlaylist extends React.Component {
           <div className="row">
             <div className="col-sm-6">
 
-              <SearchForm getAPIrequestData={this.getAPIrequestData} />
+              <SearchForm getSpotifyAPIrequestData={this.getSpotifyAPIrequestData} />
 
             </div>
             <div className="col-sm-6">

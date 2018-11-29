@@ -25,4 +25,19 @@ def search(q, max_results=10,order="relevance", token=None):
         part="id,snippet",
         maxResults=max_results).execute()
 
-    return search_response
+    search_response_dict = {}
+    search_result_no = 0
+    for search_result in search_response.get("items", []):
+        if search_result["id"]["kind"] == "youtube#video":
+            
+            videoTitle = search_result['snippet']['title']
+            videoImg = search_result['snippet']['thumbnails']['default']['url']
+            videoId = search_result['id']['videoId']
+
+            search_response_dict[search_result_no] = {'videoTitle': videoTitle,
+                                                      'videoImg': videoImg,
+                                                      'videoId': videoId}
+
+            search_result_no += 1
+
+    return search_response_dict

@@ -10,6 +10,7 @@ from flask import Flask, render_template, request, flash, redirect, session, jso
 # Import modules
 from models import db, User, Playlist, PlaylistSong, Song
 import spotify
+import youtube
 
 app = Flask(__name__)
 
@@ -123,9 +124,9 @@ def search_songs():
     return render_template("/searchlist-playlist.html")
 
 
-@app.route('/search-api-request.json')
-def search_api_request():
-    """Return result dictionary for search query."""
+@app.route('/spotify-search-api-request.json')
+def spotify_search_api_request():
+    """Return result dictionary for Spotify search query."""
 
     access_token = session['spotify_token']
 
@@ -136,7 +137,6 @@ def search_api_request():
     results = spotify.search(query, access_token).json()
     data_lst = results['tracks']['items']
 
-    # Create result "keys" used in React
     data_dict = {}
     search_result_no = 0
     while search_result_no < len(data_lst):
@@ -144,6 +144,16 @@ def search_api_request():
         search_result_no += 1
 
     return jsonify(data_dict)
+
+
+@app.route('/youtube-search-api-request.json')
+def youtube_search_api_request():
+    """Return result dictionary for YouTube search query."""
+
+    query = request.args.get("userquery")
+    results = youtube.search(query)
+
+    return jsonify(results)
 
 
 @app.route("/user-playlists.json")
