@@ -71,7 +71,7 @@ def auth_header(access_token):
 
 
 def search(query, access_token):
-    """TESTING SEARCH"""
+    """Spotify search request and response."""
 
     headers = auth_header(access_token)
     url = f"{SPOTIFY_API_URL}/search?{query}"
