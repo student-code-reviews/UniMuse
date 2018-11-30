@@ -23,11 +23,11 @@ class SearchListElement extends React.Component {
         <p className="panel-body">
           <img src={searchListData.albumImgURLsm}></img>
           {searchListData.songTitle}
-          
-          <form className="form-inline" onSubmit={this.handleAddSongSubmitEvent}>
-            <button type="submit" className="btn btn-default btn-xs"><i className="fa fa-spotify"></i>Add to playlist</button>
-          </form>
         </p>
+
+        <form className="form-inline" onSubmit={this.handleAddSongSubmitEvent}>
+            <button type="submit" className="btn btn-default btn-xs"><i className="fa fa-spotify"></i>Add to playlist</button>
+        </form>
         
       </div>
     );

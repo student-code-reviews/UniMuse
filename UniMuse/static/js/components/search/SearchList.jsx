@@ -27,12 +27,21 @@ class SearchList extends React.Component {
     return (
       <div>
         <h3 className="page-header">
-
           <div>
               Search Results
           </div>
-
         </h3>
+
+        <button id="spotifySearchResultsBtn" type="button" className="btn btn-primary" 
+          onClick={this.spotifySearchResultsBtnClick}>
+          <i className="fa fa-spotify"></i>&nbsp;Spotify Results
+        </button>
+
+        <button id="youtubeSearchResultsBtn" type="button" className="btn btn-primary" 
+          onClick={this.youtubeSearchResultsBtnClick}>
+          <i className="fa fa-youtube"></i>&nbsp;YouTube Results
+        </button>
+
         <ul>
 
           {searchListDataElements.length > 0 ? searchListDataElements : <NoSearchListElement />}

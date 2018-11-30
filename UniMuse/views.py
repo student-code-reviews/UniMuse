@@ -145,7 +145,8 @@ def youtube_search_api_request():
 
     query = request.args.get("userquery")
     results = youtube.search(query)
-
+    print(results)
+    
     return jsonify(results)
 
 
