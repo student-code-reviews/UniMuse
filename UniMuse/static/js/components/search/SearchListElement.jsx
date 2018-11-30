@@ -31,8 +31,7 @@ class SearchListElement extends React.Component {
 
         <div className="panel-footer">
           <form className="form-inline" onSubmit={this.handleAddSongSubmitEvent}>
-            <button type="submit" className="btn btn-default btn-xs">Add to playlist</button>
-            {/* <button type="button" className="btn btn-default btn-xs">Play Song</button> */}
+            <button type="submit" className="btn btn-default btn-xs"><i className="fa fa-spotify"></i>Add to playlist</button>
           </form>
         </div>
       </div>

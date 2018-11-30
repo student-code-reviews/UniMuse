@@ -13,7 +13,7 @@ class SearchList extends React.Component {
     return (
       searchListDataAll
       .map(function createSearchListDataElements(searchListData) {
-        return (<SearchListElement key={searchListData.toString()}
+        return (<SearchListElement key={searchListData.songURI}
                                    searchListData={searchListData} 
                                    saveSongToPlaylist={this.props.saveSongToPlaylist} />);
       }.bind(this))

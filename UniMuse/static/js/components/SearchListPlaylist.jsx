@@ -110,9 +110,6 @@ class SearchListPlaylist extends React.Component {
     let artistName = songData.artistName;
     let albumImgURLsm = songData.albumImgURLsm;
     
-    console.log(checkPlaylistExists);
-    console.log(songURI);
-    
     if (isEmpty(checkPlaylistExists)) {
       alert('Please select a playlist!')
     } else {
