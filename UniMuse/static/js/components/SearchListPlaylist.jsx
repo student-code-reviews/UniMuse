@@ -15,7 +15,7 @@ class SearchListPlaylist extends React.Component {
     };
 
     // Bindings
-    this.getSpotifyAPIrequestData = this.getSpotifyAPIrequestData.bind(this);
+    this.getSearchAPIrequestData = this.getSearchAPIrequestData.bind(this);
     this.saveUserNewPlaylist = this.saveUserNewPlaylist.bind(this);
 
     this.addPlaylistsDataAll = this.addPlaylistsDataAll.bind(this);
@@ -53,8 +53,8 @@ class SearchListPlaylist extends React.Component {
     this.setState( {playlistsDataAll: newPlaylistsDataAll} );
   }
 
-  getSpotifyAPIrequestData (userQuery) {
-    fetch(`/youtube-search-api-request.json?userquery=${userQuery}`)
+  getSearchAPIrequestData (userQuery) {
+    fetch(`/search-api-request.json?userquery=${userQuery}`)
       .then(res => res.json())
       .then(data => {
           this.setState({
@@ -157,7 +157,7 @@ class SearchListPlaylist extends React.Component {
           <div className="row">
             <div className="col-sm-6">
 
-              <SearchForm getSpotifyAPIrequestData={this.getSpotifyAPIrequestData} />
+              <SearchForm getSearchAPIrequestData={this.getSearchAPIrequestData} />
 
             </div>
             <div className="col-sm-6">

@@ -15,7 +15,7 @@ class SearchForm extends React.Component {
 
     let userQuery = this.refs.userquery.value;
     // console.log(userQuery);
-    this.props.getSpotifyAPIrequestData(userQuery);
+    this.props.getSearchAPIrequestData(userQuery);
   }
 
   render () {

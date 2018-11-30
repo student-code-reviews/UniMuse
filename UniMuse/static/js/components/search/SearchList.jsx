@@ -1,17 +1,30 @@
 class SearchList extends React.Component {
   constructor(props) {
       super(props);
-      this.state = {};
+      this.state = {
+        spotify: true
+      };
 
       // Bindings
+      this.spotifySearchResultsBtnClick = this.spotifySearchResultsBtnClick.bind(this);
+      this.youtubeSearchResultsBtnClick = this.youtubeSearchResultsBtnClick.bind(this);
       this.createSearchListDataElements = this.createSearchListDataElements.bind(this);
   }
 
   createSearchListDataElements (searchListDataAll) {
-   console.log(searchListDataAll)
+   let searchListDataAllSource;
+   
+    if (this.state.spotify) {
+      searchListDataAllSource = searchListDataAll.spotify;
+    } else {
+      searchListDataAllSource = searchListDataAll.youtube;
+    }
+    if (!searchListDataAllSource) {
+      searchListDataAllSource = [];
+    }
 
     return (
-      searchListDataAll
+      searchListDataAllSource
       .map(function createSearchListDataElements(searchListData) {
         return (<SearchListElement key={searchListData.songURI}
                                    searchListData={searchListData} 
@@ -20,10 +33,18 @@ class SearchList extends React.Component {
     );
   }
 
-  render () {
-    let searchListDataAll = this.props.searchListDataAll;
-    let searchListDataElements = this.createSearchListDataElements(searchListDataAll);
+  spotifySearchResultsBtnClick () {
+    this.setState({ spotify: true });
+  }
 
+  youtubeSearchResultsBtnClick () {
+    this.setState({ spotify: false });
+  }
+
+  render () {
+    let searchListDataAll = this.props.searchListDataAll
+    let searchListDataElements = this.createSearchListDataElements(searchListDataAll);
+    
     return (
       <div>
         <h3 className="page-header">

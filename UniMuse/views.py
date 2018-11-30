@@ -124,30 +124,33 @@ def search_songs():
     return render_template("/searchlist-playlist.html")
 
 
-@app.route('/spotify-search-api-request.json')
+@app.route('/search-api-request.json')
 def spotify_search_api_request():
-    """Return result dictionary for Spotify search query."""
+    """Return results for search query."""
 
     access_token = session['spotify_token']
 
-    query_input = request.args.get("userquery")
-    query_input = query_input.replace(" ", "%20").lower()
-    query = "q=" + query_input + "&type=track&limit=10"
-
-    results = spotify.search(query, access_token)
-
-    return jsonify(results)
-
-
-@app.route('/youtube-search-api-request.json')
-def youtube_search_api_request():
-    """Return result dictionary for YouTube search query."""
-
     query = request.args.get("userquery")
-    results = youtube.search(query)
-    print(results)
+    query_str = query.replace(" ", "%20").lower()
+    query_str = "q=" + query_str + "&type=track&limit=10"
+
+    spotify_data = spotify.search(query_str, access_token)
+    youtube_data = youtube.search(query)
+    print(spotify_data)
+    print(youtube_data)
+
+    return jsonify({'spotify': spotify_data, 'youtube': youtube_data})
+
+
+# @app.route('/youtube-search-api-request.json')
+# def youtube_search_api_request():
+#     """Return result dictionary for YouTube search query."""
+
+#     query = request.args.get("userquery")
+#     results = youtube.search(query)
+#     print(results)
     
-    return jsonify(results)
+#     return jsonify(results)
 
 
 @app.route("/user-playlists.json")
