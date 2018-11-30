@@ -11,6 +11,7 @@ from flask import Flask, render_template, request, flash, redirect, session, jso
 from models import db, User, Playlist, PlaylistSong, Song
 import spotify
 import youtube
+import mixcloud
 
 app = Flask(__name__)
 
@@ -134,10 +135,14 @@ def spotify_search_api_request():
 
     spotify_data = spotify.search(query, access_token)
     youtube_data = youtube.search(query)
+    mixcoud_data = mixcloud.search(query)
     print(spotify_data)
     print(youtube_data)
+    print(mixcloud_data)
 
-    return jsonify({'spotify': spotify_data, 'youtube': youtube_data})
+    return jsonify({'spotify': spotify_data,
+                    'youtube': youtube_data,
+                    'mixcloud': mixcoud_data})
 
 
 @app.route("/user-playlists.json")
