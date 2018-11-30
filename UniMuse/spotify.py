@@ -70,12 +70,11 @@ def auth_header(access_token):
     return {"Authorization" : f"Bearer {access_token}"}
 
 def search_data_map(response):
+    title = response['name']
+    artist = response['album']['artists'][0]['name']
     search_data = {
-        'songTitle': response['name'],
-        'artistName': response['album']['artists'][0]['name'],
-        'albumName': response['album']['name'],
+        'songTitle': title + ' - ' + artist,
         'albumImgURLsm': response['album']['images'][2]['url'],
-        'albumImgURLlg': response['album']['images'][0]['url'],
         'songURI': response['uri']
     }
 
@@ -87,7 +86,6 @@ def search(query, access_token):
     headers = auth_header(access_token)
     url = f"{SPOTIFY_API_URL}/search?{query}"
     response = requests.get(url, headers=headers).json()
-
     response_lst = response['tracks']['items']
 
     search_list_data = list(map(search_data_map, response_lst))

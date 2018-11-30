@@ -20,7 +20,7 @@ class SongElement extends React.Component {
           <div className="panel-footer">
 
               <button type="button" className="btn btn-default btn-xs" onClick={this.handlePlaySongClick}>
-                {songData.song_name} - {songData.artist}
+                {songData.song_name}
               </button>
 
             <p />

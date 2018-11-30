@@ -5,7 +5,8 @@ class PlaylistPlayer extends React.Component {
     this.state = {
       selectedPlaylist: this.props.selectedPlaylist,
       songsDataAll: [],
-      currentSongData: {}
+      currentSongData: {},
+      songClicked: false
     };
 
     // Bindings
@@ -29,15 +30,14 @@ class PlaylistPlayer extends React.Component {
   }
 
   setSelectedSong (songData) {
-    this.setState({ currentSongData: songData }, () => {
-      console.log(this.state.currentSongData)
-    })
+    this.setState({ currentSongData: songData , songClicked: true })
   }
 
   render() {
     let songsDataAll = this.state.songsDataAll;
     let playlistName = this.state.selectedPlaylist.playlist_name;
     let currentSongData = this.state.currentSongData;
+    let songClicked = this.state.songClicked;
 
     return (
       <div className="container">
@@ -58,7 +58,7 @@ class PlaylistPlayer extends React.Component {
           </div>
           <div className="col-sm-6">
 
-            <Player currentSongData={currentSongData} />
+            {songClicked ? <Player currentSongData={currentSongData} /> : null} 
 
           </div>
           <div className="col-sm-6">

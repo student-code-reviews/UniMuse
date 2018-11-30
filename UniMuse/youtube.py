@@ -12,32 +12,32 @@ YOUTUBE_API_SERVICE_NAME = "youtube"
 YOUTUBE_API_VERSION = "v3"
 
 
-def search(q, max_results=10,order="relevance", token=None):
+def search_data_map(response):
+    search_data = {
+        'songTitle': response['snippet']['title'],
+        'albumImgURLsm': response['snippet']['thumbnails']['default']['url'],
+        'songURI': response['id']['videoId']
+    }
+
+    return search_data
+
+
+def search(query_str, max_results=10,order="relevance", token=None):
     """YouTube search request and response."""
 
     youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=YOUTUBE_API_KEY)
 
-    search_response = youtube.search().list(
-        q=q,
+    response = youtube.search().list(
+        q=query_str,
         type="video",
         pageToken=token,
         order = order,
         part="id,snippet",
         maxResults=max_results).execute()
 
-    search_response_dict = {}
-    search_result_no = 0
-    for search_result in search_response.get("items", []):
-        if search_result["id"]["kind"] == "youtube#video":
-            
-            videoTitle = search_result['snippet']['title']
-            videoImg = search_result['snippet']['thumbnails']['default']['url']
-            videoId = search_result['id']['videoId']
+    response_lst = [result for result in response["items"] if result["id"]["kind"] == "youtube#video"]
+    
+    search_list_data = list(map(search_data_map, response_lst))
+    print(search_list_data)
 
-            search_response_dict[search_result_no] = {'videoTitle': videoTitle,
-                                                      'videoImg': videoImg,
-                                                      'videoId': videoId}
-
-            search_result_no += 1
-
-    return search_response_dict
+    return search_list_data

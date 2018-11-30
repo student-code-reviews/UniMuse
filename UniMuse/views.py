@@ -124,29 +124,33 @@ def search_songs():
     return render_template("/searchlist-playlist.html")
 
 
-@app.route('/spotify-search-api-request.json')
+@app.route('/search-api-request.json')
 def spotify_search_api_request():
-    """Return result dictionary for Spotify search query."""
+    """Return results for search query."""
 
     access_token = session['spotify_token']
 
-    query_input = request.args.get("userquery")
-    query_input = query_input.replace(" ", "%20").lower()
-    query = "q=" + query_input + "&type=track&limit=10"
-
-    results = spotify.search(query, access_token)
-
-    return jsonify(results)
-
-
-@app.route('/youtube-search-api-request.json')
-def youtube_search_api_request():
-    """Return result dictionary for YouTube search query."""
-
     query = request.args.get("userquery")
-    results = youtube.search(query)
+    query_str = query.replace(" ", "%20").lower()
+    query_str = "q=" + query_str + "&type=track&limit=10"
 
-    return jsonify(results)
+    spotify_data = spotify.search(query_str, access_token)
+    youtube_data = youtube.search(query)
+    print(spotify_data)
+    print(youtube_data)
+
+    return jsonify({'spotify': spotify_data, 'youtube': youtube_data})
+
+
+# @app.route('/youtube-search-api-request.json')
+# def youtube_search_api_request():
+#     """Return result dictionary for YouTube search query."""
+
+#     query = request.args.get("userquery")
+#     results = youtube.search(query)
+#     print(results)
+    
+#     return jsonify(results)
 
 
 @app.route("/user-playlists.json")
@@ -203,7 +207,6 @@ def save_song():
 
     song_uri = request.args.get("songData")
     song_name = request.args.get("songTitle")
-    artist = request.args.get("artistName")
     song_img = request.args.get("songImg")
     playlist_no = int(request.args.get("playlist"))
 
@@ -214,7 +217,7 @@ def save_song():
         service = 'youtube'
     
     # Duplicates of the song are okay
-    song = Song(service_id=song_uri, song_name=song_name, artist=artist, song_img=song_img, service=service)
+    song = Song(service_id=song_uri, song_name=song_name, song_img=song_img, service=service)
 
     db.session.add(song)
     db.session.commit()
@@ -276,12 +279,10 @@ def playlist_songs():
         
         service = db.session.query(Song.service).filter(Song.song_id==song_id[0]).one()[0]
         song_name = db.session.query(Song.song_name).filter(Song.song_id==song_id[0]).one()[0]
-        artist = db.session.query(Song.artist).filter(Song.song_id==song_id[0]).one()[0]
         song_img = db.session.query(Song.song_img).filter(Song.song_id==song_id[0]).one()[0]
 
         song_data = {'service_id': service_id,
                      'song_name': song_name,
-                     'artist': artist,
                      'song_img': song_img,
                      'service': service}
 
