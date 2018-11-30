@@ -38,6 +38,5 @@ def search(query_str, max_results=10,order="relevance", token=None):
     response_lst = [result for result in response["items"] if result["id"]["kind"] == "youtube#video"]
     
     search_list_data = list(map(search_data_map, response_lst))
-    print(search_list_data)
 
     return search_list_data

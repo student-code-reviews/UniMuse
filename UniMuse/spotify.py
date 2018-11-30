@@ -48,16 +48,9 @@ def get_access_tokens():
     client_str = base64.b64encode(f"{SPOTIFY_CLIENT_ID}:{SPOTIFY_CLIENT_SECRET}".encode('ascii'))
     headers = {"Authorization": f"Basic {client_str.decode('ascii')}"}
     
-    try:
-        response = requests.post(SPOTIFY_TOKEN_URL, data=code_payload, headers=headers)
-    except ConnectionError:
-        current_app.logger.error("Spotify client connection failed.")
-        raise
-    except TimeoutError:
-        current_app.logger.error("Spotify client timed out.")
-        raise
-    else:
-        return response.json()
+    response = requests.post(SPOTIFY_TOKEN_URL, data=code_payload, headers=headers)
+
+    return response.json()
 
 
 def auth_header(access_token):
@@ -68,6 +61,7 @@ def auth_header(access_token):
     """
 
     return {"Authorization" : f"Bearer {access_token}"}
+
 
 def search_data_map(response):
     title = response['name']
@@ -80,15 +74,18 @@ def search_data_map(response):
 
     return search_data
 
+
 def search(query, access_token):
     """Spotify search request and response."""
 
+    query_str = query.replace(" ", "%20").lower()
+    query_str = "q=" + query_str + "&type=track&limit=10"
+
     headers = auth_header(access_token)
-    url = f"{SPOTIFY_API_URL}/search?{query}"
+    url = f"{SPOTIFY_API_URL}/search?{query_str}"
     response = requests.get(url, headers=headers).json()
     response_lst = response['tracks']['items']
 
     search_list_data = list(map(search_data_map, response_lst))
-    print(search_list_data)
 
     return search_list_data

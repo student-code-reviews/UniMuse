@@ -131,26 +131,13 @@ def spotify_search_api_request():
     access_token = session['spotify_token']
 
     query = request.args.get("userquery")
-    query_str = query.replace(" ", "%20").lower()
-    query_str = "q=" + query_str + "&type=track&limit=10"
 
-    spotify_data = spotify.search(query_str, access_token)
+    spotify_data = spotify.search(query, access_token)
     youtube_data = youtube.search(query)
     print(spotify_data)
     print(youtube_data)
 
     return jsonify({'spotify': spotify_data, 'youtube': youtube_data})
-
-
-# @app.route('/youtube-search-api-request.json')
-# def youtube_search_api_request():
-#     """Return result dictionary for YouTube search query."""
-
-#     query = request.args.get("userquery")
-#     results = youtube.search(query)
-#     print(results)
-    
-#     return jsonify(results)
 
 
 @app.route("/user-playlists.json")
@@ -197,7 +184,7 @@ def save_new_playlist():
             'playlist_no': playlist.playlist_id,
             'playlist_name': playlist.playlist_name
         }
-        print(playlistData)
+        
         return jsonify(playlistData)
 
 
