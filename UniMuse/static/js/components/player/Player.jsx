@@ -10,24 +10,23 @@ class Player extends React.Component {
   checkSongSource () {
     let SongData = this.props.currentSongData
     let currentSongService = this.props.currentSongData.service;
-    let url;
+    console.log(SongData.service_id);
 
     if (currentSongService === 'spotify') {
-      url = `https://open.spotify.com/embed/track/${SongData.service_id}`
+      return `https://open.spotify.com/embed/track/${SongData.service_id}`;
     } else {
+      return `https://www.youtube.com/embed/${SongData.service_id}`;
     }
-
-    return url
   }
 
   render () {
     let url = this.checkSongSource();
-
+    console.log(url)
     return (
       <div>
-        { url ? <iframe src={url} width="500" height="380" 
-        frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe> :
-        null }
+        <iframe src={url} width="500" height="380" 
+          frameBorder="0" allowtransparency="true" allow="encrypted-media">
+        </iframe>
       </div>
     );
   }

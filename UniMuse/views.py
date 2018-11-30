@@ -203,7 +203,6 @@ def save_song():
 
     song_uri = request.args.get("songData")
     song_name = request.args.get("songTitle")
-    artist = request.args.get("artistName")
     song_img = request.args.get("songImg")
     playlist_no = int(request.args.get("playlist"))
 
@@ -214,7 +213,7 @@ def save_song():
         service = 'youtube'
     
     # Duplicates of the song are okay
-    song = Song(service_id=song_uri, song_name=song_name, artist=artist, song_img=song_img, service=service)
+    song = Song(service_id=song_uri, song_name=song_name, song_img=song_img, service=service)
 
     db.session.add(song)
     db.session.commit()
@@ -276,12 +275,10 @@ def playlist_songs():
         
         service = db.session.query(Song.service).filter(Song.song_id==song_id[0]).one()[0]
         song_name = db.session.query(Song.song_name).filter(Song.song_id==song_id[0]).one()[0]
-        artist = db.session.query(Song.artist).filter(Song.song_id==song_id[0]).one()[0]
         song_img = db.session.query(Song.song_img).filter(Song.song_id==song_id[0]).one()[0]
 
         song_data = {'service_id': service_id,
                      'song_name': song_name,
-                     'artist': artist,
                      'song_img': song_img,
                      'service': service}
 

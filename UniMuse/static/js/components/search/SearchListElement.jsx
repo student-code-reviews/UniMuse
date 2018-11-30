@@ -19,21 +19,16 @@ class SearchListElement extends React.Component {
 
     return (
       <div className="panel panel-primary">
-        <div className="panel-heading">
-          {searchListData.songTitle}
-        </div>
 
         <p className="panel-body">
           <img src={searchListData.albumImgURLsm}></img>
-          <strong>Artist:</strong> {searchListData.artistName}
-          <strong> Album:</strong> {searchListData.albumName}
-        </p>
-
-        <div className="panel-footer">
+          {searchListData.songTitle}
+          
           <form className="form-inline" onSubmit={this.handleAddSongSubmitEvent}>
             <button type="submit" className="btn btn-default btn-xs"><i className="fa fa-spotify"></i>Add to playlist</button>
           </form>
-        </div>
+        </p>
+        
       </div>
     );
   }

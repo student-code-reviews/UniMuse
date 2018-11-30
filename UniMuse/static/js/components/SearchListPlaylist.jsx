@@ -54,7 +54,7 @@ class SearchListPlaylist extends React.Component {
   }
 
   getSpotifyAPIrequestData (userQuery) {
-    fetch(`/spotify-search-api-request.json?userquery=${userQuery}`)
+    fetch(`/youtube-search-api-request.json?userquery=${userQuery}`)
       .then(res => res.json())
       .then(data => {
           this.setState({
@@ -107,7 +107,6 @@ class SearchListPlaylist extends React.Component {
     let checkPlaylistExists = this.state.selectedPlaylist;
     let songURI = songData.songURI;
     let songTitle = songData.songTitle;
-    let artistName = songData.artistName;
     let albumImgURLsm = songData.albumImgURLsm;
     
     if (isEmpty(checkPlaylistExists)) {
@@ -116,7 +115,7 @@ class SearchListPlaylist extends React.Component {
       let playlistNo = checkPlaylistExists.playlist_no
       let playlistName = checkPlaylistExists.playlist_name
 
-      fetch(`/save-song?songData=${songURI}&songTitle=${songTitle}&artistName=${artistName}&songImg=${albumImgURLsm}&playlist=${playlistNo}`)
+      fetch(`/save-song?songData=${songURI}&songTitle=${songTitle}&songImg=${albumImgURLsm}&playlist=${playlistNo}`)
       .then(res => res.json())
       .then(response => {
         if (response === 'Success.') {
