@@ -2,25 +2,16 @@ class Songs extends React.Component {
     constructor(props) {
       super(props);
       this.state = {};
-  
-      // Bindings
-    }
-  
-    getSongDataAllKeys (songsDataAll) {
-      return Object.keys(songsDataAll)
+
     }
   
     createSongDataElements (songsDataAll) {
-      let songData;
   
       return (
-        this
-        .getSongDataAllKeys(songsDataAll)
-        .map(function createSongDataElements(song_no) {
-          songData = songsDataAll[song_no];
-          console.log(songData)
-          return (<SongElement key={song_no}
-                               songData={songData} 
+        songsDataAll
+        .map(function createSongDataElements(song) {
+          return (<SongElement key={song.service_id}
+                               songData={song}
                                setSelectedSong={this.props.setSelectedSong} />);
         }.bind(this))
         .reverse()

@@ -87,7 +87,6 @@ class SearchListPlaylist extends React.Component {
   deleteSelectedPlaylist () {
     let currentSelectedPlaylist = this.state.selectedPlaylist;
 
-    // By nature, the if statement should only require playlists that exist in the DB.
     if (isEmpty(currentSelectedPlaylist)) {
       alert("Please select a playlist to delete!");
     } else {

@@ -267,10 +267,9 @@ def player():
 @app.route("/playlist-songs.json")
 def playlist_songs():
     selected_playlist = int(request.args.get('playlist'))
-    print(selected_playlist)
     
     song_ids = db.session.query(PlaylistSong.song_id).filter(PlaylistSong.playlist_id==selected_playlist).all()
-    song_uris = {}
+    song_uris = []
     for song_id in song_ids:
         service_id = db.session.query(Song.service_id).filter(Song.song_id==song_id[0]).one()[0]
         service_id = service_id.split(":")[-1]
@@ -280,11 +279,12 @@ def playlist_songs():
         artist = db.session.query(Song.artist).filter(Song.song_id==song_id[0]).one()[0]
         song_img = db.session.query(Song.song_img).filter(Song.song_id==song_id[0]).one()[0]
 
-        song_uris[song_id[0]] = {'service_id': service_id,
-                                 'song_name': song_name,
-                                 'artist': artist,
-                                 'song_img': song_img,
-                                 'service': service
-                                }
-    print(song_uris)
-    return jsonify(song_uris)
+        song_data = {'service_id': service_id,
+                     'song_name': song_name,
+                     'artist': artist,
+                     'song_img': song_img,
+                     'service': service}
+
+        song_uris.append(song_data)
+
+    return jsonify({'songs': song_uris})

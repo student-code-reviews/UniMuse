@@ -4,7 +4,7 @@ class PlaylistPlayer extends React.Component {
 
     this.state = {
       selectedPlaylist: this.props.selectedPlaylist,
-      songsDataAll: {},
+      songsDataAll: [],
       currentSongData: {}
     };
 
@@ -19,21 +19,7 @@ class PlaylistPlayer extends React.Component {
     fetch(`/playlist-songs.json?playlist=${playlistNo}`)
       .then(res => res.json())
       .then(data => {
-        let songsDataAll = {};
-        for (let key of Object.keys(data)) {
-          let playlistSongData = {
-            song_no: key,
-            service_id: data[key]['service_id'],
-            song_name: data[key]['song_name'],
-            artist: data[key]['artist'],
-            song_img: data[key]['song_img'],
-            service: data[key]['service']
-          };
-          songsDataAll[key] = playlistSongData;
-        };
-        
-        this.setState( {songsDataAll: songsDataAll} );
-        console.log(this.state.songsDataAll);
+        this.setState( {songsDataAll: data.songs} );
       })
     .catch(err => this.setState({ songsDataAll: "Something went wrong with user's playlists songs."}));
   }
