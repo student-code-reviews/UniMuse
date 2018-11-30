@@ -22,18 +22,18 @@ def search_data_map(response):
     return search_data
 
 
-def search(query_str, max_results=10,order="relevance", token=None):
+def search(query):
     """YouTube search request and response."""
 
     youtube = build(YOUTUBE_API_SERVICE_NAME, YOUTUBE_API_VERSION, developerKey=YOUTUBE_API_KEY)
 
     response = youtube.search().list(
-        q=query_str,
+        q=query,
         type="video",
-        pageToken=token,
-        order = order,
+        pageToken=None,
+        order = "relevance",
         part="id,snippet",
-        maxResults=max_results).execute()
+        maxResults=10).execute()
 
     response_lst = [result for result in response["items"] if result["id"]["kind"] == "youtube#video"]
     
