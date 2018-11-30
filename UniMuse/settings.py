@@ -13,8 +13,3 @@ SPOTIFY_REDIRECT_URI = f"{CLIENT_SIDE_URL}:{PORT}/spotify-callback"
 
 ##### YouTube Client Info. and URLs #####
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
-
-
-##### MixCloud Client Info. and URLs #####
-MIXCLOUD_CLIENT_SECRET = os.getenv("MIXCLOUD_CLIENT_SECRET")
-MIXCLOUD_CLIENT_ID = os.getenv("MIXCLOUD_CLIENT_ID")
