@@ -108,6 +108,7 @@ class SearchListPlaylist extends React.Component {
     let songURI = songData.songURI;
     let songTitle = songData.songTitle;
     let albumImgURLsm = songData.albumImgURLsm;
+    let service = songData.service;
     
     if (isEmpty(checkPlaylistExists)) {
       alert('Please select a playlist!')

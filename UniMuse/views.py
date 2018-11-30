@@ -135,14 +135,14 @@ def spotify_search_api_request():
 
     spotify_data = spotify.search(query, access_token)
     youtube_data = youtube.search(query)
-    mixcoud_data = mixcloud.search(query)
+    mixcloud_data = mixcloud.search(query)
     print(spotify_data)
     print(youtube_data)
     print(mixcloud_data)
 
     return jsonify({'spotify': spotify_data,
                     'youtube': youtube_data,
-                    'mixcloud': mixcoud_data})
+                    'mixcloud': mixcloud_data})
 
 
 @app.route("/user-playlists.json")
@@ -205,6 +205,8 @@ def save_song():
     service = ''
     if 'spotify' in song_uri:
         service = 'spotify'
+    elif '/' in song_uri:
+        service = 'mixcloud'
     else:
         service = 'youtube'
     
