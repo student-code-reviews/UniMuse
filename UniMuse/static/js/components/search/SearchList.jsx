@@ -2,23 +2,27 @@ class SearchList extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
-        spotify: true
+        source: 'spotify'
       };
 
       // Bindings
       this.spotifySearchResultsBtnClick = this.spotifySearchResultsBtnClick.bind(this);
       this.youtubeSearchResultsBtnClick = this.youtubeSearchResultsBtnClick.bind(this);
+      this.mixcloudSearchResultsBtnClick = this.mixcloudSearchResultsBtnClick.bind(this);
       this.createSearchListDataElements = this.createSearchListDataElements.bind(this);
   }
 
   createSearchListDataElements (searchListDataAll) {
    let searchListDataAllSource;
    
-    if (this.state.spotify) {
+    if (this.state.source == 'spotify') {
       searchListDataAllSource = searchListDataAll.spotify;
-    } else {
+    } else if (this.state.source == 'youtube') {
       searchListDataAllSource = searchListDataAll.youtube;
+    } else {
+      searchListDataAllSource = searchListDataAll.mixcloud;
     }
+    
     if (!searchListDataAllSource) {
       searchListDataAllSource = [];
     }
@@ -34,11 +38,15 @@ class SearchList extends React.Component {
   }
 
   spotifySearchResultsBtnClick () {
-    this.setState({ spotify: true });
+    this.setState({ source: 'spotify' });
   }
 
   youtubeSearchResultsBtnClick () {
-    this.setState({ spotify: false });
+    this.setState({ source: 'youtube' });
+  }
+
+  mixcloudSearchResultsBtnClick () {
+    this.setState({ source: 'mixcloud' })
   }
 
   render () {
@@ -61,6 +69,11 @@ class SearchList extends React.Component {
         <button id="youtubeSearchResultsBtn" type="button" className="btn btn-primary" 
           onClick={this.youtubeSearchResultsBtnClick}>
           <i className="fa fa-youtube"></i>&nbsp;YouTube Results
+        </button>
+
+        <button id="mixcloudSearchResultsBtn" type="button" className="btn btn-primary" 
+          onClick={this.mixcloudSearchResultsBtnClick}>
+          <i className="fa fa-mixcloud"></i>&nbsp;Mixcloud Results
         </button>
 
         <ul>

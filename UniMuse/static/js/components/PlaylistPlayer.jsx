@@ -31,6 +31,7 @@ class PlaylistPlayer extends React.Component {
 
   setSelectedSong (songData) {
     this.setState({ currentSongData: songData , songClicked: true })
+    console.log(this.state.currentSongData)
   }
 
   render() {
