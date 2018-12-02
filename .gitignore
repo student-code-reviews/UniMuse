@@ -2,6 +2,9 @@
 __pycache__/
 *.py[cod]
 
+# Testing
+geckodriver.log
+
 # Distribution / packaging
 env/
 
