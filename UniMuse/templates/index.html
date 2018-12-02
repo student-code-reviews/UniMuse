@@ -4,29 +4,16 @@
 
 {% block content %}
 
-  <h2>Welcome to UniMuse</h2>
+  <h2 id="main-header">Welcome to UniMuse</h2>
   
   <div id="main-login">
 
-    <button class="btn btn-primary" id="um-signup-button" onclick="location.href = '/sign-up-form'">
+    <button class="btn btn-primary" id="main-signup-button" onclick="location.href = '/sign-up-form'">
       New User </button>
 
-    <button class="btn btn-primary" id="um-login-button" onclick="location.href = '/login-form'">
+    <button class="btn btn-primary" id="main-login-button" onclick="location.href = '/login-form'">
       Login</button>
 
   </div>
-
-  
-  <script type="text/javascript">
-
-    document.getElementById("um-signup-button").onclick = function () {
-      location.href = '/sign-up-form'
-    }
-
-    document.getElementById("um-login-button").onclick = function () {
-      location.href = '/login-form'
-    }
-
-  </script>
   
 {% endblock %}

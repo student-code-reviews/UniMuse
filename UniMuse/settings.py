@@ -13,3 +13,6 @@ SPOTIFY_REDIRECT_URI = f"{CLIENT_SIDE_URL}:{PORT}/spotify-callback"
 
 ##### YouTube Client Info. and URLs #####
 YOUTUBE_API_KEY = os.getenv("YOUTUBE_API_KEY")
+
+##### Webdriver for testing #####
+WEBDRIVER_PATH = os.getenv("TEST_WEBDRIVER_PATH")
