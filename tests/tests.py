@@ -81,6 +81,12 @@ class TestMainSignUp(TestMixin, unittest.TestCase):
         button = self.browser.find_element(By.ID, 'submit-new-user')
         self.assertEqual(button.get_attribute('value'), 'Sign-Up!')
 
+    def test_back_to_main_btn(self):
+        self.browser.get(BROWSER_URL+'/sign-up-form')
+        self.browser.find_element(By.ID, 'signup-to-main-btn').click()
+        actual_url = self.browser.current_url
+        self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/index')
+
     def test_new_user_create_btn(self):
         self.browser.get(BROWSER_URL+'/sign-up-form')
 
