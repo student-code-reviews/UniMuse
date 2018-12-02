@@ -14,8 +14,8 @@ from UniMuse.models import db, User, Playlist, PlaylistSong, Song
 BROWSER_URL = 'http://localhost:5000'
 
 
-class TestIndex(unittest.TestCase):
-
+class TestMixin:
+    
     def setUp(self):
         self.browser = webdriver.Firefox()
         # self.wait = WebDriverWait(self.browser, 5)
@@ -27,6 +27,9 @@ class TestIndex(unittest.TestCase):
        """ Compare 2 arguments """
        unittest.TestCase.assertEqual(self, actual_url, expected_url,
                                       "Actual url: " + actual_url + " is not equal to expected url: " + expected_url)
+
+
+class TestIndex(TestMixin, unittest.TestCase):
 
     def test_title(self):
         self.browser.get(BROWSER_URL)
