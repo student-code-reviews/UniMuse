@@ -4,17 +4,17 @@
 
 {% block content %}
 
-  <h2>Sign-Up for UniMuse</h2>
+  <h2 id="signup-header">Sign-Up for UniMuse</h2>
     
   <form id="sign-up-form" action="/sign-up-verification" method="post">
 
-    <label>
+    <label id="sign-up-username-label">
       Username: <input type="text" name="um-new-username" required>
     </label><br>
-    <label>
+    <label id="sign-up-pw-label">
       Password: <input type="password" name="um-new-password" required>
     </label><br>
-    <input type="submit" value="Sign-Up!">
+    <input id="submit-new-user" type="submit" value="Sign-Up!">
 
   </form>
 
