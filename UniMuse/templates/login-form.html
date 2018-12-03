@@ -4,17 +4,17 @@
 
 {% block content %}
 
-  <h2>Log-in to UniMuse</h2>
+  <h2 id='login-header'>Log-in to UniMuse</h2>
   
   <form id="login-form" action="/login-verification" method="post">
 
-    <label>
+    <label id="login-username-label">
       Username: <input type="text" name="um-username" required>
     </label><br>
     <label>
       Password: <input type="password" name="um-password" required>
     </label><br>
-    <button type="submit" class="btn btn-primary" id="login-btn">Log-In!</button>
+    <button type="submit" class="btn btn-primary" id="login-submit-btn">Log-In!</button>
 
   </form>
 
