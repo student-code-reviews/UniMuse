@@ -252,7 +252,7 @@ class TestSubscriptionsLogin(TestMixin, unittest.TestCase):
         """Test subscriptions page value for Spotify login button."""
         self.browser.get(BROWSER_URL+'/subscriptions-login')
         button = self.browser.find_element(By.ID, 'spotify-login-button')
-        self.assertEqual(button.text, 'Log-In')
+        self.assertEqual(button.text, ' Spotify Login')
 
     def test_back_to_main_btn(self):
         """Test subscriptions page back to main page button."""

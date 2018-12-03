@@ -6,34 +6,36 @@
 
   <h2 id="subscriptions-header">Subscriptions Log-In</h2>
 
-  <div id="subscription-login-btns">
+  <p></p>
 
+  <div id="subscription-login-btns">
+    
     <button class="btn btn-primary" id="spotify-login-button" onclick="location.href = '{{ spotify_auth_url }}'">
       <i class="fa fa-spotify"></i>&nbsp;Spotify Login</button>
     
     <p></p>
 
-    <button class="btn btn-primary" id="youtube-login-button">
-      <i class="fa fa-youtube"></i>&nbsp;YouTube Login</button>
+    <button type="button" class="btn btn-primary" id="youtube-login-button">
+      <i class="fa fa-youtube"></i>&nbsp;YouTube</button>
     
     <p></p>
 
-    <button class="btn btn-primary" id="mixcloud-login-button">
-      <i class="fa fa-mixcloud"></i>&nbsp;Mixcloud Login</button>
+    <button type="button" class="btn btn-primary" id="mixcloud-login-button">
+      <i class="fa fa-mixcloud"></i>&nbsp;Mixcloud</button>
     
     <p></p>
 
-    <button class="btn btn-primary" id="soundcloud-login-button">
-      <i class="fa fa-soundcloud"></i>&nbsp;<i>Coming Soon!</i></button>
+    <button type="button" class="btn btn-primary" id="soundcloud-login-button">
+      <i class="fa fa-soundcloud"></i>&nbsp;<i>Soundcloud</i></button>
 
   </div>
 
   <hr />
-
-  <button class="btn btn-primary" id="finished-logins-button" onclick="location.href = '/searchlist-playlist'">
-    Finish </button>
         
   <button class="btn btn-primary" id="subscriptions-to-main-btn" onclick="location.href = '/'">
     Go Back</button>
+
+  <button class="btn btn-primary" id="finished-logins-button" onclick="location.href = '/searchlist-playlist'">
+    Finish </button>
 
 {% endblock %}
