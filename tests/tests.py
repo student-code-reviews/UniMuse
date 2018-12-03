@@ -79,13 +79,13 @@ class TestMainSignUp(TestMixin, unittest.TestCase):
     def test_signup_button_value(self):
         self.browser.get(BROWSER_URL+'/sign-up-form')
         button = self.browser.find_element(By.ID, 'submit-new-user')
-        self.assertEqual(button.get_attribute('value'), 'Sign-Up!')
+        self.assertEqual(button.text, 'Sign-Up!')
 
     def test_back_to_main_btn(self):
         self.browser.get(BROWSER_URL+'/sign-up-form')
         self.browser.find_element(By.ID, 'signup-to-main-btn').click()
         actual_url = self.browser.current_url
-        self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/index')
+        self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/')
 
     def test_new_user_create_btn(self):
         self.browser.get(BROWSER_URL+'/sign-up-form')
@@ -101,11 +101,28 @@ class TestMainSignUp(TestMixin, unittest.TestCase):
         alert = self.browser.find_element(By.CLASS_NAME, 'alert')
         if alert.text == 'Sign-up Successful!':
             actual_url = self.browser.current_url
-            self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/index')
+            self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}')
 
-        elif alert.text == 'That username is already taken!':
+        else:
+            print(alert)
+
+    def test_existing_user_create_btn(self):
+        self.browser.get(BROWSER_URL+'/sign-up-form')
+
+        username = self.browser.find_element(By.NAME, 'um-new-username')
+        username.send_keys("frank")
+        password = self.browser.find_element(By.NAME, 'um-new-password')
+        password.send_keys("frank")
+
+        self.browser.find_element(By.ID, 'submit-new-user').click()
+        self.wait
+
+        alert = self.browser.find_element(By.CLASS_NAME, 'alert')
+        if alert.text == 'That username is already taken!':
             actual_url = self.browser.current_url
             self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/sign-up-form')
+        else:
+            print(alert)
 
 
 if __name__ == "__main__":
