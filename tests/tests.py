@@ -15,7 +15,7 @@ BROWSER_URL = 'http://localhost:5000'
 
 
 class TestMixin:
-"""Mixin for base test methods."""
+    """Mixin for base test methods."""
 
     def setUp(self):
         """Set-up for testing."""
@@ -33,7 +33,7 @@ class TestMixin:
 
 
 class TestIndex(TestMixin, unittest.TestCase):
-"""Class to test the home page of UniMuse."""
+    """Class to test the home page of UniMuse."""
 
     def test_title(self):
         """Test main page title."""
@@ -70,7 +70,7 @@ class TestIndex(TestMixin, unittest.TestCase):
 
 
 class TestMainSignUp(TestMixin, unittest.TestCase):
-"""Class to test the UniMuse account sign-up page."""
+    """Class to test the UniMuse account sign-up page."""
 
     def test_title(self):
         """Test sign-up page title."""
@@ -143,7 +143,7 @@ class TestMainSignUp(TestMixin, unittest.TestCase):
     
     
 class TestMainLogin(TestMixin, unittest.TestCase):
-"""Class to test the UniMuse user login page."""
+    """Class to test the UniMuse user login page."""
 
     def test_title(self):
         """Test login page title."""
