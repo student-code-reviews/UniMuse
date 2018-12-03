@@ -234,5 +234,53 @@ class TestMainLogin(TestMixin, unittest.TestCase):
             print(alert)
 
 
+class TestSubscriptionsLogin(TestMixin, unittest.TestCase):
+    """Class to test the subscriptions login page."""
+
+    def test_title(self):
+        """Test subscriptions page title."""
+        self.browser.get(BROWSER_URL+'/subscriptions-login')
+        self.assertEqual(self.browser.title, 'Subscriptions')
+
+    def test_header(self):
+        """Test subscriptions page header."""
+        self.browser.get(BROWSER_URL+'/subscriptions-login')
+        main_header = self.browser.find_element_by_id('subscriptions-header').text
+        self.assertIn('Subscriptions', main_header)
+
+    def test_spotify_login_button_value(self):
+        """Test subscriptions page value for Spotify login button."""
+        self.browser.get(BROWSER_URL+'/subscriptions-login')
+        button = self.browser.find_element(By.ID, 'spotify-login-button')
+        self.assertEqual(button.text, 'Log-In')
+
+    def test_back_to_main_btn(self):
+        """Test subscriptions page back to main page button."""
+        self.browser.get(BROWSER_URL+'/subscriptions-login')
+        self.browser.find_element(By.ID, 'subscriptions-to-main-btn').click()
+        actual_url = self.browser.current_url
+        self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/')
+
+    def test_spotify_auth_page_btn(self):
+        """Test Spotify auth page redirect button."""
+        self.browser.get(BROWSER_URL+'/subscriptions-login')
+
+        self.browser.find_element(By.ID, 'spotify-login-button').click()
+        self.wait
+
+        actual_url = self.browser.current_url
+        self.assertIn('accounts.spotify', actual_url)
+
+    def test_subscription_login_finish_btn(self):
+        """Test finish logging into subscriptions button."""
+        self.browser.get(BROWSER_URL+'/subscriptions-login')
+
+        self.browser.find_element(By.ID, 'finished-logins-button').click()
+        self.wait
+
+        actual_url = self.browser.current_url
+        self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/searchlist-playlist')
+
+
 if __name__ == "__main__":
     unittest.main()
