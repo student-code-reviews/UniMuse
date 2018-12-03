@@ -123,6 +123,89 @@ class TestMainSignUp(TestMixin, unittest.TestCase):
             self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/sign-up-form')
         else:
             print(alert)
+    
+    
+class TestMainLogin(TestMixin, unittest.TestCase):
+
+    def test_title(self):
+        self.browser.get(BROWSER_URL+'/login-form')
+        self.assertEqual(self.browser.title, 'Login')
+
+    def test_header(self):
+        self.browser.get(BROWSER_URL+'/login-form')
+        main_header = self.browser.find_element_by_id('login-header').text
+        self.assertIn('Log-in', main_header)
+
+    def test_signup_input_label(self):
+        self.browser.get(BROWSER_URL+'/login-form')
+        input_label = self.browser.find_element_by_id('login-username-label')
+        self.assertEqual(input_label.text, 'Username:')
+
+    def test_signup_button_value(self):
+        self.browser.get(BROWSER_URL+'/login-form')
+        button = self.browser.find_element(By.ID, 'login-submit-btn')
+        self.assertEqual(button.text, 'Log-In!')
+
+    def test_back_to_main_btn(self):
+        self.browser.get(BROWSER_URL+'/login-form')
+        self.browser.find_element(By.ID, 'login-to-main-btn').click()
+        actual_url = self.browser.current_url
+        self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/')
+
+    def test_valid_user_login_btn(self):
+        self.browser.get(BROWSER_URL+'/login-form')
+
+        username = self.browser.find_element(By.NAME, 'um-username')
+        username.send_keys("frank")
+        password = self.browser.find_element(By.NAME, 'um-password')
+        password.send_keys("frank")
+
+        self.browser.find_element(By.ID, 'login-submit-btn').click()
+        self.wait
+
+        alert = self.browser.find_element(By.CLASS_NAME, 'alert')
+        if alert.text == "You've successfully logged in!":
+            actual_url = self.browser.current_url
+            self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/subscriptions-login')
+
+        else:
+            print(alert)
+
+    def test_invalid_user_login_btn(self):
+        self.browser.get(BROWSER_URL+'/login-form')
+
+        username = self.browser.find_element(By.NAME, 'um-username')
+        username.send_keys("ricksmith")
+        password = self.browser.find_element(By.NAME, 'um-password')
+        password.send_keys("burp")
+
+        self.browser.find_element(By.ID, 'login-submit-btn').click()
+        self.wait
+
+        alert = self.browser.find_element(By.CLASS_NAME, 'alert')
+        if alert.text == "That username doesn't exist!":
+            actual_url = self.browser.current_url
+            self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/login-form')
+        else:
+            print(alert)
+
+    def test_wrongpass_user_login_btn(self):
+        self.browser.get(BROWSER_URL+'/login-form')
+
+        username = self.browser.find_element(By.NAME, 'um-username')
+        username.send_keys("frank")
+        password = self.browser.find_element(By.NAME, 'um-password')
+        password.send_keys("notfrank")
+
+        self.browser.find_element(By.ID, 'login-submit-btn').click()
+        self.wait
+
+        alert = self.browser.find_element(By.CLASS_NAME, 'alert')
+        if alert.text == "The password is incorrect.":
+            actual_url = self.browser.current_url
+            self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/login-form')
+        else:
+            print(alert)
 
 
 if __name__ == "__main__":
