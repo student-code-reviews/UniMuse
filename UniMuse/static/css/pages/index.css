@@ -1,0 +1,21 @@
+.ml12 {
+  font-weight: 200;
+  font-size: 5em;
+  color: #ffaaaa;
+  /* text-transform: uppercase; */
+  letter-spacing: 0.5em;
+}
+
+.ml12 .letter {
+  display: inline-block;
+  line-height: 1em;
+}
+
+html, body {
+    font-family: 'Permanent Marker';
+    background: #333333;
+    /* OR #5E6264 */
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+}
