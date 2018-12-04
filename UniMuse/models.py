@@ -58,10 +58,17 @@ class PlaylistSong(db.Model):
                                                       order_by=song_id))
 
 
-def connect_to_db(app, dburl='postgresql:///unimuse'):
+def test_data():
+    user = User(username='test_human', password='iamnothuman')
+    db.session.add(user)
+    db.session.commit()
+
+
+def connect_to_db(app):
     """Connect UniMuse database to Flask app."""
 
-    app.config['SQLALCHEMY_DATABASE_URI'] = dburl
+    # app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///unimuse'
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///testdb'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.app = app
     db.init_app(app)
@@ -69,7 +76,8 @@ def connect_to_db(app, dburl='postgresql:///unimuse'):
 if __name__ == '__main__':
     from server import app
     
-    # connect_to_db(app)
-    connect_to_db(app, 'postgresql:///testdb')
+    connect_to_db(app)
+    
     db.create_all()
+    test_data()
     print('Connected to database.')
