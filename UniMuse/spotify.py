@@ -10,7 +10,6 @@ from flask import request
 from settings import SPOTIFY_REDIRECT_URI, SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET
 
 
-# Spotify info. needed for authorization
 SPOTIFY_AUTH_URL = "https://accounts.spotify.com/authorize"
 SPOTIFY_TOKEN_URL = "https://accounts.spotify.com/api/token"
 SPOTIFY_API_BASE_URL = "https://api.spotify.com"
@@ -22,8 +21,6 @@ auth_query_param = {
     "response_type": "code",
     "redirect_uri": SPOTIFY_REDIRECT_URI,
     "scope": SPOTIFY_SCOPE,
-    # "state": STATE,
-    # "show_dialog": SHOW_DIALOG_str,
     "client_id": SPOTIFY_CLIENT_ID
 }
 
@@ -64,6 +61,14 @@ def auth_header(access_token):
 
 
 def search_data_map(response):
+    """Mapping function to extract relevant information from API response data.
+    
+    Args:
+        response (dict) - A single dictionary from the API response data.
+    
+    Returns a dictionary of relevant information from API response.
+    """
+
     title = response['name']
     artist = response['album']['artists'][0]['name']
     search_data = {
@@ -76,7 +81,14 @@ def search_data_map(response):
 
 
 def search(query, access_token):
-    """Spotify search request and response."""
+    """Spotify search request and response.
+    
+    Args:
+        query (string) - User inputted query.
+    
+    Returns a dictionary containing dictionaries with track information 
+    from API response.
+    """
 
     query_str = query.replace(" ", "%20").lower()
     query_str = "q=" + query_str + "&type=track&limit=10"

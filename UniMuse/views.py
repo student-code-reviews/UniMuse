@@ -1,4 +1,4 @@
-"""Views for application."""
+"""Views for UniMuse."""
 
 import os
 import json
@@ -7,7 +7,6 @@ import requests
 from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session, jsonify
 
-# Import modules
 from models import db, User, Playlist, PlaylistSong, Song
 import spotify
 import youtube
@@ -17,8 +16,6 @@ app = Flask(__name__)
 
 app.jinja_env.undefined = StrictUndefined
 
-
-# =========================================================================== #
 
 @app.route('/')
 def index():
@@ -98,9 +95,6 @@ def subscriptions_login():
                             spotify_auth_url=spotify_auth_url)
 
 
-# =========================================================================== #
-
-
 @app.route("/spotify-callback")
 def spotify_callback():
     """Spotify user authentication callback."""
@@ -115,9 +109,6 @@ def spotify_callback():
     return redirect("/subscriptions-login")
 
 
-# =========================================================================== #
-
-
 @app.route("/searchlist-playlist")
 def search_songs():
     """Search songs on app."""
@@ -127,7 +118,7 @@ def search_songs():
 
 @app.route('/search-api-request.json')
 def spotify_search_api_request():
-    """Return results for search query."""
+    """Return API responses for search query."""
 
     access_token = session['spotify_token']
 
@@ -136,9 +127,6 @@ def spotify_search_api_request():
     spotify_data = spotify.search(query, access_token)
     youtube_data = youtube.search(query)
     mixcloud_data = mixcloud.search(query)
-    print(spotify_data)
-    print(youtube_data)
-    print(mixcloud_data)
 
     return jsonify({'spotify': spotify_data,
                     'youtube': youtube_data,
@@ -150,7 +138,6 @@ def get_user_playlists():
     """Retrieve user's previously-created playlists."""
 
     user_id = session['logged_user']['user_id']
-    print(user_id)
     playlist_check = db.session.query(Playlist).filter(User.user_id==user_id).first()
 
     if playlist_check:
@@ -169,12 +156,10 @@ def save_new_playlist():
     """Save new playlist created by user into database."""
 
     new_playlist = request.args.get("newPlaylistName")
-    print(new_playlist)
     user_id = session['logged_user']['user_id']
 
     playlist = db.session.query(Playlist).filter(User.user_id==user_id,
-                                                 Playlist.playlist_name==new_playlist
-                                                ).first()
+                                                 Playlist.playlist_name==new_playlist).first()
 
     if playlist:
         return jsonify("User already has a playlist with that name.")
@@ -235,6 +220,7 @@ def delete_playlist():
 
     db.session.query(PlaylistSong).filter(PlaylistSong.playlist_id == playlist_id).delete()
     db.session.query(Playlist).filter(Playlist.playlist_id == playlist_id).delete()
+    
     for song in songs:
         db.session.query(Song).filter(Song.song_id == song[0]).delete()
 
@@ -245,13 +231,15 @@ def delete_playlist():
 
 @app.route("/playlist-player")
 def player():
-    """Play songs from playlist."""
+    """Player to play songs from playlist."""
 
     return render_template("/playlist-player.html")
 
 
 @app.route("/playlist-songs.json")
 def playlist_songs():
+    """Retrieve saved songs from user's playlist."""
+    
     selected_playlist = int(request.args.get('playlist'))
     
     song_ids = db.session.query(PlaylistSong.song_id).filter(PlaylistSong.playlist_id==selected_playlist).all()

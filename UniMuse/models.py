@@ -7,7 +7,7 @@ db = SQLAlchemy()
 
 
 class User(db.Model):
-    """User of UniMuse."""
+    """UniMuse user information."""
 
     __tablename__ = "users"
 
@@ -17,7 +17,7 @@ class User(db.Model):
 
 
 class Playlist(db.Model):
-    """Playlist by User."""
+    """Playlist information created by user."""
 
     __tablename__ = "playlists"
 
@@ -30,7 +30,7 @@ class Playlist(db.Model):
 
 
 class Song(db.Model):
-    """Song."""
+    """Song information from API queries."""
 
     __tablename__ = "songs"
 
@@ -42,7 +42,7 @@ class Song(db.Model):
 
 
 class PlaylistSong(db.Model):
-    """Playlist song."""
+    """Songs contained in user playlists."""
 
     __tablename__ = "playlist_songs"
 
@@ -58,6 +58,7 @@ class PlaylistSong(db.Model):
 
 
 def test_data():
+    """Seed test user to testdb."""
     user = User(username='test_human', password='iamnothuman')
     db.session.add(user)
     db.session.commit()

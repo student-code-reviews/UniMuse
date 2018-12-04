@@ -8,6 +8,14 @@ MIXCLOUD_SEARCH_URL = "https://api.mixcloud.com/search"
 
 
 def search_data_map(response):
+    """Mapping function to extract relevant information from API response data.
+    
+    Args:
+        response (dict) - A single dictionary from the API response data.
+    
+    Returns a dictionary of relevant information from API response.
+    """
+
     search_data = {
         'songTitle': response['name'],
         'albumImgURLsm': response['pictures']['thumbnail'],
@@ -18,7 +26,14 @@ def search_data_map(response):
 
 
 def search(query):
-    """Mixcloud search request and response."""
+    """Mixcloud search request and response.
+    
+    Args:
+        query (string) - User inputted query.
+    
+    Returns a dictionary containing dictionaries with track information 
+    from API response.
+    """
 
     if " " in query:
         query_str = "+".join(query.split(" "))
