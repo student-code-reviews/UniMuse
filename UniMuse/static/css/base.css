@@ -1,9 +1,7 @@
 html, body {
-    font-family: 'Permanent Marker';
-    color: #ffaaaa;
     background: #333333;
     /* OR #5E6264 */
     height: 100%;
     overflow: hidden;
-    text-align: center;
+    font-family: 'Roboto Condensed';
 }
