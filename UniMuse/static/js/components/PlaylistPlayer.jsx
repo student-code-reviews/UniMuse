@@ -39,29 +39,33 @@ class PlaylistPlayer extends React.Component {
     let songClicked = this.state.songClicked;
 
     return (
-      <div className="row">
+      <div>
 
-        <div className="col-sm-6">
-          <p />
-          <button id="backFromPlayerBtn" type="button" className="btn btn-primary" 
-                  onClick={this.goBackFromPlayer}>Go Back</button>
+        <div className="row">
+          <div className="col-sm-6">
+            <p />
+            <button id="backFromPlayerBtn" type="button" className="btn btn-primary" 
+                    onClick={this.goBackFromPlayer}>Go Back</button>
+          </div>
+
+          <div className="col-sm-6">
+            <h3 className="page-header"><strong>{playlistName}</strong></h3>
+            <p />
+            <hr />
+          </div>
         </div>
 
-        <div className="col-sm-6">
-          <h3 className="page-header"><strong>{playlistName}</strong></h3>
-          <p />
-          <hr />
-        </div>
+        <div className="row">
+          <div className="col-sm-6">
+            {songClicked ? <Player currentSong={currentSong} /> : null}
+          </div>
 
-        <div className="col-sm-6">
-          {songClicked ? <Player currentSong={currentSong} /> : null}
+          <div className="col-sm-6">
+            <Songs songs={songs} 
+                  setSelectedSong={this.setSelectedSong} />
+          </div>
         </div>
-
-        <div className="col-sm-6">
-          <Songs songs={songs} 
-                 setSelectedSong={this.setSelectedSong} />
-        </div>
-
+        
       </div>
     );
   }
