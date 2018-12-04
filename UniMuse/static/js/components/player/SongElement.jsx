@@ -8,19 +8,19 @@ class SongElement extends React.Component {
     }
 
     handlePlaySongClick () {
-      let songData = this.props.songData;
-      this.props.setSelectedSong(songData);
+      let song = this.props.song;
+      this.props.setSelectedSong(song);
     }
   
     render () {
-      let songData = this.props.songData;
+      let song = this.props.song;
   
       return (
         <div className="panel panel-primary">
           <div className="panel-footer">
 
               <button type="button" className="btn btn-default btn-xs" onClick={this.handlePlaySongClick}>
-                {songData.song_name}
+                {song.song_name}
               </button>
 
             <p />

@@ -4,8 +4,8 @@ class PlaylistPlayer extends React.Component {
 
     this.state = {
       selectedPlaylist: this.props.selectedPlaylist,
-      songsDataAll: [],
-      currentSongData: {},
+      songs: [],
+      currentSong: {},
       songClicked: false
     };
 
@@ -20,24 +20,24 @@ class PlaylistPlayer extends React.Component {
     fetch(`/playlist-songs.json?playlist=${playlistNo}`)
       .then(res => res.json())
       .then(data => {
-        this.setState( {songsDataAll: data.songs} );
+        this.setState( {songs: data.songs} );
       })
-    .catch(err => this.setState({ songsDataAll: "Something went wrong with user's playlists songs."}));
+    .catch(err => this.setState({ songs: "Something went wrong with user's playlists songs."}));
   }
 
   goBackFromPlayer () {
     this.props.revertPlaylistPlayerRender();
   }
 
-  setSelectedSong (songData) {
-    this.setState({ currentSongData: songData , songClicked: true })
-    console.log(this.state.currentSongData)
+  setSelectedSong (song) {
+    this.setState({ currentSong: song, songClicked: true })
+    console.log(this.state.currentSong)
   }
 
   render() {
-    let songsDataAll = this.state.songsDataAll;
+    let songs = this.state.songs;
     let playlistName = this.state.selectedPlaylist.playlist_name;
-    let currentSongData = this.state.currentSongData;
+    let currentSong = this.state.currentSong;
     let songClicked = this.state.songClicked;
 
     return (
@@ -59,12 +59,12 @@ class PlaylistPlayer extends React.Component {
           </div>
           <div className="col-sm-6">
 
-            {songClicked ? <Player currentSongData={currentSongData} /> : null} 
+            {songClicked ? <Player currentSong={currentSong} /> : null} 
 
           </div>
           <div className="col-sm-6">
             
-            <Songs songsDataAll={songsDataAll} 
+            <Songs songs={songs} 
                    setSelectedSong={this.setSelectedSong} />
 
           </div>

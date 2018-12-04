@@ -5,13 +5,13 @@ class Songs extends React.Component {
 
     }
   
-    createSongDataElements (songsDataAll) {
+    createSongElements (songs) {
   
       return (
-        songsDataAll
-        .map(function createSongDataElements(song) {
+        songs
+        .map(function createSongElements(song) {
           return (<SongElement key={song.service_id}
-                               songData={song}
+                               song={song}
                                setSelectedSong={this.props.setSelectedSong} />);
         }.bind(this))
         .reverse()
@@ -19,8 +19,8 @@ class Songs extends React.Component {
     }
   
     render () {
-      let songsDataAll = this.props.songsDataAll;
-      let songDataElements = this.createSongDataElements(songsDataAll);
+      let songs = this.props.songs;
+      let songElements = this.createSongElements(songs);
   
       return (
         <div>
@@ -33,7 +33,7 @@ class Songs extends React.Component {
           </h3>
           <ul>
   
-            {songDataElements.length > 0 ? songDataElements : <NoSongElement />}
+            {songElements.length > 0 ? songElements : <NoSongElement />}
   
           </ul>
         </div>

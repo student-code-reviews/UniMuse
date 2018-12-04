@@ -8,16 +8,16 @@ class Player extends React.Component {
   }
 
   checkSongSource () {
-    let SongData = this.props.currentSongData
-    let currentSongService = this.props.currentSongData.service;
-    console.log(SongData.service_id);
+    let song = this.props.currentSong
+    let currentSongService = this.props.currentSong.service;
+    console.log(song.service_id);
 
     if (currentSongService == 'spotify') {
-      return `https://open.spotify.com/embed/track/${SongData.service_id}`;
+      return `https://open.spotify.com/embed/track/${song.service_id}`;
     } else if (currentSongService == 'youtube') {
-      return `https://www.youtube.com/embed/${SongData.service_id}`;
+      return `https://www.youtube.com/embed/${song.service_id}`;
     } else {
-      return `https://api.mixcloud.com/${SongData.service_id}/embed-html/`
+      return `https://api.mixcloud.com/${song.service_id}/embed-html/`
     }
   }
 
