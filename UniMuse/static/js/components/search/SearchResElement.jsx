@@ -1,4 +1,4 @@
-class SearchListElement extends React.Component {
+class SearchResElement extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -10,19 +10,19 @@ class SearchListElement extends React.Component {
   handleAddSongSubmitEvent (evt) {
     evt.preventDefault();
 
-    let songData = this.props.searchListData;
+    let songData = this.props.songData;
     this.props.saveSongToPlaylist(songData);
   }
 
   render () {
-    let searchListData = this.props.searchListData;
+    let songData = this.props.songData;
 
     return (
       <div className="panel panel-primary">
 
         <p className="panel-body">
-          <img src={searchListData.albumImgURLsm}></img>
-          {searchListData.songTitle}
+          <img src={songData.albumImgURLsm}></img>
+          {songData.songTitle}
         </p>
 
         <form className="form-inline" onSubmit={this.handleAddSongSubmitEvent}>

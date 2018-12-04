@@ -3,12 +3,12 @@ function isEmpty(obj) {
 }
 
 
-class SearchListPlaylist extends React.Component {
+class SearchResultsAndPlaylists extends React.Component {
   constructor() {
     super();
 
     this.state = {
-      searchListDataAll: [],
+      searchResDataAll: [],
       playlistsDataAll: [],
       selectedPlaylist: {},
       playlistPlayerClick: false
@@ -58,10 +58,10 @@ class SearchListPlaylist extends React.Component {
       .then(res => res.json())
       .then(data => {
           this.setState({
-            searchListDataAll: data
+            searchResDataAll: data
           });
         })
-      .catch(err => this.setState({ searchListDataAll: "Something went wrong with API request."}));
+      .catch(err => this.setState({ searchResDataAll: "Something went wrong with API request."}));
   }
 
   saveUserNewPlaylist (userNewPlaylist) {
@@ -144,7 +144,7 @@ class SearchListPlaylist extends React.Component {
   }
 
   render() {
-    let searchListDataAll = this.state.searchListDataAll;
+    let searchResDataAll = this.state.searchResDataAll;
     let saveUserNewPlaylist = this.state.saveUserNewPlaylist;
     let playlistsDataAll = this.state.playlistsDataAll;
     let selectedPlaylist = this.state.selectedPlaylist;
@@ -170,8 +170,8 @@ class SearchListPlaylist extends React.Component {
             </div>
             <div className="col-sm-6">
 
-              <SearchList searchListDataAll={searchListDataAll} 
-                          saveSongToPlaylist={this.saveSongToPlaylist} />
+              <SearchResults searchResDataAll={searchResDataAll} 
+                             saveSongToPlaylist={this.saveSongToPlaylist} />
 
             </div>
             <div className="col-sm-6">

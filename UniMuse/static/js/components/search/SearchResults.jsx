@@ -1,4 +1,4 @@
-class SearchList extends React.Component {
+class SearchResults extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
@@ -9,30 +9,30 @@ class SearchList extends React.Component {
       this.spotifySearchResultsBtnClick = this.spotifySearchResultsBtnClick.bind(this);
       this.youtubeSearchResultsBtnClick = this.youtubeSearchResultsBtnClick.bind(this);
       this.mixcloudSearchResultsBtnClick = this.mixcloudSearchResultsBtnClick.bind(this);
-      this.createSearchListDataElements = this.createSearchListDataElements.bind(this);
+      this.createSearchResDataElements = this.createSearchResDataElements.bind(this);
   }
 
-  createSearchListDataElements (searchListDataAll) {
-   let searchListDataAllSource;
+  createSearchResDataElements (searchResDataAll) {
+   let searchResDataSource;
    
     if (this.state.source == 'spotify') {
-      searchListDataAllSource = searchListDataAll.spotify;
+      searchResDataSource = searchResDataAll.spotify;
     } else if (this.state.source == 'youtube') {
-      searchListDataAllSource = searchListDataAll.youtube;
+      searchResDataSource = searchResDataAll.youtube;
     } else {
-      searchListDataAllSource = searchListDataAll.mixcloud;
+      searchResDataSource = searchResDataAll.mixcloud;
     }
     
-    if (!searchListDataAllSource) {
-      searchListDataAllSource = [];
+    if (!searchResDataSource) {
+      searchResDataSource = [];
     }
 
     return (
-      searchListDataAllSource
-      .map(function createSearchListDataElements(searchListData) {
-        return (<SearchListElement key={searchListData.songURI}
-                                   searchListData={searchListData} 
-                                   saveSongToPlaylist={this.props.saveSongToPlaylist} />);
+      searchResDataSource
+      .map(function createSearchResDataElements(songData) {
+        return (<SearchResElement key={songData.songURI}
+                                  songData={songData} 
+                                  saveSongToPlaylist={this.props.saveSongToPlaylist} />);
       }.bind(this))
     );
   }
@@ -50,8 +50,8 @@ class SearchList extends React.Component {
   }
 
   render () {
-    let searchListDataAll = this.props.searchListDataAll
-    let searchListDataElements = this.createSearchListDataElements(searchListDataAll);
+    let searchResDataAll = this.props.searchResDataAll
+    let searchResDataElements = this.createSearchResDataElements(searchResDataAll);
     
     return (
       <div>
@@ -78,7 +78,7 @@ class SearchList extends React.Component {
 
         <ul>
 
-          {searchListDataElements.length > 0 ? searchListDataElements : <NoSearchListElement />}
+          {searchResDataElements.length > 0 ? searchResDataElements : <NoSearchResElement />}
 
         </ul>
       </div>

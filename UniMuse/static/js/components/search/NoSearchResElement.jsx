@@ -1,4 +1,4 @@
-class NoSearchListElement extends React.Component {
+class NoSearchResElement extends React.Component {
 
   render () {
     return (
