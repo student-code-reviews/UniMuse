@@ -214,7 +214,6 @@ def delete_playlist():
     """Delete playlist from the database."""
 
     playlist_id = int(request.args.get('playlist'))
-    print(playlist_id)
 
     songs = db.session.query(PlaylistSong.song_id).filter(PlaylistSong.playlist_id == playlist_id).all()
 
