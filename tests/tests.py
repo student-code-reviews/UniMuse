@@ -115,21 +115,21 @@ class TestMainSignUp(TestMixin, unittest.TestCase):
         self.wait
 
         alert = self.browser.find_element(By.CLASS_NAME, 'alert')
-        if alert.text == 'Sign-up Successful!':
+        if alert.text == 'Sign-up successful!':
             actual_url = self.browser.current_url
-            self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}')
+            self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/')
 
         else:
-            print(alert)
+            print(alert.text)
 
     def test_existing_user_create_btn(self):
         """Test sign-up page attempt to create account with existing user info."""
         self.browser.get(BROWSER_URL+'/sign-up-form')
 
         username = self.browser.find_element(By.NAME, 'um-new-username')
-        username.send_keys("frank")
+        username.send_keys("test_human")
         password = self.browser.find_element(By.NAME, 'um-new-password')
-        password.send_keys("frank")
+        password.send_keys("iamnothuman")
 
         self.browser.find_element(By.ID, 'submit-new-user').click()
         self.wait
@@ -139,7 +139,7 @@ class TestMainSignUp(TestMixin, unittest.TestCase):
             actual_url = self.browser.current_url
             self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/sign-up-form')
         else:
-            print(alert)
+            print(alert.text)
     
     
 class TestMainLogin(TestMixin, unittest.TestCase):
@@ -180,9 +180,9 @@ class TestMainLogin(TestMixin, unittest.TestCase):
         self.browser.get(BROWSER_URL+'/login-form')
 
         username = self.browser.find_element(By.NAME, 'um-username')
-        username.send_keys("frank")
+        username.send_keys("test_human")
         password = self.browser.find_element(By.NAME, 'um-password')
-        password.send_keys("frank")
+        password.send_keys("iamnothuman")
 
         self.browser.find_element(By.ID, 'login-submit-btn').click()
         self.wait
@@ -193,7 +193,7 @@ class TestMainLogin(TestMixin, unittest.TestCase):
             self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/subscriptions-login')
 
         else:
-            print(alert)
+            print(alert.text)
 
     def test_invalid_user_login_btn(self):
         """Test non-existing user login submission."""
@@ -212,16 +212,16 @@ class TestMainLogin(TestMixin, unittest.TestCase):
             actual_url = self.browser.current_url
             self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/login-form')
         else:
-            print(alert)
+            print(alert.text)
 
     def test_wrongpass_user_login_btn(self):
         """Test existing user wrong password login submission."""
         self.browser.get(BROWSER_URL+'/login-form')
 
         username = self.browser.find_element(By.NAME, 'um-username')
-        username.send_keys("frank")
+        username.send_keys("test_human")
         password = self.browser.find_element(By.NAME, 'um-password')
-        password.send_keys("notfrank")
+        password.send_keys("iamhuman")
 
         self.browser.find_element(By.ID, 'login-submit-btn').click()
         self.wait
@@ -231,7 +231,7 @@ class TestMainLogin(TestMixin, unittest.TestCase):
             actual_url = self.browser.current_url
             self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/login-form')
         else:
-            print(alert)
+            print(alert.text)
 
 
 class TestSubscriptionsLogin(TestMixin, unittest.TestCase):

@@ -210,24 +210,13 @@ def save_song():
     else:
         service = 'youtube'
     
-    # Duplicates of the song are okay
     song = Song(service_id=song_uri, song_name=song_name, song_img=song_img, service=service)
 
     db.session.add(song)
     db.session.commit()
-
-    order_ids = db.session.query(PlaylistSong.order_id).filter(PlaylistSong.playlist_id==playlist_no).all()
-    if order_ids:
-        order_nums = []
-        for num in order_ids:
-            order_nums.append(num[0])
-        new_order_id = max(order_nums) + 1
-    else:
-        new_order_id = 1
     
     playlist_song = PlaylistSong(playlist_id=playlist_no,
-                                 song_id=song.song_id,
-                                 order_id=new_order_id)
+                                 song_id=song.song_id)
 
     db.session.add(playlist_song)
     db.session.commit()

@@ -49,7 +49,6 @@ class PlaylistSong(db.Model):
     playlist_song_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     playlist_id = db.Column(db.Integer, db.ForeignKey('playlists.playlist_id'))
     song_id = db.Column(db.Integer, db.ForeignKey('songs.song_id'))
-    order_id = db.Column(db.Integer, nullable=False)
 
     playlist = db.relationship("Playlist", backref=db.backref("playlist_songs",
                                                               order_by=playlist_id))
