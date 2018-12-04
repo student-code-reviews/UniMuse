@@ -146,29 +146,31 @@ class SearchResultsAndPlaylists extends React.Component {
         { this.state.playlistPlayerClick ? 
           <PlaylistPlayer selectedPlaylist={selectedPlaylist}
                           revertPlaylistPlayerRender={this.revertPlaylistPlayerRender} /> :
+          
+          <div>
+            <div className="row">
+              <div className="col-sm-6">
+                <SearchForm getSearchAPIrequestData={this.getSearchAPIrequestData} />
+              </div>
 
-          <div className="row">
-
-            <div className="col-sm-6">
-              <SearchForm getSearchAPIrequestData={this.getSearchAPIrequestData} />
+              <div className="col-sm-6">
+                <PlaylistForm saveUserNewPlaylist={this.saveUserNewPlaylist} 
+                              deleteSelectedPlaylist={this.deleteSelectedPlaylist} 
+                              playlistPlayerRender={this.playlistPlayerRender} />
+              </div>
             </div>
 
-            <div className="col-sm-6">
-              <PlaylistForm saveUserNewPlaylist={this.saveUserNewPlaylist} 
-                            deleteSelectedPlaylist={this.deleteSelectedPlaylist} 
-                            playlistPlayerRender={this.playlistPlayerRender} />
-            </div>
+            <div className="row">
+              <div className="col-sm-6">
+                <SearchResults searchResDataAll={searchResDataAll} 
+                              saveSongToPlaylist={this.saveSongToPlaylist} />
+              </div>
 
-            <div className="col-sm-6">
-              <SearchResults searchResDataAll={searchResDataAll} 
-                             saveSongToPlaylist={this.saveSongToPlaylist} />
+              <div className="col-sm-6">
+                <PlaylistsSongList userPlaylists={userPlaylists} 
+                                  setSelectedPlaylist={this.setSelectedPlaylist} />
+              </div>
             </div>
-
-            <div className="col-sm-6">
-              <PlaylistsSongList userPlaylists={userPlaylists} 
-                                 setSelectedPlaylist={this.setSelectedPlaylist} />
-            </div>
-
           </div>
         }
         
