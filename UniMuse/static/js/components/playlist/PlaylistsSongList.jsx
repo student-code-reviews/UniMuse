@@ -4,15 +4,15 @@ class PlaylistsSongList extends React.Component {
     this.state = {};
 
     // Bindings
-    this.createPlaylistDataElements = this.createPlaylistDataElements.bind(this);
+    this.createPlaylistElements = this.createPlaylistElements.bind(this);
   }
 
-  createPlaylistDataElements (playlistsDataAll) {
+  createPlaylistElements (userPlaylists) {
     return (
-      playlistsDataAll
-      .map(function createPlaylistDataElements(playlist) {
+      userPlaylists
+      .map(function createPlaylistElements(playlist) {
         return (<PlaylistElement key={playlist.playlist_no} 
-                                 playlistData={playlist} 
+                                 playlist={playlist} 
                                  setSelectedPlaylist={this.props.setSelectedPlaylist} />);
       }.bind(this))
       .reverse()
@@ -20,8 +20,8 @@ class PlaylistsSongList extends React.Component {
   }
 
   render () {
-    let playlistsDataAll = this.props.playlistsDataAll;
-    let playlistDataElements = this.createPlaylistDataElements(playlistsDataAll);
+    let userPlaylists = this.props.userPlaylists;
+    let playlistElements = this.createPlaylistElements(userPlaylists);
 
     return (
       <div>
@@ -34,7 +34,7 @@ class PlaylistsSongList extends React.Component {
         </h3>
         <ul>
 
-          {playlistDataElements.length > 0 ? playlistDataElements : <NoPlaylistElement />}
+          {playlistElements.length > 0 ? playlistElements : <NoPlaylistElement />}
 
         </ul>
       </div>

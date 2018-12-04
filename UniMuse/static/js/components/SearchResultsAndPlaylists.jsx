@@ -9,7 +9,7 @@ class SearchResultsAndPlaylists extends React.Component {
 
     this.state = {
       searchResDataAll: [],
-      playlistsDataAll: [],
+      userPlaylists: [],
       selectedPlaylist: {},
       playlistPlayerClick: false
     };
@@ -18,8 +18,8 @@ class SearchResultsAndPlaylists extends React.Component {
     this.getSearchAPIrequestData = this.getSearchAPIrequestData.bind(this);
     this.saveUserNewPlaylist = this.saveUserNewPlaylist.bind(this);
 
-    this.addPlaylistsDataAll = this.addPlaylistsDataAll.bind(this);
-    this.removePlaylistData = this.removePlaylistData.bind(this);
+    this.addUserPlaylist = this.addUserPlaylist.bind(this);
+    this.removeUserPlaylist = this.removeUserPlaylist.bind(this);
     this.setSelectedPlaylist = this.setSelectedPlaylist.bind(this);
     this.deleteSelectedPlaylist = this.deleteSelectedPlaylist.bind(this);
 
@@ -35,22 +35,22 @@ class SearchResultsAndPlaylists extends React.Component {
         if (data === 'User does not have any playlists.') {
         } else {
           console.log(data.playlists)
-          this.setState( {playlistsDataAll: data.playlists} );
+          this.setState( {userPlaylists: data.playlists} );
         }
       })
-    .catch(err => this.setState({ playlistsDataAll: "Something went wrong with user's playlists."}));
+    .catch(err => this.setState({ userPlaylists: "Something went wrong with user's playlists."}));
   }
   
-  addPlaylistsDataAll (playlistData) {
-    let newPlaylistsDataAll = this.state.playlistsDataAll;
-    newPlaylistsDataAll.push(playlistData);
-    this.setState( {playlistsDataAll: newPlaylistsDataAll} );
+  addUserPlaylist (playlist) {
+    let updatedUserPlaylists = this.state.userPlaylists;
+    updatedUserPlaylists.push(playlist);
+    this.setState( {userPlaylists: updatedUserPlaylists} );
   }
 
-  removePlaylistData (playlistToDelete) {
-    let playlistDataAll = this.state.playlistsDataAll;
-    let newPlaylistsDataAll =  playlistDataAll.filter(playlist => playlist.playlist_no !== playlistToDelete);
-    this.setState( {playlistsDataAll: newPlaylistsDataAll} );
+  removeUserPlaylist (playlistToDelete) {
+    let userPlaylists = this.state.userPlaylists;
+    let updatedUserPlaylists =  userPlaylists.filter(playlist => playlist.playlist_no !== playlistToDelete);
+    this.setState( {userPlaylists: updatedUserPlaylists} );
   }
 
   getSearchAPIrequestData (userQuery) {
@@ -72,7 +72,7 @@ class SearchResultsAndPlaylists extends React.Component {
           alert(`'${userNewPlaylist}' already exists!`)
         } else {
           alert(`Successfully created playlist '${userNewPlaylist}'!`);
-          this.addPlaylistsDataAll(response);
+          this.addUserPlaylist(response);
         }
       })
       .catch(err => this.setState({ playlistsAll: "Something went wrong with saving new playlist."}));
@@ -94,7 +94,7 @@ class SearchResultsAndPlaylists extends React.Component {
       fetch(`/delete-playlist?playlist=${playlistToDelete}`)
       .then(res => res.json())
       .then(response => {
-        this.removePlaylistData(playlistToDelete);
+        this.removeUserPlaylist(playlistToDelete);
         this.setState({ selectedPlaylist: {} }, () => {
           console.log(this.state.selectedPlaylist);
         });
@@ -146,7 +146,7 @@ class SearchResultsAndPlaylists extends React.Component {
   render() {
     let searchResDataAll = this.state.searchResDataAll;
     let saveUserNewPlaylist = this.state.saveUserNewPlaylist;
-    let playlistsDataAll = this.state.playlistsDataAll;
+    let userPlaylists = this.state.userPlaylists;
     let selectedPlaylist = this.state.selectedPlaylist;
 
     return (
@@ -176,8 +176,8 @@ class SearchResultsAndPlaylists extends React.Component {
             </div>
             <div className="col-sm-6">
               
-              <PlaylistsSongList playlistsDataAll={playlistsDataAll} 
-                                setSelectedPlaylist={this.setSelectedPlaylist} />
+              <PlaylistsSongList userPlaylists={userPlaylists} 
+                                 setSelectedPlaylist={this.setSelectedPlaylist} />
 
             </div>
           </div>

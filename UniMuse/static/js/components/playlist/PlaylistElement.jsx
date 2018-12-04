@@ -9,18 +9,18 @@ class PlaylistElement extends React.Component {
 
     handlePlaylistSelectEvent (evt) {
       evt.preventDefault();
-      let currentSelectedPlaylist = this.props.playlistData;
+      let currentSelectedPlaylist = this.props.playlist;
       this.props.setSelectedPlaylist(currentSelectedPlaylist);
     }
   
     render () {
-      let playlistData = this.props.playlistData;
+      let playlist = this.props.playlist;
   
       return (
         <div className="panel panel-primary">
           <div className="panel-footer">
             <form className="form-inline" onSubmit={this.handlePlaylistSelectEvent}>
-              <button type="submit" className="btn btn-default btn-xs">{playlistData.playlist_name}</button>
+              <button type="submit" className="btn btn-default btn-xs">{playlist.playlist_name}</button>
             </form>
             <p />
           </div>
