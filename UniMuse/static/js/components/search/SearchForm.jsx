@@ -1,6 +1,5 @@
-let styleRequired = {
-  color: "#ffaaaa"
-};
+let styleRequired = {color: "#ffaaaa"};
+
 
 class SearchForm extends React.Component {
   constructor(props) {
@@ -14,7 +13,6 @@ class SearchForm extends React.Component {
     evt.preventDefault();
 
     let userQuery = this.refs.userquery.value;
-    // console.log(userQuery);
     this.props.getSearchAPIrequestData(userQuery);
   }
 
@@ -22,6 +20,7 @@ class SearchForm extends React.Component {
 
     return (
       <form onSubmit={this.handleSearchSubmitEvent}>
+
         <h3 className="page-header"><strong>Search for a Song!</strong></h3>
 
         <div className="form-group">
@@ -40,6 +39,7 @@ class SearchForm extends React.Component {
         </div>
 
         <hr />
+        
       </form>
     );
   }

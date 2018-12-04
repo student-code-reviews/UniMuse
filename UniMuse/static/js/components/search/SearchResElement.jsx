@@ -3,30 +3,31 @@ class SearchResElement extends React.Component {
     super(props);
     this.state = {};
 
-    // Bindings
     this.handleAddSongSubmitEvent = this.handleAddSongSubmitEvent.bind(this);
   }
 
   handleAddSongSubmitEvent (evt) {
     evt.preventDefault();
 
-    let songData = this.props.songData;
-    this.props.saveSongToPlaylist(songData);
+    let song = this.props.song;
+    this.props.saveSongToPlaylist(song);
   }
 
   render () {
-    let songData = this.props.songData;
+    let song = this.props.song;
 
     return (
       <div className="panel panel-primary">
 
         <p className="panel-body">
-          <img src={songData.albumImgURLsm}></img>
-          {songData.songTitle}
+          <img src={song.albumImgURLsm}></img>
+          {song.songTitle}
         </p>
 
         <form className="form-inline" onSubmit={this.handleAddSongSubmitEvent}>
-            <button type="submit" className="btn btn-default btn-xs"><i className="fa fa-spotify"></i>Add to playlist</button>
+            <button type="submit" className="btn btn-default btn-xs">
+              <i className="fa fa-spotify"></i>Add to playlist
+            </button>
         </form>
         
       </div>

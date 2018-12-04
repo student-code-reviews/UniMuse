@@ -3,7 +3,6 @@ class PlaylistsSongList extends React.Component {
     super(props);
     this.state = {};
 
-    // Bindings
     this.createPlaylistElements = this.createPlaylistElements.bind(this);
   }
 
@@ -25,18 +24,17 @@ class PlaylistsSongList extends React.Component {
 
     return (
       <div>
-        <h3 className="page-header">
 
+        <h3 className="page-header">
           <div>
               Playlists
           </div>
-
         </h3>
+
         <ul>
-
           {playlistElements.length > 0 ? playlistElements : <NoPlaylistElement />}
-
         </ul>
+        
       </div>
     );
   }

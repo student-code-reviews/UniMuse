@@ -8,7 +8,6 @@ class PlaylistForm extends React.Component {
 		super(props);
     this.state = {};
     
-    // Bindings
     this.handleCreatePlaylistSubmitEvent = this.handleCreatePlaylistSubmitEvent.bind(this);
     this.handleDeletePlaylistSubmitEvent = this.handleDeletePlaylistSubmitEvent.bind(this);
     this.gotoPlaylistButtonClick = this.gotoPlaylistButtonClick.bind(this);
@@ -16,13 +15,14 @@ class PlaylistForm extends React.Component {
   
   handleCreatePlaylistSubmitEvent (evt) {
     evt.preventDefault();
+
     let userNewPlaylist = this.refs.newPlaylistName.value;
-    console.log(userNewPlaylist)
     this.props.saveUserNewPlaylist(userNewPlaylist);
   }
 
   handleDeletePlaylistSubmitEvent (evt) {
     evt.preventDefault();
+
     this.props.deleteSelectedPlaylist();
   }
 
@@ -37,9 +37,8 @@ class PlaylistForm extends React.Component {
 
         <h3 className="page-header"><strong>Playlists</strong></h3>
 
-        {/* Create New Playlist */}
         <button id="newPlaylistBtn" type="button" className="btn btn-primary" data-toggle="collapse" 
-                data-target="#createplaylistform"><i className="fa fa-plus"></i></button>
+          data-target="#createplaylistform"><i className="fa fa-plus"></i></button>
 
         <div id="createplaylistform" className="collapse">
 
@@ -55,13 +54,15 @@ class PlaylistForm extends React.Component {
 
         </div>
 
-        {/* Delete Selected Playlist */}
         <form onSubmit={this.handleDeletePlaylistSubmitEvent}>
-          <button id="deletePlaylistBtn" type="submit" className="btn btn-primary"><i className="fa fa-minus"></i></button>
+          <button id="deletePlaylistBtn" type="submit" className="btn btn-primary">
+            <i className="fa fa-minus"></i>
+          </button>
         </form>
         
-        {/* Go to Selected Playlist */}
-        <button id="gotoPlaylistBtn" type="button" className="btn btn-primary" onClick={this.gotoPlaylistButtonClick}><i className="fa fa-play"></i></button>
+        <button id="gotoPlaylistBtn" type="button" className="btn btn-primary" 
+          onClick={this.gotoPlaylistButtonClick}><i className="fa fa-play"></i>
+        </button>
 
         <p />
         <hr />

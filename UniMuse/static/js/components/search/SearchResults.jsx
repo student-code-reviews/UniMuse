@@ -5,7 +5,6 @@ class SearchResults extends React.Component {
         source: 'spotify'
       };
 
-      // Bindings
       this.spotifySearchResultsBtnClick = this.spotifySearchResultsBtnClick.bind(this);
       this.youtubeSearchResultsBtnClick = this.youtubeSearchResultsBtnClick.bind(this);
       this.mixcloudSearchResultsBtnClick = this.mixcloudSearchResultsBtnClick.bind(this);
@@ -21,17 +20,17 @@ class SearchResults extends React.Component {
       searchResDataSource = searchResDataAll.youtube;
     } else {
       searchResDataSource = searchResDataAll.mixcloud;
-    }
+    };
     
     if (!searchResDataSource) {
       searchResDataSource = [];
-    }
+    };
 
     return (
       searchResDataSource
-      .map(function createSearchResDataElements(songData) {
-        return (<SearchResElement key={songData.songURI}
-                                  songData={songData} 
+      .map(function createSearchResDataElements(song) {
+        return (<SearchResElement key={song.songURI}
+                                  song={song} 
                                   saveSongToPlaylist={this.props.saveSongToPlaylist} />);
       }.bind(this))
     );
@@ -46,15 +45,16 @@ class SearchResults extends React.Component {
   }
 
   mixcloudSearchResultsBtnClick () {
-    this.setState({ source: 'mixcloud' })
+    this.setState({ source: 'mixcloud' });
   }
 
   render () {
-    let searchResDataAll = this.props.searchResDataAll
+    let searchResDataAll = this.props.searchResDataAll;
     let searchResDataElements = this.createSearchResDataElements(searchResDataAll);
     
     return (
       <div>
+
         <h3 className="page-header">
           <div>
               Search Results
@@ -77,10 +77,9 @@ class SearchResults extends React.Component {
         </button>
 
         <ul>
-
           {searchResDataElements.length > 0 ? searchResDataElements : <NoSearchResElement />}
-
         </ul>
+        
       </div>
     );
   }
