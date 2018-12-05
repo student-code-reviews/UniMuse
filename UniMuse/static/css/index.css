@@ -1,3 +1,7 @@
+body {
+  background: #484848;
+}
+
 .navbar-default {
   background: #333333;
 }
@@ -25,4 +29,37 @@
 
 .index-buttons {
   text-align: center;
+  padding-top: 2em;
+  padding-bottom: 10em;
+}
+
+.index-about {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  background-color: #989898;
+  border: solid 1px #989898;
+  border-radius: 25px;
+  text-align: center;
+}
+
+.about-header {
+  font-family: 'Permanent Marker';
+  text-align: center;
+}
+
+.index-available-subs-header {
+  text-align: center;
+  padding-top: 20em;
+  padding-bottom: 5em;
+}
+
+.index-available-subs {
+  text-align: center;
+  padding-bottom: 5em;
+}
+
+.available-subs-header {
+  font-family: 'Permanent Marker';
+  text-align: center;
+  /* padding-bottom: 3em; */
 }

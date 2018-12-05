@@ -1,14 +1,12 @@
 html, body {
-    background: #333333;
-    /* OR #5E6264 */
     height: 100%;
     /* overflow: hidden; */
     font-family: 'Roboto Condensed';
 }
 
-
 .btn {
-    padding: 14px 24px;
+    padding: 10px 20px;
+    width: 200px;
     border: 0 none;
     font-weight: 700;
     letter-spacing: 1px;
