@@ -1,13 +1,8 @@
-.navbar-default {
-  background: #333333;
-}
-
 .ml12 {
   font-weight: 200;
   font-size: 5em;
   font-family: 'Permanent Marker';
   color: #ffaaaa;
-  /* text-transform: uppercase; */
   letter-spacing: 0.5em;
   text-align: center;
 }
@@ -57,5 +52,4 @@
 .available-subs-header {
   font-family: 'Permanent Marker';
   text-align: center;
-  /* padding-bottom: 3em; */
 }
