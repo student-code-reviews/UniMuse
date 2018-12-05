@@ -1,6 +1,7 @@
 html, body {
     height: 100%;
     font-family: 'Roboto Condensed';
+    background: #484848;
 }
 
 .btn {
@@ -11,27 +12,28 @@ html, body {
     letter-spacing: 1px;
     text-transform: uppercase;
 }
+
 .btn:focus, .btn:active:focus, .btn.active:focus {
     outline: 0 none;
 }
 
 .btn-primary {
-    background: #0099cc;
-    color: #ffffff;
+    background: white;
+    color: #333333;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
-    background: #33a6cc;
+    background: #ffaaaa;
 }
 .btn-primary:active, .btn-primary.active {
-    background: #007299;
+    background: salmon;
     box-shadow: none;
 }
 
 .btn-primary.raised {
-    box-shadow: 0 3px 0 0 #007299;
+    box-shadow: 0 3px 0 0 #989898;
 }
 .btn-primary.raised:active, .btn-primary.raised.active {
-    background: #33a6cc;
+    background: #ffaaaa;
     box-shadow: none;
     margin-bottom: -3px;
     margin-top: 3px;
