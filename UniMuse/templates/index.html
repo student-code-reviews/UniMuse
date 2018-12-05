@@ -4,25 +4,41 @@
 
 {% block content %}
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="navbar-nav ml-auto" id="navbarNavDropdown">
-        <a class="nav-link" href="https://github.com/yspark90/UniMuse">GitHub</a>
+  <div class="container">
+
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="navbar-nav ml-auto" id="navbarNavDropdown">
+          <a class="nav-link" href="https://github.com/yspark90/UniMuse">GitHub</a>
+      </div>
+    </nav>
+
+    <div class="index-header row">
+      <div class="col-12">
+        <h1 class="ml12">
+          <span class="text-wrapper">
+            <span class="letters">UniMuse</span>
+          </span>
+        </h1>
+      </div>
     </div>
-  </nav>
 
-  <h1 class="ml12">
-    <span class="text-wrapper">
-      <span class="letters">UniMuse</span>
-    </span>
-  </h1>
-  
-  <div>
+    <div class="index-buttons row">
+      <div class="col-12">
+        <button class="btn btn-primary btn-lg raised" id="main-signup-button" onclick="location.href = '/sign-up-form'">
+          New User </button>
 
-    <button class="btn btn-primary" id="main-signup-button" onclick="location.href = '/sign-up-form'">
-      New User </button>
+        <button class="btn btn-primary btn-lg raised" id="main-login-button" onclick="location.href = '/login-form'">
+          Login</button>
+      </div>
+    </div>
 
-    <button class="btn btn-primary" id="main-login-button" onclick="location.href = '/login-form'">
-      Login</button>
+    <div class="index-about">
+      Placeholder
+    </div>
+    
+    <div class="index-available-subs">
+      Placeholder
+    </div>
 
   </div>
 

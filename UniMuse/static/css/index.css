@@ -1,3 +1,7 @@
+.navbar-default {
+  background: #333333;
+}
+
 .ml12 {
   font-weight: 200;
   font-size: 5em;
@@ -11,4 +15,14 @@
 .ml12 .letter {
   display: inline-block;
   line-height: 1em;
+}
+
+.index-header {
+  text-align: center;
+  padding-top: 10em;
+  padding-bottom: 10em;
+}
+
+.index-buttons {
+  text-align: center;
 }
