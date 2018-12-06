@@ -21,7 +21,7 @@ class PlaylistForm extends React.Component {
   }
 
   handleDeletePlaylistSubmitEvent (evt) {
-    evt.preventDefault();
+    // evt.preventDefault();
 
     this.props.deleteSelectedPlaylist();
   }
@@ -42,8 +42,16 @@ class PlaylistForm extends React.Component {
         <button id="newPlaylistBtn" type="button" className="btn btn-primary" data-toggle="collapse" 
           data-target="#createplaylistform"><i className="fa fa-plus"></i></button>
 
-        <div id="createplaylistform" className="collapse">
+        <button id="deletePlaylistBtn" type="submit" className="btn btn-primary" 
+          onClick={this.handleDeletePlaylistSubmitEvent}>
+          <i className="fa fa-minus"></i>
+        </button>
+        
+        <button id="gotoPlaylistBtn" type="button" className="btn btn-primary" 
+          onClick={this.gotoPlaylistButtonClick}><i className="fa fa-play"></i>
+        </button>
 
+        <div id="createplaylistform" className="collapse">
           <form onSubmit={this.handleCreatePlaylistSubmitEvent}>
             <input type="text" className="form-control" placeholder="Enter new playlist name" 
                   required ref="newPlaylistName" />
@@ -53,20 +61,8 @@ class PlaylistForm extends React.Component {
             <button type="reset" className="btn btn-link btn-xs" data-toggle="collapse" 
                 data-target="#createplaylistform">Cancel</button>
           </form>
-
         </div>
 
-        <form onSubmit={this.handleDeletePlaylistSubmitEvent}>
-          <button id="deletePlaylistBtn" type="submit" className="btn btn-primary">
-            <i className="fa fa-minus"></i>
-          </button>
-        </form>
-        
-        <button id="gotoPlaylistBtn" type="button" className="btn btn-primary" 
-          onClick={this.gotoPlaylistButtonClick}><i className="fa fa-play"></i>
-        </button>
-
-        <p />
         <hr />
 
         <div className="form-group">
