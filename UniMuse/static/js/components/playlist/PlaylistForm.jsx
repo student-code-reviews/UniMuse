@@ -63,10 +63,13 @@ class PlaylistForm extends React.Component {
           <form onSubmit={this.handleCreatePlaylistSubmitEvent}>
             <input type="text" className="form-control" placeholder="Enter new playlist name" 
                   required ref="newPlaylistName" />
+
             <p />
-            <button type="submit" className="btn btn-default btn-xs" data-toggle="collapse" 
-                data-target="#createplaylistform">Create</button>
-            <button type="reset" className="btn btn-link btn-xs" data-toggle="collapse" 
+
+            <button type="submit" className="playlist-create-btn btn btn-primary raised" 
+            data-toggle="collapse" data-target="#createplaylistform">Create</button>
+
+            <button type="reset" className="playlist-create-reset-btn btn btn-link" data-toggle="collapse" 
                 data-target="#createplaylistform">Cancel</button>
           </form>
         </div>

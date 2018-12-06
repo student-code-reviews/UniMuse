@@ -12,7 +12,7 @@
   text-align: left;
 }
 
-.search-form-reset-btn {
+.search-form-reset-btn, .playlist-create-reset-btn {
   color: #ffaaaa;
 }
 
