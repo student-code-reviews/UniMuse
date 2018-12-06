@@ -3,24 +3,32 @@
 {% block title %}Sign-Up!{% endblock %}
 
 {% block content %}
+  <div type="container">
 
-  <h2 id="signup-header">Sign-Up for UniMuse</h2>
-    
-  <form id="sign-up-form" action="/sign-up-verification" method="post">
+    <div class="signup-header row">
+      <div class="col-12">
+        <h2 id="signup-header">Sign-Up for UniMuse</h2>
+      </div>
+    </div>
 
-    <label id="sign-up-username-label">
-      Username: <input type="text" name="um-new-username" required>
-    </label><br>
-    
-    <label id="sign-up-pw-label">
-      Password: <input type="password" name="um-new-password" required>
-    </label><br>
-    <button type="submit" class="btn btn-primary btn-lg raised" 
-      id="submit-new-user">Sign-Up!</button>
+    <div class="signup-form row">
+      <div class="col-12">
+        <form id="sign-up-form" action="/sign-up-verification" method="post">
+          <label id="sign-up-username-label">
+            Username: <input type="text" name="um-new-username" required>
+          </label><br>
+          
+          <label id="sign-up-pw-label">
+            Password: <input type="password" name="um-new-password" required>
+          </label><br>
+          <button type="submit" class="btn btn-primary btn-lg raised" 
+            id="submit-new-user">Sign-Up!</button>
 
-    <button class="btn btn-primary btn-lg raised" id="signup-to-main-btn" 
-      onclick="location.href = '/'">Go Back</button>
+          <button class="btn btn-primary btn-lg raised" id="signup-to-main-btn" 
+            onclick="location.href = '/'">Go Back</button>
+        </form>
+      </div>
+    </div>
 
-  </form>
-
+  </div>
 {% endblock %}
