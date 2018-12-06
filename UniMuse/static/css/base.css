@@ -2,6 +2,7 @@ html, body {
     height: 100%;
     font-family: 'Roboto Condensed';
     background: #484848;
+    /* background: linear-gradient(to top left, #202020 10%, #484848 65%, #fff7f7 200%); */
 }
 
 h1, h2, h3, h4 {
@@ -9,6 +10,12 @@ h1, h2, h3, h4 {
     font-weight: 200;
     font-family: 'Permanent Marker';
     color: #ffaaaa;
+}
+
+.alert {
+    color: black;
+    background-color: #ffaaaa;
+    border-color: #ffaaaa;
 }
 
 .row {

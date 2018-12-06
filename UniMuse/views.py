@@ -35,8 +35,8 @@ def sign_up_form():
 def sign_up_success():
     """UniMuse sign-up verification."""
 
-    username = request.form.get("um-new-username")
-    password = request.form.get("um-new-password")
+    username = request.form.get("new-username")
+    password = request.form.get("new-password")
 
     user = db.session.query(User).filter(User.username==username).first()
 
