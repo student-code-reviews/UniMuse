@@ -148,7 +148,7 @@ class SearchResultsAndPlaylists extends React.Component {
                           revertPlaylistPlayerRender={this.revertPlaylistPlayerRender} /> :
           
           <div>
-            <div className="row">
+            <div className="search-playlist-form-row row">
               <div className="col-sm-6">
                 <SearchForm getSearchAPIrequestData={this.getSearchAPIrequestData} />
               </div>
@@ -160,7 +160,7 @@ class SearchResultsAndPlaylists extends React.Component {
               </div>
             </div>
 
-            <div className="row">
+            <div className="searchresults-playlists-row row">
               <div className="col-sm-6">
                 <SearchResults searchResDataAll={searchResDataAll} 
                               saveSongToPlaylist={this.saveSongToPlaylist} />
