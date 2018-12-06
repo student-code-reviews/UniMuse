@@ -68,7 +68,7 @@ class SearchResults extends React.Component {
 
         <button id="youtubeSearchResultsBtn" type="button" className="btn btn-primary" 
           onClick={this.youtubeSearchResultsBtnClick}>
-          <i className="fa fa-youtube"></i>&nbsp;YouTube Results
+          <i className="fa fa-youtube-play"></i>&nbsp;YouTube Results
         </button>
 
         <button id="mixcloudSearchResultsBtn" type="button" className="btn btn-primary" 

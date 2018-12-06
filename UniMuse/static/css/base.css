@@ -56,3 +56,15 @@ h1, h2, h3, h4 {
     margin-bottom: -3px;
     margin-top: 3px;
 }
+
+.fa-spotify {
+    color: #1DB954;
+}
+
+.fa-youtube-play {
+    color: #FF0000;
+}
+
+.fa-mixcloud {
+    color: #52aad8;
+}
