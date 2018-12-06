@@ -5,13 +5,13 @@
 {% block content %}
   <div type="container">
 
-    <div class="signup-header row">
+    <div class="signup-header-row row">
       <div class="col-12">
         <h2 id="signup-header">Sign-Up for UniMuse</h2>
       </div>
     </div>
 
-    <div class="signup-form row">
+    <div class="signup-form-row row">
       <div class="col-12">
         <form id="sign-up-form" action="/sign-up-verification" method="post">
           <label for="new-username" id="signup-username-label">
@@ -29,9 +29,10 @@
           <button type="submit" class="btn btn-primary btn-lg raised" 
             id="submit-new-user">Sign-Up!</button>
 
-          <button class="btn btn-primary btn-lg raised" id="signup-to-main-btn" 
-            onclick="location.href = '/'">Go Back</button>
         </form>
+
+        <button class="btn btn-primary btn-lg raised" id="signup-to-main-btn" 
+          onclick="location.href = '/'">Go Back</button>
       </div>
     </div>
 
