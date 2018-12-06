@@ -4,6 +4,12 @@ html, body {
     background: #484848;
 }
 
+h1, h2, h3, h4 {
+    font-weight: 200;
+    font-family: 'Permanent Marker';
+    color: #ffaaaa;
+}
+
 .btn {
     padding: 10px 20px;
     width: 200px;
