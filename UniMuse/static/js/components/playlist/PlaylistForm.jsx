@@ -45,7 +45,6 @@ class PlaylistForm extends React.Component {
         <div id="createplaylistform" className="collapse">
 
           <form onSubmit={this.handleCreatePlaylistSubmitEvent}>
-            <label htmlFor="createPlaylistBoxLabel">New Playlist Name</label>
             <input type="text" className="form-control" placeholder="Enter new playlist name" 
                   required ref="newPlaylistName" />
             <p />
