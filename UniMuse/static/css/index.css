@@ -1,10 +1,6 @@
 .ml12 {
-  font-weight: 200;
   font-size: 5em;
-  font-family: 'Permanent Marker';
-  color: #ffaaaa;
   letter-spacing: 0.5em;
-  text-align: center;
 }
 
 .ml12 .letter {
@@ -12,46 +8,33 @@
   line-height: 1em;
 }
 
-.index-header {
-  text-align: center;
+.index-header-row {
   padding-top: 10em;
   padding-bottom: 10em;
 }
 
-.index-buttons {
-  text-align: center;
+.index-buttons-row {
   padding-top: 2em;
   padding-bottom: 10em;
 }
 
-.index-about {
+.index-about-row {
   padding-top: 1em;
   padding-bottom: 1em;
   background-color: #989898;
   border: solid 1px #989898;
   border-radius: 25px;
-  text-align: center;
 }
 
-.about-header {
+.about-header, .available-subs-header {
   color: black;
-  font-family: 'Permanent Marker';
-  text-align: center;
 }
 
-.index-available-subs-header {
-  text-align: center;
+.index-available-subs-header-row {
   padding-top: 20em;
   padding-bottom: 5em;
 }
 
-.index-available-subs {
-  text-align: center;
+.index-available-subs-row {
   padding-bottom: 5em;
-}
-
-.available-subs-header {
-  color: black;
-  font-family: 'Permanent Marker';
-  text-align: center;
 }

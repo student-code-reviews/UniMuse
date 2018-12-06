@@ -5,9 +5,14 @@ html, body {
 }
 
 h1, h2, h3, h4 {
+    text-align: center;
     font-weight: 200;
     font-family: 'Permanent Marker';
     color: #ffaaaa;
+}
+
+.row {
+    text-align: center;
 }
 
 .btn {
