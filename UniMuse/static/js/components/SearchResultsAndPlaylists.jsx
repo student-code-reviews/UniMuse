@@ -162,11 +162,13 @@ class SearchResultsAndPlaylists extends React.Component {
 
             <div className="searchresults-playlists-row row">
               <div className="col-sm-6">
+                <hr />
                 <SearchResults searchResDataAll={searchResDataAll} 
                               saveSongToPlaylist={this.saveSongToPlaylist} />
               </div>
 
               <div className="col-sm-6">
+                <hr />
                 <PlaylistsSongList userPlaylists={userPlaylists} 
                                   setSelectedPlaylist={this.setSelectedPlaylist} />
               </div>

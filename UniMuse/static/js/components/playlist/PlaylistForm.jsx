@@ -63,8 +63,6 @@ class PlaylistForm extends React.Component {
           </form>
         </div>
 
-        <hr />
-
         <div className="form-group">
           <div className="row">
             <div className="col-xs-5 col-sm-6 col-md-4">

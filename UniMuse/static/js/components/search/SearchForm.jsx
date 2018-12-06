@@ -42,8 +42,6 @@ class SearchForm extends React.Component {
             </div>
           </div>
         </div>
-
-        <hr />
         
       </form>
     );
