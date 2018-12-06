@@ -5,19 +5,35 @@
     padding-bottom: 0.25em;
   }
   
-  .services-form-row {
-    color: #ffaaaa;
-  }
-  
-  #services-submit-button, #services-to-main-button {
-    width: 150px;
-  }
-  
-  #padding {
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-  }
+.services-form-row {
+  color: #ffaaaa;
+}
 
-  .not-nec.btn-primary:hover, .not-nec.btn-primary:focus, .not-nec.btn-primary:active, .not-nec.btn-primary.active, .open > .dropdown-toggle.not-nec.btn-primary {
-    background: #A0A0A0;
+#services-submit-button, #services-to-main-button {
+  width: 150px;
+}
+
+#padding {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.not-nec.btn-primary:hover, .not-nec.btn-primary:focus, .not-nec.btn-primary:active, .not-nec.btn-primary.active, .open > .dropdown-toggle.not-nec.btn-primary {
+  background: #A0A0A0;
+}
+
+#note-marker {
+  color: #ffaaaa;
+}
+
+.fa-spotify {
+  color: #1DB954;
+}
+
+.fa-youtube-play {
+  color: #FF0000;
+}
+
+.fa-mixcloud {
+  color: #52aad8;
 }
