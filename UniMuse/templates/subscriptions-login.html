@@ -4,38 +4,40 @@
 
 {% block content %}
 
-  <h2 id="subscriptions-header">Subscriptions Log-In</h2>
+  <div type="container">
 
-  <p></p>
+    <div class="subscriptions-header-row row">
+      <div class="col-12">
+          <h2 id="subscriptions-header">Subscriptions Log-In</h2>
+      </div>
+    </div>
 
-  <div id="subscription-login-btns">
-    
-    <button class="btn btn-primary" id="spotify-login-button" onclick="location.href = '{{ spotify_auth_url }}'">
-      <i class="fa fa-spotify"></i>&nbsp;Spotify Login</button>
-    
-    <p></p>
-
-    <button type="button" class="btn btn-primary" id="youtube-login-button">
-      <i class="fa fa-youtube"></i>&nbsp;YouTube</button>
-    
-    <p></p>
-
-    <button type="button" class="btn btn-primary" id="mixcloud-login-button">
-      <i class="fa fa-mixcloud"></i>&nbsp;Mixcloud</button>
-    
-    <p></p>
-
-    <button type="button" class="btn btn-primary" id="soundcloud-login-button">
-      <i class="fa fa-soundcloud"></i>&nbsp;<i>Soundcloud</i></button>
-
-  </div>
-
-  <hr />
+    <div class="subscriptions-buttons-row row">
+      <div class="col-12">
+        <button class="btn btn-primary btn-lg raised" id="spotify-login-button" 
+          onclick="location.href = '{{ spotify_auth_url }}'">
+          <i class="fa fa-spotify"></i>&nbsp;Spotify</button>
         
-  <button class="btn btn-primary" id="subscriptions-to-main-btn" onclick="location.href = '/'">
-    Go Back</button>
+        <p id="padding">
 
-  <button class="btn btn-primary" id="finished-logins-button" onclick="location.href = '/searchlist-playlist'">
-    Finish </button>
+        <button type="button" class="btn btn-primary" id="youtube-login-button">
+          <i class="fa fa-youtube"></i>&nbsp;YouTube</button>
+        
+        <p id="padding">
+
+        <button type="button" class="btn btn-primary" id="mixcloud-login-button">
+          <i class="fa fa-mixcloud"></i>&nbsp;Mixcloud</button>
+      
+        <hr />
+        
+        <button class="btn btn-primary btn-lg raised" id="subscriptions-to-main-btn" 
+          onclick="location.href = '/'">Home</button>
+    
+        <button class="btn btn-primary btn-lg raised" id="finished-logins-button" 
+          onclick="location.href = '/searchlist-playlist'">Finish </button>
+      </div>
+    </div>
+    
+  </div>
 
 {% endblock %}
