@@ -23,8 +23,8 @@ class SearchForm extends React.Component {
 
         <h3 className="page-header"><strong>Search for a Song!</strong></h3>
 
-        <div className="form-group">
-          <label htmlFor="searchBoxLabel">Search <span style={styleRequired}>*</span></label>
+        <div className="search-form-box form-group">
+          <label id="search-form-label" htmlFor="searchBoxLabel">Search <span style={styleRequired}>*</span></label>
           <input type="text" className="form-control" placeholder="Enter song title" required ref="userquery" />
         </div>
 
