@@ -1,13 +1,23 @@
 /* SearchResultsAndPlaylists Overall */
 .search-playlist-form-row {
-    padding-top: 2em;
+  padding-top: 2em;
+}
+
+.search-form-header, .playlist-form-header {
+  padding-bottom: 0.5em;
 }
 
 /* Search Form */
 .search-form-box {
-    text-align: left;
-  }
-  
-  .search-form-reset-btn {
-    color: #ffaaaa;
-  }
+  text-align: left;
+}
+
+.search-form-reset-btn {
+  color: #ffaaaa;
+}
+
+/* Playlist Form */
+#createplaylistform {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}

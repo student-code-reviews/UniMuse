@@ -21,7 +21,9 @@ class SearchForm extends React.Component {
     return (
       <form onSubmit={this.handleSearchSubmitEvent}>
 
-        <h3 className="page-header"><strong>Search for a Song!</strong></h3>
+        <h3 className="search-form-header page-header">
+          <strong>Search for a Song!</strong>
+        </h3>
 
         <div className="search-form-box form-group">
           <label htmlFor="searchBoxLabel">

@@ -35,7 +35,9 @@ class PlaylistForm extends React.Component {
     return (
       <div>
 
-        <h3 className="page-header"><strong>Playlists</strong></h3>
+        <h3 className="playlist-form-header page-header">
+          <strong>Playlists</strong>
+        </h3>
 
         <button id="newPlaylistBtn" type="button" className="btn btn-primary" data-toggle="collapse" 
           data-target="#createplaylistform"><i className="fa fa-plus"></i></button>
@@ -47,7 +49,8 @@ class PlaylistForm extends React.Component {
             <input type="text" className="form-control" placeholder="Enter new playlist name" 
                   required ref="newPlaylistName" />
             <p />
-            <button type="submit" className="btn btn-default btn-xs">Create</button>
+            <button type="submit" className="btn btn-default btn-xs" data-toggle="collapse" 
+                data-target="#createplaylistform">Create</button>
             <button type="reset" className="btn btn-link btn-xs" data-toggle="collapse" 
                 data-target="#createplaylistform">Cancel</button>
           </form>
