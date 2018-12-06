@@ -1,0 +1,19 @@
+.login-header-row {
+  font-weight: 200;
+  font-size: 5em;
+  padding-top: 2em;
+  padding-bottom: 0.25em;
+}
+
+.login-form-row {
+  color: #ffaaaa;
+}
+
+#login-submit-button, #login-to-main-button {
+  width: 150px;
+}
+
+#padding {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
