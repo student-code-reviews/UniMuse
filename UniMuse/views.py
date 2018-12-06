@@ -68,8 +68,8 @@ def login_form():
 def login():
     """UniMuse log-in verification."""
 
-    username = request.form.get("um-username")
-    password = request.form.get("um-password")
+    username = request.form.get("username")
+    password = request.form.get("password")
 
     user = db.session.query(User).filter(User.username==username).first()
     
