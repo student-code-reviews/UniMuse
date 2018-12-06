@@ -14,13 +14,18 @@
     <div class="signup-form row">
       <div class="col-12">
         <form id="sign-up-form" action="/sign-up-verification" method="post">
-          <label id="sign-up-username-label">
-            Username: <input type="text" name="um-new-username" required>
-          </label><br>
+          <label for="new-username" id="signup-username-label">
+              Username: </label>
+          <input type="text" name="new-username" required>
           
-          <label id="sign-up-pw-label">
-            Password: <input type="password" name="um-new-password" required>
-          </label><br>
+          <br>
+          
+          <label for="new-password" id="signup-password-label">
+            Password: </label>
+          <input type="password" name="new-password" required>
+
+          <br>
+
           <button type="submit" class="btn btn-primary btn-lg raised" 
             id="submit-new-user">Sign-Up!</button>
 
