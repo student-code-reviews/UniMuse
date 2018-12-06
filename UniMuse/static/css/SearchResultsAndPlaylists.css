@@ -1,9 +1,14 @@
 /* SearchResultsAndPlaylists Overall */
+
+hr {
+  padding-bottom: 1em;
+}
+
 .search-playlist-form-row {
   padding-top: 2em;
 }
 
-.search-form-header, .playlist-form-header {
+.search-form-header, .playlist-form-header, .search-results-header {
   padding-bottom: 0.5em;
 }
 

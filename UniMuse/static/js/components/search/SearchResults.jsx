@@ -55,10 +55,8 @@ class SearchResults extends React.Component {
     return (
       <div>
 
-        <h3 className="page-header">
-          <div>
-              Search Results
-          </div>
+        <h3 className="search-results-header page-header">
+          Search Results
         </h3>
 
         <button id="spotifySearchResultsBtn" type="button" className="btn btn-primary" 
