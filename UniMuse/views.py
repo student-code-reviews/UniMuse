@@ -54,7 +54,7 @@ def sign_up_success():
                                     'username': username}
 
         flash("Sign-up successful!")
-        return redirect("/subscriptions-login")
+        return redirect("/services-login")
 
 
 @app.route('/login-form')
@@ -80,7 +80,7 @@ def login():
                                        'username': username}
 
             flash("You've successfully logged in!")
-            return redirect("/subscriptions-login")
+            return redirect("/services-login")
         else:
             flash("The password is incorrect.")
             return redirect("/login-form")
@@ -89,13 +89,13 @@ def login():
         return redirect("/login-form")
 
 
-@app.route('/subscriptions-login')
-def subscriptions_login():
-    """Subscriptions login splash page."""
+@app.route('/services-login')
+def services_login():
+    """Music services login splash page."""
 
     spotify_auth_url = spotify.auth_page()
 
-    return render_template("/subscriptions-login.html", 
+    return render_template("/services-login.html", 
                             spotify_auth_url=spotify_auth_url)
 
 
@@ -110,7 +110,7 @@ def spotify_callback():
     else:
         session['spotify_token'] = response_data["access_token"]
     
-    return redirect("/subscriptions-login")
+    return redirect("/services-login")
 
 
 @app.route("/searchlist-playlist")

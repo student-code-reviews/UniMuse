@@ -38,3 +38,11 @@
 .index-available-subs-row {
   padding-bottom: 5em;
 }
+
+#main-signup-btn-div {
+  text-align: right;
+}
+
+#main-login-btn-div {
+  text-align: left;
+}

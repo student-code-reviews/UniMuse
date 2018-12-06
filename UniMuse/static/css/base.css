@@ -36,7 +36,7 @@ h1, h2, h3, h4 {
 }
 
 .btn-primary {
-    background: white;
+    background: #D0D0D0;
     color: #333333;
 }
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
