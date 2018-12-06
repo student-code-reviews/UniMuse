@@ -49,8 +49,12 @@ def sign_up_success():
         db.session.add(new_user)
         db.session.commit()
 
+        user_id = new_user.user_id
+        session['logged_user'] = { 'user_id': user_id,
+                                    'username': username}
+
         flash("Sign-up successful!")
-        return redirect("/")
+        return redirect("/subscriptions-login")
 
 
 @app.route('/login-form')

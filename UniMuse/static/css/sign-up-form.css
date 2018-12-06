@@ -1,0 +1,19 @@
+.signup-header-row {
+  font-weight: 200;
+  font-size: 5em;
+  padding-top: 2em;
+  padding-bottom: 0.25em;
+}
+
+.signup-form-row {
+  color: #ffaaaa;
+}
+
+#submit-new-user-button, #signup-to-main-button {
+  width: 150px;
+}
+
+#padding {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
