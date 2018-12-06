@@ -39,15 +39,17 @@ class PlaylistForm extends React.Component {
           <strong>Playlists</strong>
         </h3>
 
-        <button id="newPlaylistBtn" type="button" className="btn btn-primary" data-toggle="collapse" 
-          data-target="#createplaylistform"><i className="fa fa-plus"></i></button>
+        <button id="newPlaylistBtn" type="button" className="btn btn-primary raised" 
+          data-toggle="collapse" data-target="#createplaylistform">
+          <i className="fa fa-plus"></i>
+        </button>
 
-        <button id="deletePlaylistBtn" type="submit" className="btn btn-primary" 
+        <button id="deletePlaylistBtn" type="submit" className="btn btn-primary raised" 
           onClick={this.handleDeletePlaylistSubmitEvent}>
           <i className="fa fa-minus"></i>
         </button>
         
-        <button id="gotoPlaylistBtn" type="button" className="btn btn-primary" 
+        <button id="gotoPlaylistBtn" type="button" className="btn btn-primary raised" 
           onClick={this.gotoPlaylistButtonClick}><i className="fa fa-play"></i>
         </button>
 
