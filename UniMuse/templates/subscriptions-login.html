@@ -22,14 +22,28 @@
         
         <p id="padding">
 
-        <button type="button" class="not-nec btn btn-primary" id="youtube-login-button">
-          <i class="fa fa-youtube"></i>&nbsp;YouTube</button>
+        <button type="button" class="not-nec btn btn-primary" id="youtube-login-button"
+          data-toggle="collapse" data-target="#nologin-necessary-msg">
+          <i class="fa fa-youtube"></i>
+          &nbsp;YouTube<span id="note-marker">*</span>
+        </button>
         
         <p id="padding">
 
-        <button type="button" class="not-nec btn btn-primary" id="mixcloud-login-button">
-          <i class="fa fa-mixcloud"></i>&nbsp;Mixcloud</button>
-      
+        <button type="button" class="not-nec btn btn-primary" id="mixcloud-login-button"
+          data-toggle="collapse" data-target="#nologin-necessary-msg">
+          <i class="fa fa-mixcloud"></i>
+          &nbsp;Mixcloud<span id="note-marker">*</span>
+        </button>
+          
+        <div id="nologin-necessary-msg" class="collapse">
+          <p id="padding">
+            
+          <p><span id="note-marker">*</span>
+            No need to log-in! YouTube and Mixcloud services are already included!
+          </p>
+        </div>
+
         <hr />
         
         <button class="btn btn-primary btn-lg raised" id="services-to-main-btn" 
