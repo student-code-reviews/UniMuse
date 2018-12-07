@@ -73,6 +73,7 @@ hr {
 
 /* Search Result Elements */
 .song-image {
+  float: left;
   width: 64px;
   height: 64px;
 }
@@ -80,9 +81,15 @@ hr {
 .search-result-element-title {
   text-align:left;
   color:#ffaaaa;
+  /* margin: 0 auto; */
 }
 
 .search-result-element-btn {
   width: 70px;
   text-align: center;
+}
+
+.search-result-element-row {
+  padding-top: 0.25em;
+  padding-bottom: 0.25em;
 }

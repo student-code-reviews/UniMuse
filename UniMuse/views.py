@@ -108,6 +108,7 @@ def spotify_callback():
     if 'spotify_token' in session:
         flash("You're already logged into Spotify!")
     else:
+        flash("Succesfully logged into Spotify!")
         session['spotify_token'] = response_data["access_token"]
     
     return redirect("/services-login")
