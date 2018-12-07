@@ -41,15 +41,17 @@ class PlaylistPlayer extends React.Component {
     return (
       <div>
 
-        <div className="row">
+        <div className="player-back-btn row">
           <div className="col-sm-6">
             <p />
-            <button id="backFromPlayerBtn" type="button" className="btn btn-primary" 
-                    onClick={this.goBackFromPlayer}>Go Back</button>
+            <button id="backFromPlayerBtn" className="btn btn-primary raised" 
+              type="button" onClick={this.goBackFromPlayer}>Go Back</button>
           </div>
 
           <div className="col-sm-6">
-            <h3 className="page-header"><strong>{playlistName}</strong></h3>
+            <h3 className="page-header">
+              <strong>Playlist: {playlistName}</strong>
+            </h3>
             <p />
             <hr />
           </div>

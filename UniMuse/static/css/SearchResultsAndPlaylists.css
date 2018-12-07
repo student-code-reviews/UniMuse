@@ -105,3 +105,10 @@ hr {
 .playlist-buttons:active, .playlist-buttons:focus {
   background-color: #ffaaaa;
 }
+
+/* Playlist Player */
+.player-back-btn {
+  padding-top: 2em;
+  text-align: left;
+}
+
