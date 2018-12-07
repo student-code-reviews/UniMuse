@@ -23,7 +23,7 @@ class SearchResElement extends React.Component {
           
           {song.songTitle}
 
-          <button type="submit" className="btn btn-default btn-xs raised"
+          <button type="submit" className="btn btn-primary raised"
             onClick={this.handleAddSongSubmitEvent}>
               <i className="fa fa-plus"></i>
           </button>
