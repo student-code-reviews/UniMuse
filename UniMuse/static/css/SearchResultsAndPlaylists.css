@@ -76,3 +76,12 @@ hr {
   width: 64px;
   height: 64px;
 }
+
+.search-result-element-title {
+  text-align:left;
+}
+
+.search-result-element-btn {
+  width: 70px;
+  text-align: center;
+}
