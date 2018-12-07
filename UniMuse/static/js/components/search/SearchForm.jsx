@@ -33,7 +33,8 @@ class SearchForm extends React.Component {
           required ref="userquery" />
         </div>
 
-        <button type="submit" className="search-form-btn btn btn-primary raised">Submit</button>
+        <button type="submit" className="search-form-btn btn btn-primary raised"
+          onClick={this.handleSearchSubmitEvent}>Submit</button>
         <button type="reset" className="search-form-reset-btn btn btn-link">Cancel</button>
 
         <div className="form-group">

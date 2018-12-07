@@ -61,3 +61,8 @@ hr {
 #mixcloudSearchResultsBtn:hover, #mixcloudSearchResultsBtn:focus, #mixcloudSearchResultsBtn:active, #mixcloudSearchResultsBtn.active, .open > .dropdown-toggle#mixcloudSearchResultsBtn {
   background: #52aad8;
 }
+
+.search-results {
+  padding-top: 2em;
+  text-align: left;
+}

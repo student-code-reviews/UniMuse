@@ -77,8 +77,8 @@ class SearchResults extends React.Component {
           type="button" onClick={this.mixcloudSearchResultsBtnClick}>
           <i className="fa fa-mixcloud"></i>
         </button>
-
-        <ul>
+      
+        <ul className="search-results">
           {searchResDataElements.length > 0 ? searchResDataElements : <NoSearchResElement />}
         </ul>
         
