@@ -39,3 +39,25 @@ hr {
   height: auto;
   display: inline-block;
 }
+
+/* Search Results */
+#spotifySearchResultsBtn, #youtubeSearchResultsBtn, #mixcloudSearchResultsBtn {
+  width: 100px;
+}
+
+.fa-spotify, .fa-youtube-play, .fa-mixcloud {
+  color: black;
+  
+}
+
+#spotifySearchResultsBtn:hover, #spotifySearchResultsBtn:focus, #spotifySearchResultsBtn:active, #spotifySearchResultsBtn.active, .open > .dropdown-toggle#spotifySearchResultsBtn {
+  background: #1DB954;
+}
+
+#youtubeSearchResultsBtn:hover, #youtubeSearchResultsBtn:focus, #youtubeSearchResultsBtn:active, #youtubeSearchResultsBtn.active, .open > .dropdown-toggle#youtubeSearchResultsBtn {
+  background: #FF0000;
+}
+
+#mixcloudSearchResultsBtn:hover, #mixcloudSearchResultsBtn:focus, #mixcloudSearchResultsBtn:active, #mixcloudSearchResultsBtn.active, .open > .dropdown-toggle#mixcloudSearchResultsBtn {
+  background: #52aad8;
+}

@@ -59,19 +59,23 @@ class SearchResults extends React.Component {
           Search Results
         </h3>
 
-        <button id="spotifySearchResultsBtn" type="button" className="btn btn-primary" 
-          onClick={this.spotifySearchResultsBtnClick}>
-          <i className="fa fa-spotify"></i>&nbsp;Spotify Results
+        <button id="spotifySearchResultsBtn" className="btn btn-primary raised" 
+          type="button" onClick={this.spotifySearchResultsBtnClick}>
+          <i className="fa fa-spotify"></i>
         </button>
 
-        <button id="youtubeSearchResultsBtn" type="button" className="btn btn-primary" 
-          onClick={this.youtubeSearchResultsBtnClick}>
-          <i className="fa fa-youtube-play"></i>&nbsp;YouTube Results
+        <div className="divider"></div>
+
+        <button id="youtubeSearchResultsBtn" className="btn btn-primary raised" 
+          type="button" onClick={this.youtubeSearchResultsBtnClick}>
+          <i className="fa fa-youtube-play"></i>
         </button>
 
-        <button id="mixcloudSearchResultsBtn" type="button" className="btn btn-primary" 
-          onClick={this.mixcloudSearchResultsBtnClick}>
-          <i className="fa fa-mixcloud"></i>&nbsp;Mixcloud Results
+        <div className="divider"></div>
+
+        <button id="mixcloudSearchResultsBtn" className="btn btn-primary raised" 
+          type="button" onClick={this.mixcloudSearchResultsBtnClick}>
+          <i className="fa fa-mixcloud"></i>
         </button>
 
         <ul>
