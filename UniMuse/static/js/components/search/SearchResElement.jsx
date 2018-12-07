@@ -24,7 +24,7 @@ class SearchResElement extends React.Component {
             <p className="panel-body">
               <img className="song-image" src={song.albumImgURLsm}></img>
             
-              {song.songTitle}
+              <span className="song-title">{song.songTitle}</span>
             </p>
           </div>
 
