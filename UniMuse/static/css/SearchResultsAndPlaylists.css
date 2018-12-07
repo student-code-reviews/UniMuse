@@ -112,3 +112,6 @@ hr {
   text-align: left;
 }
 
+.playlist-header {
+  padding-top: .25em;
+}

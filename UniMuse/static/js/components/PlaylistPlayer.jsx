@@ -49,20 +49,19 @@ class PlaylistPlayer extends React.Component {
           </div>
 
           <div className="col-sm-6">
-            <h3 className="page-header">
+            <h3 className="playlist-header page-header">
               <strong>Playlist: {playlistName}</strong>
             </h3>
-            <p />
-            <hr />
           </div>
         </div>
 
-        <div className="row">
+        <div className="player-songs-row row">
           <div className="col-sm-6">
             {songClicked ? <Player currentSong={currentSong} /> : null}
           </div>
 
           <div className="col-sm-6">
+            <hr />
             <Songs songs={songs} 
                   setSelectedSong={this.setSelectedSong} />
           </div>
