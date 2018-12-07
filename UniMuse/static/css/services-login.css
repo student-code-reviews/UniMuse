@@ -21,7 +21,3 @@
 .not-nec.btn-primary:hover, .not-nec.btn-primary:focus, .not-nec.btn-primary:active, .not-nec.btn-primary.active, .open > .dropdown-toggle.not-nec.btn-primary {
   background: #A0A0A0;
 }
-
-#note-marker {
-  color: #ffaaaa;
-}
