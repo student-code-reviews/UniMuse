@@ -61,8 +61,8 @@ class PlaylistForm extends React.Component {
 
         <div id="createplaylistform" className="collapse">
           <form onSubmit={this.handleCreatePlaylistSubmitEvent}>
-            <input type="text" className="form-control" placeholder="Enter new playlist name" 
-                  required ref="newPlaylistName" />
+            <input type="text" className="create-playlist-form-input form-control" 
+              placeholder="Enter new playlist name" required ref="newPlaylistName" />
 
             <p />
 

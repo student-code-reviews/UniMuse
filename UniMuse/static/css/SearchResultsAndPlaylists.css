@@ -17,7 +17,7 @@ hr {
   text-align: left;
 }
 
-.search-form-box-input {
+.search-form-box-input, .create-playlist-form-input {
   background-color: #D0D0D0;
 }
 
