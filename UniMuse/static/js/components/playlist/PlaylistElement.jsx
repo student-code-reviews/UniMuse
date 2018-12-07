@@ -20,9 +20,8 @@ class PlaylistElement extends React.Component {
       <div className="panel panel-primary">
 
         <div className="panel-footer">
-          <form className="form-inline" onSubmit={this.handlePlaylistSelectEvent}>
-            <button type="submit" className="btn btn-default btn-xs">{playlist.playlist_name}</button>
-          </form>
+          <button type="button" className="playlist-buttons btn btn-default btn-xs" 
+             onClick={this.handlePlaylistSelectEvent}>{playlist.playlist_name}</button>
           <p />
         </div>
         

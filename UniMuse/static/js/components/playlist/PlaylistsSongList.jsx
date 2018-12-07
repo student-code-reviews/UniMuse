@@ -25,13 +25,13 @@ class PlaylistsSongList extends React.Component {
     return (
       <div>
 
-        <h3 className="page-header">
+        <h3 className="playlists-header page-header">
           <div>
               Playlists
           </div>
         </h3>
 
-        <ul>
+        <ul className="playlists-list">
           {playlistElements.length > 0 ? playlistElements : <NoPlaylistElement />}
         </ul>
         
