@@ -25,12 +25,12 @@ class SearchForm extends React.Component {
           <strong>Search for a Song!</strong>
         </h3>
 
-        <div className="search-form-box form-group">
-          <label htmlFor="searchBoxLabel">
+        <div className="search-form-box-div form-group">
+          <label>
             Search <span style={styleRequired}>*</span>
           </label>
-          <input type="text" className="form-control" placeholder="Enter song title" 
-          required ref="userquery" />
+          <input type="text" className="search-form-box-input form-control" 
+            placeholder="Enter song title" required ref="userquery" />
         </div>
 
         <button type="submit" className="search-form-btn btn btn-primary raised"

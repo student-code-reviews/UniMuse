@@ -13,8 +13,12 @@ hr {
 }
 
 /* Search Form */
-.search-form-box {
+.search-form-box-div {
   text-align: left;
+}
+
+.search-form-box-input {
+  background-color: #D0D0D0;
 }
 
 .search-form-reset-btn, .playlist-create-reset-btn {
