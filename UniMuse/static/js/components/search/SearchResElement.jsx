@@ -18,18 +18,16 @@ class SearchResElement extends React.Component {
 
     return (
       <div className="panel panel-primary">
-
         <p className="panel-body">
-          <img src={song.albumImgURLsm}></img>
+          <img className="song-image" src={song.albumImgURLsm}></img>
+          
           {song.songTitle}
-        </p>
 
-        <form className="form-inline" onSubmit={this.handleAddSongSubmitEvent}>
-            <button type="submit" className="btn btn-default btn-xs">
-              <i className="fa fa-spotify"></i>Add to playlist
-            </button>
-        </form>
-        
+          <button type="submit" className="btn btn-default btn-xs raised"
+            onClick={this.handleAddSongSubmitEvent}>
+              <i className="fa fa-plus"></i>
+          </button>
+        </p>
       </div>
     );
   }
