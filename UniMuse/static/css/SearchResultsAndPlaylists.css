@@ -55,15 +55,15 @@ hr {
 }
 
 #spotifySearchResultsBtn:hover, #spotifySearchResultsBtn:focus, #spotifySearchResultsBtn:active, #spotifySearchResultsBtn.active, .open > .dropdown-toggle#spotifySearchResultsBtn {
-  background: #1DB954;
+  background: #77d598;
 }
 
 #youtubeSearchResultsBtn:hover, #youtubeSearchResultsBtn:focus, #youtubeSearchResultsBtn:active, #youtubeSearchResultsBtn.active, .open > .dropdown-toggle#youtubeSearchResultsBtn {
-  background: #FF0000;
+  background: #ff7f7f;
 }
 
 #mixcloudSearchResultsBtn:hover, #mixcloudSearchResultsBtn:focus, #mixcloudSearchResultsBtn:active, #mixcloudSearchResultsBtn.active, .open > .dropdown-toggle#mixcloudSearchResultsBtn {
-  background: #52aad8;
+  background: #85c3e3;
 }
 
 .search-results {
