@@ -56,7 +56,7 @@ class PlaylistPlayer extends React.Component {
         </div>
 
         <div className="player-songs-row row">
-          <div className="col-sm-6">
+          <div className="player col-sm-6">
             {songClicked ? <Player currentSong={currentSong} /> : null}
           </div>
 

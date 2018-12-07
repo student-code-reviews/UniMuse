@@ -8,7 +8,7 @@ hr {
   padding-top: 2em;
 }
 
-.search-form-header, .playlist-form-header, .search-results-header, .playlists-header {
+.search-form-header, .playlist-form-header, .search-results-header, .playlists-header, .songlist-header {
   padding-bottom: 0.5em;
 }
 
@@ -114,4 +114,19 @@ hr {
 
 .playlist-header {
   padding-top: .25em;
+}
+
+.player {
+  padding-top: 5em;
+}
+
+.songslist {
+  text-align: left;
+}
+
+.songslist-btns {
+  text-align: left;
+  background-color: #D0D0D0;
+  width: 465px;
+  white-space:normal !important;
 }

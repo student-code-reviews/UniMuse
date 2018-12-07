@@ -23,13 +23,13 @@ class Songs extends React.Component {
     return (
       <div>
 
-        <h3 className="page-header">
+        <h3 className="songlist-header page-header">
           <div>
               Songs
           </div>
         </h3>
 
-        <ul>
+        <ul className="songslist">
           {songElements.length > 0 ? songElements : <NoSongElement />}
         </ul>
         

@@ -17,9 +17,9 @@ class SongElement extends React.Component {
     return (
       <div className="panel panel-primary">
 
-        <div className="panel-footer">
-          <button type="button" className="btn btn-default btn-xs" onClick={this.handlePlaySongClick}>
-            {song.song_name}
+        <div className="songslist-panel panel-footer">
+          <button type="button" className="songslist-btns btn btn-primary" 
+            onClick={this.handlePlaySongClick}>{song.song_name}
           </button>
           <p />
         </div>
