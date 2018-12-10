@@ -51,7 +51,6 @@ hr {
 
 .fa-spotify, .fa-youtube-play, .fa-mixcloud {
   color: black;
-  
 }
 
 #spotifySearchResultsBtn:hover, #spotifySearchResultsBtn:focus, #spotifySearchResultsBtn:active, #spotifySearchResultsBtn.active, .open > .dropdown-toggle#spotifySearchResultsBtn {
@@ -99,10 +98,10 @@ hr {
 }
 
 /* Playlist Elements */
-.playlist-buttons {
+.playlist-btns {
   background-color: #D0D0D0;
 }
-.playlist-buttons:active, .playlist-buttons:focus {
+.playlist-btns:active, .playlist-btns:focus {
   background-color: #ffaaaa;
 }
 

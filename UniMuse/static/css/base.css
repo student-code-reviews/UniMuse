@@ -1,74 +1,65 @@
 html, body {
-    height: 100%;
-    font-family: 'Roboto Condensed';
-    background: #484848;
-    /* background: linear-gradient(to top left, #202020 10%, #484848 65%, #fff7f7 200%); */
+  height: 100%;
+  font-family: 'Roboto Condensed';
+  background: #484848;
+  /* background: linear-gradient(to top left, #202020 10%, #484848 65%, #fff7f7 200%); */
 }
 
 h1, h2, h3, h4 {
-    text-align: center;
-    font-weight: 200;
-    font-family: 'Permanent Marker';
-    color: #ffaaaa;
+  text-align: center;
+  font-weight: 200;
+  font-family: 'Permanent Marker';
+  color: #ffaaaa;
 }
 
 .alert {
-    color: black;
-    background-color: #ffaaaa;
-    border-color: #ffaaaa;
+  color: black;
+  background-color: #ffaaaa;
+  border-color: #ffaaaa;
 }
 
 .row {
-    text-align: center;
+  text-align: center;
 }
 
 .btn {
-    padding: 10px 20px;
-    width: 200px;
-    border: 0 none;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+  padding: 10px 20px;
+  width: 200px;
+  border: 0 none;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
 .btn:focus, .btn:active:focus, .btn.active:focus {
-    outline: 0 none;
+  outline: 0 none;
 }
 
 .btn-primary {
-    background: #D0D0D0;
-    color: #333333;
+  background: #D0D0D0;
+  color: #333333;
 }
+
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open > .dropdown-toggle.btn-primary {
-    background: #ffaaaa;
+  background: #ffaaaa;
 }
+
 .btn-primary:active, .btn-primary.active {
-    background: salmon;
-    box-shadow: none;
+  background: salmon;
+  box-shadow: none;
 }
 
 .btn-primary.raised {
-    box-shadow: 0 3px 0 0 #989898;
+  box-shadow: 0 3px 0 0 #989898;
 }
+
 .btn-primary.raised:active, .btn-primary.raised.active {
-    background: #ffaaaa;
-    box-shadow: none;
-    margin-bottom: -3px;
-    margin-top: 3px;
-}
-
-.fa-spotify {
-    color: #1DB954;
-}
-
-.fa-youtube-play {
-    color: #FF0000;
-}
-
-.fa-mixcloud {
-    color: #52aad8;
+  background: #ffaaaa;
+  box-shadow: none;
+  margin-bottom: -3px;
+  margin-top: 3px;
 }
 
 #note-marker {
-    color: #ffaaaa;
-  }
+  color: #ffaaaa;
+}

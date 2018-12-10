@@ -12,17 +12,18 @@
       </div>
     </div>
 
-    <div class="services-buttons-row row">
+    <div class="services-btns-row row">
       <div class="col-12">
         <p id="padding">
         
-          <button class="btn btn-primary btn-lg raised" id="spotify-login-button" 
-          onclick="location.href = '{{ spotify_auth_url }}'">
-          <i class="fa fa-spotify"></i>&nbsp;Spotify</button>
+          <button class="btn btn-primary btn-lg raised" id="spotify-login-btn" 
+            onclick="location.href = '{{ spotify_auth_url }}'">
+            <i class="fa fa-spotify"></i>&nbsp;Spotify
+          </button>
         
         <p id="padding">
 
-        <button type="button" class="not-nec btn btn-primary" id="youtube-login-button"
+        <button type="button" class="not-nec btn btn-primary" id="youtube-login-btn"
           data-toggle="collapse" data-target="#nologin-necessary-msg">
           <i class="fa fa-youtube-play"></i>
           &nbsp;YouTube<span id="note-marker">*</span>
@@ -30,7 +31,7 @@
         
         <p id="padding">
 
-        <button type="button" class="not-nec btn btn-primary" id="mixcloud-login-button"
+        <button type="button" class="not-nec btn btn-primary" id="mixcloud-login-btn"
           data-toggle="collapse" data-target="#nologin-necessary-msg">
           <i class="fa fa-mixcloud"></i>
           &nbsp;Mixcloud<span id="note-marker">*</span>
@@ -48,7 +49,7 @@
         <button class="btn btn-primary btn-lg raised" id="services-to-main-btn" 
           onclick="location.href = '/'">Home</button>
     
-        <button class="btn btn-primary btn-lg raised" id="finished-logins-button" 
+        <button class="btn btn-primary btn-lg raised" id="finished-logins-btn" 
           onclick="location.href = '/searchlist-playlist'">Finish </button>
       </div>
     </div>

@@ -20,7 +20,7 @@ class PlaylistElement extends React.Component {
       <div className="panel panel-primary">
 
         <div className="panel-footer">
-          <button type="button" className="playlist-buttons btn btn-default btn-xs" 
+          <button type="button" className="playlist-btns btn btn-default btn-xs" 
              onClick={this.handlePlaylistSelectEvent}>{playlist.playlist_name}</button>
           <p />
         </div>

@@ -40,22 +40,16 @@ class TestIndex(TestMixin, unittest.TestCase):
         self.browser.get(BROWSER_URL)
         self.assertEqual(self.browser.title, 'UniMuse')
 
-    def test_header(self):
-        """Test main page header."""
-        self.browser.get(BROWSER_URL)
-        main_header = self.browser.find_element_by_id('main-header').text
-        self.assertIn('Welcome', main_header)
-
     def test_main_btn_value(self):
         """Test main page button value."""
         self.browser.get(BROWSER_URL)
-        new_user_signup = self.browser.find_element_by_id('main-signup-button')
-        self.assertEqual(new_user_signup.text, 'New User')
+        new_user_signup = self.browser.find_element_by_id('main-signup-btn')
+        self.assertEqual(new_user_signup.text, 'NEW USER')
     
     def test_new_user_btn(self):
         """Test main page new user sign-up button."""
         self.browser.get(BROWSER_URL)
-        self.browser.find_element(By.ID, 'main-signup-button').click()
+        self.browser.find_element(By.ID, 'main-signup-btn').click()
 
         actual_url = self.browser.current_url
         self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/sign-up-form')
@@ -63,10 +57,28 @@ class TestIndex(TestMixin, unittest.TestCase):
     def test_login_btn(self):
         """Test main page log-in button."""
         self.browser.get(BROWSER_URL)
-        self.browser.find_element(By.ID, 'main-login-button').click()
+        self.browser.find_element(By.ID, 'main-login-btn').click()
 
         actual_url = self.browser.current_url
         self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/login-form')
+
+    def test_about_header(self):
+        """Test main page about section header."""
+        self.browser.get(BROWSER_URL)
+        about_header = self.browser.find_element_by_id('about-header')
+        self.assertEqual(about_header.text, 'About')
+    
+    def test_about_section(self):
+        """Test main page about section."""
+        self.browser.get(BROWSER_URL)
+        about_section = self.browser.find_element_by_id('about-p')
+        self.assertIn("Welcome", about_section.text)
+
+    def test_avail_services_header(self):
+        """Test main page available services section."""
+        self.browser.get(BROWSER_URL)
+        avail_serv_header = self.browser.find_element_by_id('available-subs-header')
+        self.assertEqual(avail_serv_header.text, "Available Music Services")
 
 
 class TestMainSignUp(TestMixin, unittest.TestCase):
@@ -86,14 +98,14 @@ class TestMainSignUp(TestMixin, unittest.TestCase):
     def test_signup_input_label(self):
         """Test sign-up page label for username input box."""
         self.browser.get(BROWSER_URL+'/sign-up-form')
-        input_label = self.browser.find_element_by_id('sign-up-username-label')
+        input_label = self.browser.find_element_by_id('signup-username-label')
         self.assertEqual(input_label.text, 'Username:')
 
     def test_signup_button_value(self):
         """Test sign-up page value for submit button."""
         self.browser.get(BROWSER_URL+'/sign-up-form')
-        button = self.browser.find_element(By.ID, 'submit-new-user')
-        self.assertEqual(button.text, 'Sign-Up!')
+        button = self.browser.find_element(By.ID, 'submit-new-user-btn')
+        self.assertEqual(button.text, 'SIGN-UP!')
 
     def test_back_to_main_btn(self):
         """Test sign-up page back to main page button."""
@@ -106,32 +118,32 @@ class TestMainSignUp(TestMixin, unittest.TestCase):
         """Test new user sign-up submission."""
         self.browser.get(BROWSER_URL+'/sign-up-form')
 
-        username = self.browser.find_element(By.NAME, 'um-new-username')
+        username = self.browser.find_element(By.NAME, 'new-username')
         username.send_keys("mortysmith")
-        password = self.browser.find_element(By.NAME, 'um-new-password')
+        password = self.browser.find_element(By.NAME, 'new-password')
         password.send_keys("ilovejessica")
 
-        self.browser.find_element(By.ID, 'submit-new-user').click()
+        self.browser.find_element(By.ID, 'submit-new-user-btn').click()
         self.wait
 
         alert = self.browser.find_element(By.CLASS_NAME, 'alert')
         if alert.text == 'Sign-up successful!':
             actual_url = self.browser.current_url
-            self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/')
+            self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/services-login')
 
         else:
-            print(alert.text)
+            self.assertEqual(alert.text, "That username is already taken!")
 
     def test_existing_user_create_btn(self):
         """Test sign-up page attempt to create account with existing user info."""
         self.browser.get(BROWSER_URL+'/sign-up-form')
 
-        username = self.browser.find_element(By.NAME, 'um-new-username')
+        username = self.browser.find_element(By.NAME, 'new-username')
         username.send_keys("test_human")
-        password = self.browser.find_element(By.NAME, 'um-new-password')
+        password = self.browser.find_element(By.NAME, 'new-password')
         password.send_keys("iamnothuman")
 
-        self.browser.find_element(By.ID, 'submit-new-user').click()
+        self.browser.find_element(By.ID, 'submit-new-user-btn').click()
         self.wait
 
         alert = self.browser.find_element(By.CLASS_NAME, 'alert')
@@ -154,7 +166,7 @@ class TestMainLogin(TestMixin, unittest.TestCase):
         """Test login page header."""
         self.browser.get(BROWSER_URL+'/login-form')
         main_header = self.browser.find_element_by_id('login-header').text
-        self.assertIn('Log-in', main_header)
+        self.assertIn('Log-in to UniMuse', main_header)
 
     def test_login_input_label(self):
         """Test login page label for username input box."""
@@ -166,7 +178,7 @@ class TestMainLogin(TestMixin, unittest.TestCase):
         """Test login page value for submit button."""
         self.browser.get(BROWSER_URL+'/login-form')
         button = self.browser.find_element(By.ID, 'login-submit-btn')
-        self.assertEqual(button.text, 'Log-In!')
+        self.assertEqual(button.text, 'LOG-IN!')
 
     def test_back_to_main_btn(self):
         """Test login page back to main page button."""
@@ -179,9 +191,9 @@ class TestMainLogin(TestMixin, unittest.TestCase):
         """Test existing user login submission."""
         self.browser.get(BROWSER_URL+'/login-form')
 
-        username = self.browser.find_element(By.NAME, 'um-username')
+        username = self.browser.find_element(By.NAME, 'username')
         username.send_keys("test_human")
-        password = self.browser.find_element(By.NAME, 'um-password')
+        password = self.browser.find_element(By.NAME, 'password')
         password.send_keys("iamnothuman")
 
         self.browser.find_element(By.ID, 'login-submit-btn').click()
@@ -190,7 +202,7 @@ class TestMainLogin(TestMixin, unittest.TestCase):
         alert = self.browser.find_element(By.CLASS_NAME, 'alert')
         if alert.text == "You've successfully logged in!":
             actual_url = self.browser.current_url
-            self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/subscriptions-login')
+            self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/services-login')
 
         else:
             print(alert.text)
@@ -199,9 +211,9 @@ class TestMainLogin(TestMixin, unittest.TestCase):
         """Test non-existing user login submission."""
         self.browser.get(BROWSER_URL+'/login-form')
 
-        username = self.browser.find_element(By.NAME, 'um-username')
+        username = self.browser.find_element(By.NAME, 'username')
         username.send_keys("ricksmith")
-        password = self.browser.find_element(By.NAME, 'um-password')
+        password = self.browser.find_element(By.NAME, 'password')
         password.send_keys("burp")
 
         self.browser.find_element(By.ID, 'login-submit-btn').click()
@@ -218,9 +230,9 @@ class TestMainLogin(TestMixin, unittest.TestCase):
         """Test existing user wrong password login submission."""
         self.browser.get(BROWSER_URL+'/login-form')
 
-        username = self.browser.find_element(By.NAME, 'um-username')
+        username = self.browser.find_element(By.NAME, 'username')
         username.send_keys("test_human")
-        password = self.browser.find_element(By.NAME, 'um-password')
+        password = self.browser.find_element(By.NAME, 'password')
         password.send_keys("iamhuman")
 
         self.browser.find_element(By.ID, 'login-submit-btn').click()
@@ -239,33 +251,33 @@ class TestSubscriptionsLogin(TestMixin, unittest.TestCase):
 
     def test_title(self):
         """Test subscriptions page title."""
-        self.browser.get(BROWSER_URL+'/subscriptions-login')
-        self.assertEqual(self.browser.title, 'Subscriptions')
+        self.browser.get(BROWSER_URL+'/services-login')
+        self.assertEqual(self.browser.title, 'Music Services Login')
 
     def test_header(self):
         """Test subscriptions page header."""
-        self.browser.get(BROWSER_URL+'/subscriptions-login')
-        main_header = self.browser.find_element_by_id('subscriptions-header').text
-        self.assertIn('Subscriptions', main_header)
+        self.browser.get(BROWSER_URL+'/services-login')
+        main_header = self.browser.find_element_by_id('services-header').text
+        self.assertIn('Services', main_header)
 
     def test_spotify_login_button_value(self):
         """Test subscriptions page value for Spotify login button."""
-        self.browser.get(BROWSER_URL+'/subscriptions-login')
-        button = self.browser.find_element(By.ID, 'spotify-login-button')
-        self.assertEqual(button.text, ' Spotify Login')
+        self.browser.get(BROWSER_URL+'/services-login')
+        button = self.browser.find_element(By.ID, 'spotify-login-btn')
+        self.assertEqual(button.text, ' SPOTIFY')
 
     def test_back_to_main_btn(self):
         """Test subscriptions page back to main page button."""
-        self.browser.get(BROWSER_URL+'/subscriptions-login')
-        self.browser.find_element(By.ID, 'subscriptions-to-main-btn').click()
+        self.browser.get(BROWSER_URL+'/services-login')
+        self.browser.find_element(By.ID, 'services-to-main-btn').click()
         actual_url = self.browser.current_url
         self.verify_url(actual_url=actual_url, expected_url=f'{BROWSER_URL}/')
 
     def test_spotify_auth_page_btn(self):
         """Test Spotify auth page redirect button."""
-        self.browser.get(BROWSER_URL+'/subscriptions-login')
+        self.browser.get(BROWSER_URL+'/services-login')
 
-        self.browser.find_element(By.ID, 'spotify-login-button').click()
+        self.browser.find_element(By.ID, 'spotify-login-btn').click()
         self.wait
 
         actual_url = self.browser.current_url
@@ -273,9 +285,9 @@ class TestSubscriptionsLogin(TestMixin, unittest.TestCase):
 
     def test_subscription_login_finish_btn(self):
         """Test finish logging into subscriptions button."""
-        self.browser.get(BROWSER_URL+'/subscriptions-login')
+        self.browser.get(BROWSER_URL+'/services-login')
 
-        self.browser.find_element(By.ID, 'finished-logins-button').click()
+        self.browser.find_element(By.ID, 'finished-logins-btn').click()
         self.wait
 
         actual_url = self.browser.current_url
