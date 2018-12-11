@@ -1,9 +1,4 @@
 """Views for UniMuse."""
-
-import os
-import json
-import requests
-
 from jinja2 import StrictUndefined
 from flask import Flask, render_template, request, flash, redirect, session, jsonify
 
@@ -153,7 +148,9 @@ def get_user_playlists():
         return jsonify({'playlists': user_playlists})
 
     else:
-        return jsonify("User does not have any playlists.")
+        # See SearchResultsandPlaylist.jsx for a full example of how the
+        # front and back can communicate problems!
+        return jsonify({'message': 'No playlists!'}), 400
 
 
 @app.route("/save-new-playlist")

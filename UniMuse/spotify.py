@@ -28,8 +28,12 @@ auth_query_param = {
 def auth_page():
     """Return Spotify's user authentication page."""
 
-    url_args = "&".join(["{}={}".format(key,urllib.parse.quote(val)) for key,val in auth_query_param.items()])
-    auth_url = f"{SPOTIFY_AUTH_URL}/?{url_args}"
+    # Alternative (comes built-in with Flask):
+    # http://werkzeug.pocoo.org/docs/0.14/urls/#werkzeug.urls.url_encode
+    from werkzeug.urls import url_encode
+
+    query_string = url_encode(auth_query_param)
+    auth_url = f"{SPOTIFY_AUTH_URL}/?{query_string}"
     return auth_url
 
 
@@ -44,7 +48,7 @@ def get_access_tokens():
     }
     client_str = base64.b64encode(f"{SPOTIFY_CLIENT_ID}:{SPOTIFY_CLIENT_SECRET}".encode('ascii'))
     headers = {"Authorization": f"Basic {client_str.decode('ascii')}"}
-    
+
     response = requests.post(SPOTIFY_TOKEN_URL, data=code_payload, headers=headers)
 
     return response.json()
