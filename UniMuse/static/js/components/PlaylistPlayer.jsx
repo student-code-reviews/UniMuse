@@ -21,7 +21,10 @@ class PlaylistPlayer extends React.Component {
     .then(data => {
       this.setState({ songs: data.songs });
     })
-    .catch(err => this.setState({ songs: "Something went wrong with user's playlists songs." }));
+    .catch(err => {
+      this.setState({ songs: [] })
+      console.error('error', playlistNo, err)
+    });
   }
 
   goBackFromPlayer () {

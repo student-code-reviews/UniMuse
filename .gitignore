@@ -11,3 +11,4 @@ env/
 # Others
 secrets.sh
 .DS_Store
+.idea

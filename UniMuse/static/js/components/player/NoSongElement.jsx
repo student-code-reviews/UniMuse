@@ -1,10 +1,19 @@
-class NoSongElement extends React.Component {
+/*
+  Functional Components
+  - Props as args
+  - No internal state
+  - No lifecycle methods
 
-  render () {
-    return (
+  Use functional as much as possible!
+ */
+
+function NoSongElement(props) {
+
+  return (
       <div>
         There are no songs in this playlist!
       </div>
     );
-  }
 }
+
+export default NoSongElement;

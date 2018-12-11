@@ -1,10 +1,17 @@
-class NoPlaylistElement extends React.Component {
+/*
+  Functional Components
+  - Props as args
+  - No internal state
+  - No lifecycle methods
 
-  render () {
-    return (
+  Use functional as much as possible!
+ */
+
+function NoPlaylistElement {
+
+  return (
       <div>
         Create a playlist!
       </div>
     );
-  }
 }

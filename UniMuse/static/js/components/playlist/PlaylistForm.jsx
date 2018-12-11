@@ -1,8 +1,3 @@
-function isEmpty(obj) {
-  return Object.keys(obj).length === 0;
-}
-
-
 class PlaylistForm extends React.Component {
 	constructor(props) {
 		super(props);

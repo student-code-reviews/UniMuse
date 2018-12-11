@@ -1,6 +1,10 @@
+// Fantastic!
 function isEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
+
+// Alternative: myobj.isEmpty()
+Object.prototype.isEmpty = () => { Object.keys(obj).length === 0 };
 
 
 class SearchResultsAndPlaylists extends React.Component {
@@ -27,14 +31,23 @@ class SearchResultsAndPlaylists extends React.Component {
 
   componentDidMount () {
     fetch('/user-playlists.json')
-    .then(res => res.json())
-    .then(data => {
-      if (data === 'User does not have any playlists.') {
+    .then(res => { 
+      if (res.status == 400) {
+        // See views.py to see an example of how we can manage errors
+        // in our applications, front to back
+        console.error('error', res.status, res.message);
       } else {
-        this.setState({ userPlaylists: data.playlists });
-      };
+        return res.json();
+      }
     })
-    .catch(err => this.setState({ userPlaylists: "Something went wrong with user's playlists." }));
+    .then(data => {
+      // This will either have songs or be an empty list. Both are fine.
+      this.setState({ userPlaylists: data.playlists });
+    })
+    .catch(err => {
+      this.setState({ userPlaylists: [] });
+      console.error('error', err.name, err.message, err.stack);
+    });
   }
   
   addUserPlaylist (playlist) {
