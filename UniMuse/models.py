@@ -8,10 +8,12 @@ db = SQLAlchemy()
 
 class User(db.Model):
     """UniMuse user information."""
+    # Add security with this neat tool:
+    # https://github.com/code-workshops/blogwise/blob/sprint3/models.py#L5
 
     __tablename__ = "users"
 
-    user_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(50), nullable=False)
 
@@ -21,12 +23,15 @@ class Playlist(db.Model):
 
     __tablename__ = "playlists"
 
-    playlist_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    playlist_name = db.Column(db.String(60), nullable=False)
+    name = db.Column(db.String(60), nullable=False)
 
     user = db.relationship("User", backref=db.backref("playlists",
                                                       order_by=user_id))
+
+    # >>> playlist.songs.append(song)
+    songs = db.relationship('Song', secondary='playlist_songs', lazy=True)
 
 
 class Song(db.Model):
@@ -34,28 +39,17 @@ class Song(db.Model):
 
     __tablename__ = "songs"
 
-    song_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     service_id = db.Column(db.String(300), nullable=False)
-    song_name = db.Column(db.String(100), nullable=False)
-    song_img = db.Column(db.String(300), nullable=True)
+    name = db.Column(db.String(100), nullable=False)
+    image = db.Column(db.String(300), nullable=True)
     service = db.Column(db.String(50), nullable=False)
 
 
-class PlaylistSong(db.Model):
-    """Songs contained in user playlists."""
-
-    __tablename__ = "playlist_songs"
-
-    playlist_song_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    playlist_id = db.Column(db.Integer, db.ForeignKey('playlists.playlist_id'))
-    song_id = db.Column(db.Integer, db.ForeignKey('songs.song_id'))
-
-    playlist = db.relationship("Playlist", backref=db.backref("playlist_songs",
-                                                              order_by=playlist_id))
-
-    song = db.relationship("Song", backref=db.backref("playlist_songs",
-                                                      order_by=song_id))
-
+playlist_songs = db.Table('playlist_songs',
+                          db.Column('playlist_id', db.Integer, db.ForeignKey('playlists.id')),
+                          db.Column('song_id', db.Integer, db.ForeignKey('users.id'))
+                          )
 
 def connect_to_db(app):
     """Connect UniMuse database to Flask app."""
